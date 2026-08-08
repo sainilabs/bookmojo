@@ -13,7 +13,7 @@
     />
     <meta name="theme-color" content="#fbfdfc" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0c1a17" media="(prefers-color-scheme: dark)" />
-    <link rel="canonical" href="https://bookmojo.com/" />
+    <link rel="canonical" href="https://sainilabs.github.io/bookmojo/" />
 
     <!-- Social -->
     <meta property="og:type" content="website" />
@@ -24,7 +24,10 @@
       content="Personalised storybooks in English or Hindi, ordered entirely over WhatsApp. ₹1,499 all in. Tell us their name — we'll do the rest."
     />
     <meta property="og:locale" content="en_IN" />
-    <meta property="og:image" content="/og.svg" />
+    <!-- Absolute, because Vite rewrites asset paths in href/src but NOT inside a
+         meta `content` attribute — a relative og:image would 404 for every
+         scraper once the site is served from a subpath. -->
+    <meta property="og:image" content="https://sainilabs.github.io/bookmojo/og.svg" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

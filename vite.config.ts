@@ -4,6 +4,16 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  /**
+   * A GitHub Pages *project* site is served from /<repo>/, not from the domain
+   * root, so every asset URL needs that prefix or the deployed page loads with
+   * no CSS and no JS.
+   *
+   * Read from an env var rather than hard-coded: the CI workflow sets
+   * VITE_BASE=/bookmojo/, while local `dev`, `build` and `preview` keep serving
+   * from `/`. Hard-coding the subpath would silently break every local preview.
+   */
+  base: process.env.VITE_BASE ?? '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
