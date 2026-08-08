@@ -86,8 +86,7 @@ export function buildJourney(draft: Draft): Stage[] {
       id: 'story',
       label: 'Story',
       title: 'Choose the world. We handle the writing.',
-      reassurance:
-        'Every theme is a manuscript written by our authors, then rewritten around your answers — not a template with a name dropped into it.',
+      reassurance: 'Each world is a real manuscript, rewritten around your answers.',
       eta: '~60 seconds',
       actor: 'you',
       messages: [
@@ -119,9 +118,9 @@ export function buildJourney(draft: Draft): Stage[] {
     {
       id: 'review',
       label: 'Review',
-      title: 'See it before you pay a cent.',
+      title: 'See it before you pay.',
       reassurance:
-        'We send the real personalised cover and two interior spreads. Change anything, as many times as you like. Nothing is charged and nothing is printed until you say yes.',
+        'The real cover plus two spreads. Change anything. Nothing is charged until you approve.',
       eta: 'Instant',
       actor: 'us',
       messages: [
@@ -148,8 +147,7 @@ export function buildJourney(draft: Draft): Stage[] {
       id: 'payment',
       label: 'Payment',
       title: 'Paid on a secure page, not in the chat.',
-      reassurance:
-        'The chat sends you a one-time encrypted checkout link. Card details never appear in a message, and we never see or store them.',
+      reassurance: 'A one-time encrypted link. Payment details never appear in a message.',
       eta: '~40 seconds',
       actor: 'you',
       messages: [
@@ -176,8 +174,7 @@ export function buildJourney(draft: Draft): Stage[] {
       id: 'confirmed',
       label: 'Confirmed',
       title: 'A receipt you can find again.',
-      reassurance:
-        'Your order lives in a thread you already check every day. No “which email was that in?” three weeks later.',
+      reassurance: 'It lives in a thread you already check. No hunting through email.',
       eta: 'Instant',
       actor: 'us',
       messages: [
@@ -192,8 +189,7 @@ export function buildJourney(draft: Draft): Stage[] {
       id: 'production',
       label: 'Made',
       title: 'Watch it being made.',
-      reassurance:
-        'Typeset, illustrated, proofed by a human, then printed. You get a photo of the real book before it is boxed — the moment most parents tell us they stopped worrying.',
+      reassurance: 'Illustrated, proofed by a human, printed. You get a photo off the press.',
       eta: `${PROOF.productionDays} days`,
       actor: 'us',
       messages: [
@@ -217,8 +213,7 @@ export function buildJourney(draft: Draft): Stage[] {
       id: 'delivery',
       label: 'Delivered',
       title: 'Tracked to the door.',
-      reassurance:
-        'Live tracking in the same thread, plus a heads-up the day before it lands so a surprise stays a surprise.',
+      reassurance: 'Live tracking in the same thread, and a heads-up the day before.',
       eta: `${PROOF.metroDeliveryDays} days`,
       actor: 'us',
       messages: [

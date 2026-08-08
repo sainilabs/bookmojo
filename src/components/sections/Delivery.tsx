@@ -67,7 +67,7 @@ export function Delivery() {
             </>
           }
           title="You will never have to ask where it is."
-          deck={`Made to order in ${PROOF.productionDays} working days, then ${PROOF.metroDeliveryDays} days to metros and 4–6 elsewhere. Every stage arrives as a message in the same thread you ordered in — including a photograph of the real book before we box it.`}
+          deck={`Made in ${PROOF.productionDays} days, then ${PROOF.metroDeliveryDays} to metros and 4–6 elsewhere. Every stage arrives as a message — including a photo of the real book.`}
         />
 
         <ol className="relative mt-14 grid gap-6 lg:mt-20 lg:grid-cols-4 lg:gap-5">
@@ -110,9 +110,8 @@ export function Delivery() {
               <div className="min-w-0 flex-1">
                 <h3 className="text-title">Keeping it a surprise</h3>
                 <p className="mt-2 text-small text-ink-soft">
-                  Tell us the date and we hold the parcel, then land it on the morning you choose.
-                  Unbranded outer packaging, no pricing anywhere inside, and a heads-up to you the
-                  day before so nobody opens the door at the wrong moment.
+                  Name the date and we land it that morning. Unbranded packaging, no pricing inside,
+                  and a heads-up to you the day before.
                 </p>
               </div>
             </article>
@@ -125,9 +124,8 @@ export function Delivery() {
                   {PROOF.pincodes}
                 </p>
                 <p className="mt-2 text-small text-ink-soft">
-                  PIN codes across India, with tracked courier and GST already inside the price.
-                  Nothing is added at the last step. We also ship to {PROOF.countries} countries for
-                  families sending gifts home.
+                  PIN codes across India, courier and GST already in the price. Plus{' '}
+                  {PROOF.countries} countries for gifts sent home.
                 </p>
               </div>
               <OrderButton intent="faq" size="sm" label="Check your PIN code" />

@@ -156,7 +156,7 @@ export function Craft() {
                 </>
               }
               title="Printed like a bookshop book, because it is one."
-              deck={`We print litho on uncoated stock and sew the signatures in ${BRAND.press} — the same presses that make the trade children's hardcovers you already own. It costs more than print-on-demand and it is the reason these end up on shelves instead of in the toy bin.`}
+              deck={`Litho on uncoated stock, signatures sewn in ${BRAND.press} — the same presses behind the children's hardcovers you already own.`}
             />
 
             <Reveal y={20} delay={120} className="mt-9">

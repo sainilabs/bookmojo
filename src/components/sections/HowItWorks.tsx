@@ -27,7 +27,7 @@ const STEPS = [
     who: 'You',
     time: '~4 min',
     title: 'Answer five questions in a chat',
-    body: 'Name, age, English or Hindi, story world, and what they look like. Tap the suggested replies or type — whichever is faster with one hand.',
+    body: 'Name, age, English or Hindi, story world, and what they look like. Tap or type.',
   },
   {
     n: 2,
@@ -35,7 +35,7 @@ const STEPS = [
     who: 'You',
     time: '~1 min',
     title: 'Approve the real cover and two pages',
-    body: 'We send the actual personalised artwork into the chat. Change anything, as often as you like. Your card is not touched until you say yes.',
+    body: 'The actual artwork, in the chat. Change anything. Nothing is charged until you say yes.',
   },
   {
     n: 3,
@@ -43,7 +43,7 @@ const STEPS = [
     who: 'Us',
     time: `${PROOF.productionDays} days`,
     title: 'A human writes, illustrates and proofs it',
-    body: 'Manuscript personalised, illustrations matched by an artist, proofread by an editor, then litho-printed and hardcover bound. We send you a photo off the press.',
+    body: 'Then litho-printed and hardcover bound. We send you a photo off the press.',
   },
   {
     n: 4,
@@ -51,7 +51,7 @@ const STEPS = [
     who: 'Us',
     time: `${PROOF.metroDeliveryDays} days`,
     title: 'It arrives boxed, tracked and gift-ready',
-    body: 'Rigid gift box, no pricing inside, unbranded outer packaging. Blue Dart tracking lands in the same chat, and we can hold delivery for a date you choose.',
+    body: 'Rigid gift box, no pricing inside. Tracking lands in the same chat.',
   },
 ] as const;
 
@@ -66,7 +66,7 @@ export function HowItWorks() {
             </>
           }
           title="Two things for you to do. Two for us."
-          deck={`Most families are finished in about ${PROOF.avgOrderMinutes} minutes and holding the book inside ten days. Here is every step, with nothing hidden.`}
+          deck={`About ${PROOF.avgOrderMinutes} minutes of your time, and the book is in your hands inside ten days.`}
         />
 
         <ol className="relative mt-16 grid gap-10 sm:gap-12 lg:mt-24 lg:grid-cols-4 lg:gap-8">
@@ -143,7 +143,14 @@ export function HowItWorks() {
             sublabel="Opens WhatsApp · nothing to pay yet"
           />
           <p className="text-small text-ink-muted">
-            Prefer to look first? <a href="#journey" className="font-semibold underline decoration-gold-500 decoration-2 underline-offset-4">Watch the whole conversation</a> below.
+            Or{' '}
+            <a
+              href="#journey"
+              className="font-semibold underline decoration-gold-500 decoration-2 underline-offset-4"
+            >
+              watch the whole conversation
+            </a>{' '}
+            first.
           </p>
         </Reveal>
       </Container>

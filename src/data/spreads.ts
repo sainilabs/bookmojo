@@ -36,7 +36,7 @@ export const SPREADS: readonly Spread[] = [
     ],
     figure: 'none',
     caption:
-      'Your dedication, letterpress-style on uncoated stock. Set by hand in the same typeface as the story — this is the page dadi photographs and sends to the family group.',
+      'Set by hand in the story’s own typeface. This is the page dadi photographs.',
   },
   {
     id: 'opening',
@@ -50,7 +50,7 @@ export const SPREADS: readonly Spread[] = [
     ],
     figure: 'high',
     caption:
-      'Written by our authors, then rewritten around your answers. Sentence length, vocabulary and page count all shift with your child’s age band.',
+      'Sentence length, vocabulary and page count all shift with their age band.',
   },
   {
     id: 'personal',
@@ -63,7 +63,7 @@ export const SPREADS: readonly Spread[] = [
     ],
     figure: 'centre',
     caption:
-      'Your child’s appearance, their age, the language, the dedication, and the small details you tell us in the chat are woven through the whole book — not dropped into a name field.',
+      'Their looks, age, language and the details you mention are woven through the whole book.',
   },
   {
     id: 'ending',
@@ -75,6 +75,6 @@ export const SPREADS: readonly Spread[] = [
     ],
     figure: 'low',
     caption:
-      'Every story lands on the same feeling: you are known, and you are loved. That is the whole brief we give our writers.',
+      'Every story lands on the same feeling: you are known, and you are loved.',
   },
 ];

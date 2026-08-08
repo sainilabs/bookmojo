@@ -95,7 +95,7 @@ export function Personaliser() {
               Decide about buying later.
             </>
           }
-          deck="Five choices, no sign-up, nothing sent anywhere. When you are happy, one tap carries all of it into WhatsApp and we pick up exactly where you left off."
+          deck="Five choices, no sign-up. One tap carries them into WhatsApp and we pick up from there."
         />
 
         <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-16 3xl:gap-24">
@@ -129,7 +129,7 @@ export function Personaliser() {
                 value={draft.childName}
                 onChange={(childName) => update({ childName })}
                 placeholder="Aarav, Meera, Ishaan…"
-                hint="Exactly as it should be printed. Accents and hyphens welcome — we typeset them properly."
+                hint="Exactly as it should be printed."
               />
 
               <ChoiceGroup
@@ -147,7 +147,7 @@ export function Personaliser() {
                 value={draft.language}
                 onChange={(language) => update({ language })}
                 columns={2}
-                note="Each edition is written by an author in that language, not machine-translated. Hindi is typeset in Devanagari with proper matra spacing."
+                note="Written by an author in that language, never machine-translated."
               />
 
               {/* Theme is a custom control rather than a chip group: the choice
@@ -240,7 +240,7 @@ export function Personaliser() {
                   value={draft.look.hairStyle}
                   onChange={(hairStyle) => updateLook({ hairStyle })}
                   columns={6}
-                  note="Prefer to send a photo? Do that in the chat and an illustrator matches it by hand — glasses, hearing aids, a patka, all of it."
+                  note="Or send a photo in the chat — an illustrator matches it by hand."
                 />
               </div>
             </div>
@@ -287,8 +287,7 @@ export function Personaliser() {
                     {opening}
                   </p>
                   <p className="border-t border-hairline bg-sunken px-6 py-3 text-[0.72rem] text-ink-muted">
-                    Sample opening. The finished manuscript is rewritten for age{' '}
-                    {draft.age} and the details you give us in the chat.
+                    Sample opening · rewritten for age {draft.age}
                   </p>
                 </div>
 
@@ -305,10 +304,6 @@ export function Personaliser() {
                         : 'We will ask the five questions above'
                     }
                   />
-                  <p className="mt-3 text-center text-small text-ink-muted">
-                    Opens a chat with your choices already written out. You can still change
-                    anything, and nothing is charged until you approve the real cover.
-                  </p>
                 </div>
               </Reveal>
             </div>

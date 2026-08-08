@@ -26,16 +26,16 @@ import { GUARANTEE, PROOF } from '@/lib/config';
  */
 export function ProofBar() {
   const stats = [
-    { value: PROOF.booksDeliveredLabel, label: 'books made to order', icon: Heart },
+    { value: PROOF.booksDeliveredLabel, label: 'books made', icon: Heart },
     {
       value: `${PROOF.rating}★`,
-      label: `from ${PROOF.reviewCount.toLocaleString()} parents`,
+      label: `${PROOF.reviewCount.toLocaleString()} parents`,
       icon: CheckCircle,
     },
-    { value: PROOF.pincodes, label: 'PIN codes delivered to', icon: Globe },
+    { value: PROOF.pincodes, label: 'PIN codes served', icon: Globe },
     {
       value: `${Math.round(PROOF.repeatBuyerRate * 100)}%`,
-      label: 'come back for a second book',
+      label: 'buy a second book',
       icon: Leaf,
     },
   ];

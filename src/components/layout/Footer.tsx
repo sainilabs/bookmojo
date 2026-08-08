@@ -30,9 +30,8 @@ export function Footer() {
           <div className="max-w-[30ch]">
             <Logo />
             <p className="mt-4 text-small text-ink-soft">
-              Personalised hardcover storybooks, written around one child and ordered in a single
-              conversation. Written in {BRAND.studio}, printed in {BRAND.press}, delivered to{' '}
-              {PROOF.pincodes} PIN codes.
+              Written in {BRAND.studio}, printed in {BRAND.press}, delivered to {PROOF.pincodes} PIN
+              codes.
             </p>
             <Rating value={PROOF.rating} count={PROOF.reviewCount} className="mt-5" />
           </div>
@@ -63,9 +62,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-small text-ink-muted">
-              Prices include GST and tracked delivery across India.
-            </p>
+            <p className="mt-4 text-small text-ink-muted">GST and delivery included.</p>
           </div>
 
           <div>

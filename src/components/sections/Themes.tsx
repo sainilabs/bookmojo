@@ -61,7 +61,7 @@ export function Themes() {
               </>
             )
           }
-          deck="Original stories set where your child actually lives — a summer terrace, the banyan at the end of the lane, a launch pad on the Bay of Bengal. Each is a manuscript by our authors, not a template, and the plot beats, vocabulary and page count all change with your child's age."
+          deck="Original stories set where your child actually lives — a summer terrace, the banyan at the end of the lane, a launch pad on the Bay of Bengal."
         />
 
         <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8">
@@ -140,10 +140,8 @@ export function Themes() {
         </ul>
 
         <Reveal y={16} className="mt-14 flex flex-col items-center gap-3 text-center">
-          <p className="max-w-[46ch] text-ink-soft">
-            Cannot see the right one? Tell us about your child in the chat — a dinosaur phase, a new
-            baby sister, a first day at big school, a cricket obsession — and we will point you at
-            the world that fits.
+          <p className="max-w-[40ch] text-ink-soft">
+            Not sure which one? Tell us about your child in the chat and we will suggest the fit.
           </p>
           <OrderButton
             intent="gift"

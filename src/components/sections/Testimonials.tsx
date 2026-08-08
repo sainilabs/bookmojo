@@ -40,7 +40,7 @@ export function Testimonials() {
         <SectionHeading
           eyebrow={<>What parents say afterwards</>}
           title="The reviews are mostly about their child’s face."
-          deck="Which is the point. We ask every buyer one question after delivery: what happened when they opened it?"
+          deck="We ask every buyer one question after delivery: what happened when they opened it?"
         />
 
         {/* Aggregate first: a distribution is harder to fake than a score, and

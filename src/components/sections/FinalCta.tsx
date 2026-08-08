@@ -31,15 +31,15 @@ export function FinalCta() {
   const { draft, isPersonalised } = useDraft();
   const name = formatName(draft.childName);
 
+  /* Six items, not eight. A list this close to the button is scanned in about a
+     second; past six the extra lines stop being read and start being volume. */
   const included = [
     'Hardcover, foil-stamped, 210 × 250mm',
     'Written and illustrated for your child',
-    'English or Hindi edition',
-    'Rigid gift box, unbranded outer packaging',
-    'Tracked delivery + GST included',
-    'Private dedication page',
-    'Free unlimited changes before printing',
-    'GST invoice with every order',
+    'English or Hindi',
+    'Rigid gift box',
+    'Tracked delivery + GST',
+    'Unlimited changes before printing',
   ];
 
   return (
@@ -90,9 +90,8 @@ export function FinalCta() {
             </Reveal>
 
             <Reveal y={18} delay={140}>
-              <p className="mt-6 max-w-[44ch] text-lead text-white/70">
-                Open WhatsApp, answer five questions, approve the cover we send back. Most families
-                are done in {PROOF.avgOrderMinutes} minutes and holding the book inside two weeks.
+              <p className="mt-6 max-w-[38ch] text-lead text-white/70">
+                Five questions, approve the cover, done in {PROOF.avgOrderMinutes} minutes.
               </p>
             </Reveal>
 
@@ -138,9 +137,9 @@ export function FinalCta() {
 
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
                 {[
-                  { icon: Lock, text: 'UPI, card or net banking · never in the chat' },
+                  { icon: Lock, text: 'UPI, card or net banking' },
                   { icon: Shield, text: `${GUARANTEE.headline} · ${GUARANTEE.window}` },
-                  { icon: Clock, text: 'Cancel free before you approve' },
+                  { icon: Clock, text: 'Cancel free before approval' },
                 ].map(({ icon: Icon, text }) => (
                   <li key={text} className="flex items-center gap-2 text-small text-white/65">
                     <Icon size={16} className="shrink-0 text-verdant-500" />

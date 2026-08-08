@@ -102,10 +102,9 @@ export function Hero() {
             </Reveal>
 
             <Reveal y={18} delay={160}>
-              <p className="mt-6 max-w-[46ch] text-lead text-ink-soft">
-                Original hardcover storybooks, written around one child — their name, their age,
-                their language, their face on the cover. You order the whole thing in a single
-                WhatsApp conversation. No forms. No account. No cart to abandon.
+              <p className="mt-6 max-w-[42ch] text-lead text-ink-soft">
+                Original hardcover storybooks written around one child. Ordered in a single WhatsApp
+                conversation — no forms, no account.
               </p>
             </Reveal>
 
@@ -147,17 +146,17 @@ export function Hero() {
                   className="inline-block size-1.5 animate-pulse rounded-full bg-verdant-500"
                 />
                 {isPersonalised
-                  ? 'Cover updated. Keep it, or design the whole book below.'
-                  : 'The cover on the right updates as you type. Nothing is sent yet.'}
+                  ? 'Keep it, or design the whole book below.'
+                  : 'The cover updates as you type. Nothing is sent yet.'}
               </p>
             </Reveal>
 
             <Reveal y={16} delay={300}>
               <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-hairline pt-6">
                 {[
-                  { icon: Camera, text: 'See the real book before you pay' },
-                  { icon: Lock, text: 'Pay by UPI · details never in the chat' },
-                  { icon: Clock, text: `Printed and posted in ${PROOF.productionDays} days` },
+                  { icon: Camera, text: 'See it before you pay' },
+                  { icon: Lock, text: 'UPI on a secure page' },
+                  { icon: Clock, text: `Printed in ${PROOF.productionDays} days` },
                 ].map(({ icon: Icon, text }) => (
                   <li key={text} className="flex items-center gap-2 text-small font-medium text-ink-soft">
                     <Icon size={17} className="shrink-0 text-verdant-600 night:text-verdant-500" />

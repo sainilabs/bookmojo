@@ -34,7 +34,7 @@ export function WhyParents() {
             </>
           }
           title="A book about them changes how they read it."
-          deck="Children who find themselves inside a story stop being an audience and start being a participant. That shift is the entire product — everything else is paper and ink."
+          deck="A child who finds themselves inside a story stops being an audience and becomes a participant. Everything else is paper and ink."
         />
 
         {/* 4 × 2 on desktop: the lead card occupies a 2 × 2 block, the four
@@ -64,11 +64,9 @@ export function WhyParents() {
                 >
                   “Wait — that’s <span className="text-gold-300">me</span>.”
                 </h3>
-                <p className="mt-5 max-w-[46ch] text-lead text-white/70">
-                  It happens somewhere around page three, and you can watch it happen. Their name in
-                  print, in a real hardcover, treated with the seriousness a book gives its hero.
-                  Children read a story about themselves more slowly, more carefully, and far more
-                  often.
+                <p className="mt-5 max-w-[40ch] text-lead text-white/70">
+                  It happens around page three, and you can watch it happen. Children read a story
+                  about themselves more slowly, more carefully, and far more often.
                 </p>
               </div>
 
@@ -94,27 +92,27 @@ export function WhyParents() {
             {
               icon: Feather,
               title: 'They want to read it',
-              body: `No bribery required. ${
+              body: `${
                 isPersonalised ? `${possessive(name)} name` : 'Their name'
-              } on the cover does more for reading motivation than any reward chart, and the reading level is set to their age band so it is a challenge they can actually win.`,
+              } on the cover beats any reward chart, and the reading level is set to their age band.`,
               tone: 'gold' as const,
             },
             {
               icon: Gift,
               title: 'A gift nobody else gives',
-              body: 'Arrives in a rigid gift box with no pricing inside and unbranded outer packaging. Grandparents and godparents use us because it is the one present that does not end up in a charity bag by spring.',
+              body: 'Rigid gift box, no pricing inside. The one present that is not in a charity bag by spring.',
               tone: 'clay' as const,
             },
             {
               icon: Shield,
               title: 'Made by people',
-              body: 'An author writes the manuscript, an illustrator matches your child by hand, an editor proofreads it. Your photo is never fed to a generator, and it is deleted the day the book ships.',
+              body: 'An author, an illustrator, an editor. Your photo never goes near a generator, and it is deleted the day the book ships.',
               tone: 'verdant' as const,
             },
             {
               icon: Leaf,
               title: 'Made to be kept',
-              body: 'FSC®-certified 170gsm uncoated stock, soy-based inks, foil-stamped title, sewn binding with a linen spine so it opens flat. Ages 2–3 get thick board pages with rounded corners.',
+              body: 'FSC® 170gsm uncoated stock, soy inks, sewn linen spine so it opens flat.',
               tone: 'neutral' as const,
             },
           ].map((card, i) => (

@@ -167,10 +167,8 @@ export function Journey() {
             <span className="text-white/55">Then decide.</span>
           </Reveal>
           <Reveal y={18} delay={140}>
-            <p className="mt-5 max-w-[54ch] text-lead text-white/70">
-              This is the real flow, with your choices in it — every question, the approval step,
-              how payment works, and what we send you while the book is being made. Nothing is
-              hidden behind the click.
+            <p className="mt-5 max-w-[46ch] text-lead text-white/70">
+              The real flow, with your choices in it. Nothing is hidden behind the click.
             </p>
           </Reveal>
         </div>
@@ -296,8 +294,8 @@ export function Journey() {
                 label="Do this for real"
                 sublabel="Opens WhatsApp · about 4 minutes"
               />
-              <p className="max-w-[24ch] text-small text-white/55">
-                You can stop at any point. Nothing is charged before you approve the cover.
+              <p className="max-w-[22ch] text-small text-white/55">
+                Nothing is charged before you approve the cover.
               </p>
             </Reveal>
           </div>

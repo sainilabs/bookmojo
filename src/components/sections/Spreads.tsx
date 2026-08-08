@@ -88,7 +88,7 @@ export function Spreads() {
             </>
           }
           title="Turn the pages before you buy them."
-          deck="Four spreads from a real BookMojo, with your child's name already in the text. This is the standard of writing and printing every book leaves the studio at."
+          deck="Four spreads from a real BookMojo, with your child's name already in the text."
         />
 
         <div

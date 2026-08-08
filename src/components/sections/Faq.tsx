@@ -49,9 +49,8 @@ export function Faq() {
               ask us first.
             </Reveal>
             <Reveal y={18} delay={140}>
-              <p className="mt-5 max-w-[38ch] text-lead text-ink-soft">
-                Honest answers, including the ones about paying inside a chat app. If your question
-                is not here, it is a two-minute conversation away.
+              <p className="mt-5 max-w-[34ch] text-lead text-ink-soft">
+                Honest answers, including the ones about paying inside a chat app.
               </p>
             </Reveal>
 
@@ -63,8 +62,7 @@ export function Faq() {
                 <div>
                   <p className="font-display text-title">Ask a real person</p>
                   <p className="mt-1.5 text-small text-ink-soft">
-                    {BRAND.supportHours}. Asking a question does not start an order and does not
-                    put you on a list.
+                    {BRAND.supportHours}. Asking does not start an order.
                   </p>
                 </div>
                 <OrderButton intent="faq" size="md" label="Ask on WhatsApp" block />
