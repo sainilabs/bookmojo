@@ -56,8 +56,7 @@ export const PRICING = {
 
 export const GUARANTEE = {
   headline: 'Love it or we reprint it',
-  detail:
-    "If the book that arrives isn't something you'd keep on the shelf for twenty years, we reprint or refund it. You keep the first copy either way.",
+  detail: 'Not shelf-worthy? We reprint or refund. You keep the first copy.',
   window: '30 days',
 } as const;
 

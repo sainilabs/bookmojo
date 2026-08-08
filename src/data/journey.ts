@@ -54,8 +54,7 @@ export function buildJourney(draft: Draft): Stage[] {
       id: 'details',
       label: 'Details',
       title: 'Five questions. That is the whole form.',
-      reassurance:
-        'No account, no password, no 14-field checkout. Answer in the chat you already have open — or tap the suggested replies.',
+      reassurance: 'No account, no password. Type or tap the suggested replies.',
       eta: '~90 seconds',
       actor: 'you',
       messages: [
