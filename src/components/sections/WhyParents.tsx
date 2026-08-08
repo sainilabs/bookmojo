@@ -39,7 +39,7 @@ export function WhyParents() {
 
         {/* 4 × 2 on desktop: the lead card occupies a 2 × 2 block, the four
             supporting cards fill the remaining 2 × 2. */}
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-20 lg:grid-cols-4 lg:grid-rows-2">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-14 lg:grid-cols-4 lg:grid-rows-2">
           {/* Lead card, double height on desktop. */}
           <Reveal
             y={26}

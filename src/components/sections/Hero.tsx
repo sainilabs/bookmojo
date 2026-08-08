@@ -191,7 +191,7 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal y={12} delay={400} className="mt-14 flex justify-center lg:mt-20">
+        <Reveal y={12} delay={400} className="mt-10 flex justify-center lg:mt-12">
           <a
             href="#create"
             className="btn btn-quiet group flex-col !gap-1 text-micro font-bold tracking-[0.14em] uppercase"

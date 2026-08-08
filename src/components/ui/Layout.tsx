@@ -43,6 +43,12 @@ export function Container({
  * (tight / normal / grand) rather than ad-hoc padding, so the page has a
  * detectable pulse as you scroll — the thing that makes a long page feel
  * composed instead of stacked.
+ *
+ * The scale was tightened by roughly a third after the copy diet. Generous
+ * spacing works when the blocks it separates are dense; once the prose was cut,
+ * a `grand` bottom of 176px meeting a `normal` top of 128px added up to over
+ * 300px of nothing between sections, which reads as a hole rather than as
+ * breathing room. Whitespace has to be proportional to the content it frames.
  */
 export function Section({
   id,
@@ -71,9 +77,9 @@ export function Section({
       data-tone={tone}
       className={cx(
         'relative',
-        space === 'tight' && 'py-14 sm:py-16',
-        space === 'normal' && 'py-20 sm:py-28 lg:py-32',
-        space === 'grand' && 'py-24 sm:py-32 lg:py-44',
+        space === 'tight' && 'py-10 sm:py-12',
+        space === 'normal' && 'py-14 sm:py-16 lg:py-20',
+        space === 'grand' && 'py-16 sm:py-20 lg:py-24',
         tone === 'paper' && 'bg-paper',
         tone === 'sunken' && 'bg-sunken',
         tone === 'inverse' && 'bg-inverse text-ink-inverse',

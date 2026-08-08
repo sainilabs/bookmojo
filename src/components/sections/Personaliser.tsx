@@ -80,7 +80,12 @@ export function Personaliser() {
   const opening = theme.opening.replaceAll('{name}', name || 'your child');
 
   return (
-    <Section id="create" space="grand" className="overflow-hidden">
+    /* overflow-x-clip, NOT overflow-hidden. `hidden` turns this section into a
+       scroll container, which silently breaks the sticky preview column below —
+       the book un-sticks, scrolls away, and leaves the right half of the section
+       empty. `clip` gives the same horizontal clipping without creating a scroll
+       container, so sticky keeps working. */
+    <Section id="create" space="grand" className="overflow-x-clip">
       <Container>
         <SectionHeading
           eyebrow={
@@ -98,7 +103,7 @@ export function Personaliser() {
           deck="Five choices, no sign-up. One tap carries them into WhatsApp and we pick up from there."
         />
 
-        <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-16 3xl:gap-24">
+        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-16 3xl:gap-24">
           {/* ------------------------------ CONTROLS ------------------------ */}
           <Reveal y={24} className="order-2 lg:order-1">
             <div className="flex items-center justify-between gap-4 border-b border-hairline pb-4">

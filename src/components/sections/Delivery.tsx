@@ -70,7 +70,7 @@ export function Delivery() {
           deck={`Made in ${PROOF.productionDays} days, then ${PROOF.metroDeliveryDays} to metros and 4–6 elsewhere. Every stage arrives as a message — including a photo of the real book.`}
         />
 
-        <ol className="relative mt-14 grid gap-6 lg:mt-20 lg:grid-cols-4 lg:gap-5">
+        <ol className="relative mt-10 grid gap-6 lg:mt-14 lg:grid-cols-4 lg:gap-5">
           {beats.map((beat, i) => (
             <Reveal as="li" key={beat.title} y={24} delay={i * 90} className="h-full">
               <article className="card flex h-full flex-col gap-4 p-6">

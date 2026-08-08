@@ -69,7 +69,7 @@ export function HowItWorks() {
           deck={`About ${PROOF.avgOrderMinutes} minutes of your time, and the book is in your hands inside ten days.`}
         />
 
-        <ol className="relative mt-16 grid gap-10 sm:gap-12 lg:mt-24 lg:grid-cols-4 lg:gap-8">
+        <ol className="relative mt-10 grid gap-10 sm:gap-12 lg:mt-14 lg:grid-cols-4 lg:gap-8">
           {/* The stitched thread. Absolute, decorative, hidden from AT. */}
           <div
             aria-hidden="true"

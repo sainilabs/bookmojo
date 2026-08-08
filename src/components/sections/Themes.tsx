@@ -64,7 +64,7 @@ export function Themes() {
           deck="Original stories set where your child actually lives — a summer terrace, the banyan at the end of the lane, a launch pad on the Bay of Bengal."
         />
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8">
+        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-8">
           {THEMES.map((theme, i) => {
             const selected = theme.id === draft.themeId;
             const ages = theme.ages

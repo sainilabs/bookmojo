@@ -141,7 +141,9 @@ export function Journey() {
   const overallProgress = ((stageIndex + step / Math.max(messages.length, 1)) / stages.length) * 100;
 
   return (
-    <Section id="journey" tone="inverse" space="grand" className="overflow-hidden">
+    /* overflow-x-clip rather than overflow-hidden: `hidden` would make this
+       section a scroll container and break the sticky phone column. */
+    <Section id="journey" tone="inverse" space="grand" className="overflow-x-clip">
       {/* Inverse surface: this section is a night-time scene and the phone is
           the light source. It also creates the strongest possible break in the
           page rhythm at the exact point we need full attention. */}
@@ -173,7 +175,7 @@ export function Journey() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 3xl:gap-24">
+        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 3xl:gap-24">
           {/* ------------------------------- RAIL --------------------------- */}
           <div className="min-w-0">
             <div className="flex items-center gap-4">

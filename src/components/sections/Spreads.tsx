@@ -94,7 +94,7 @@ export function Spreads() {
         <div
           data-spread-viewer
           tabIndex={-1}
-          className="mt-14 lg:mt-20"
+          className="mt-10 lg:mt-14"
           aria-roledescription="book preview"
         >
           <div className="mx-auto max-w-[62rem]">
