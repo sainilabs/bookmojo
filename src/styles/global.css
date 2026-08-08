@@ -1,0 +1,710 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Theme is driven by a data attribute set before paint (see index.html), which
+   avoids the flash-of-wrong-theme that a React-mounted toggle would cause. */
+@custom-variant night (&:where([data-theme='night'], [data-theme='night'] *));
+
+/* =============================================================================
+   BASE
+============================================================================= */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Sticky header height + breathing room, so in-page anchors never land
+       under the nav. */
+    scroll-padding-top: 6.5rem;
+    hanging-punctuation: first last;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+    transition: background-color var(--duration-slow) var(--ease-out),
+      color var(--duration-slow) var(--ease-out);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    /* WONK 1 unlocks Fraunces' single-storey g and quirked l — the detail that
+       makes the type feel hand-set rather than defaulted. */
+    font-variation-settings: 'SOFT' 40, 'WONK' 1;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* Never remove focus rings — replace them with a better one. Two-tone ring
+     guarantees visibility on both paper and ink surfaces. */
+  :focus-visible {
+    outline: 2px solid var(--l-focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+  button {
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: var(--gold-300);
+    color: var(--c-ink);
+  }
+
+  [data-theme='night'] ::selection {
+    background: var(--clay-300);
+    color: #101815;
+  }
+
+  /* Custom scrollbar on the horizontal rails only — keeps the OS scrollbar
+     everywhere users expect it. */
+  .rail-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--l-strong) transparent;
+  }
+}
+
+/* =============================================================================
+   ACCESSIBILITY & MOTION POLICY
+   Motion is opt-out at the source: every animated primitive keys off these
+   variables, so `prefers-reduced-motion` disables the entire choreography in
+   one place instead of 40 component-level guards.
+============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --c-ink-muted: var(--c-ink-soft);
+    --l-hairline: var(--l-strong);
+  }
+}
+
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* =============================================================================
+   SCROLL REVEAL
+   One transition contract for every entrance in the product. Only `opacity`
+   and `transform` are touched, so reveals stay on the compositor and never
+   trigger layout — this is what keeps INP clean while 15 sections animate.
+============================================================================= */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 22px), 0) scale(var(--reveal-s, 1));
+  transition: opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-story) var(--ease-spring);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+[data-reveal='in'] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
+/* =============================================================================
+   COMPONENT LAYER
+   Repeated multi-property patterns live here as semantic classes. Utilities
+   handle one-off layout; anything used 3+ times becomes a token-driven class
+   so a design change is one edit, not a find-and-replace across 40 files.
+============================================================================= */
+@layer components {
+  /* ---- Actions ------------------------------------------------------------ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    text-decoration: none;
+    /* 44px minimum touch target (WCAG 2.5.8) on every variant. */
+    min-height: 2.75rem;
+    padding-inline: 1.35rem;
+    /* Counts inside filter tabs must not reflow the label as they change. */
+    font-variant-numeric: tabular-nums;
+    /* Stops a long-press from selecting the label on touch, and kills the grey
+       flash Android draws over tapped elements. */
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform var(--duration-fast) var(--ease-out),
+      background-color var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+  }
+  /* Presses 1px and no scale. A scaling button reads as a toy; a button that
+     travels straight down under the finger reads as a mechanism. */
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .btn-lg {
+    min-height: 3.5rem;
+    padding-inline: 2rem;
+    font-size: 1.0625rem;
+  }
+  .btn-sm {
+    min-height: 2.5rem;
+    padding-inline: 1.1rem;
+    font-size: var(--text-small);
+  }
+
+  /* Square icon controls. Replaces the `size-11 !min-h-0 !px-0` override that
+     was repeated at ten call sites — utility overrides marked important are the
+     clearest sign a component API is missing a variant. */
+  .btn-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    min-height: 0;
+    padding-inline: 0;
+    flex-shrink: 0;
+  }
+  .btn-icon-sm {
+    width: 2.25rem;
+    height: 2.25rem;
+    min-height: 0;
+    padding-inline: 0;
+    flex-shrink: 0;
+  }
+
+  /* ------------------------------------------------------------------------
+     EMPHASIS LADDER — four levels, never more.
+
+       order  · the WhatsApp CTA. Verdant. At most one per viewport.
+       ink    · high-contrast neutral. Secondary commitments.
+       tonal  · solid tinted fill. Navigation, filters, icon controls.
+       quiet  · text only. Dismissals, tertiary links.
+
+     All three filled levels share ONE material recipe: solid fill, a 1px
+     specular highlight along the top edge, a 1px shade along the bottom, and a
+     pressed state that inverts both into an inner shadow. That is the same
+     light-from-above model as the glass panes, so controls and chrome read as
+     one machined material family rather than as separate design exercises.
+
+     Hollow outline buttons have been removed from the system. They measure worse
+     on affordance — people are less certain an outline is pressable — and sitting
+     next to solid fills they read as disabled.
+  ------------------------------------------------------------------------ */
+
+  /* Order — the only conversion surface. Verdant appears nowhere else, so colour
+     alone says "this is the channel". */
+  .btn-order {
+    background-color: var(--w-600);
+    color: #fff;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.24),
+      inset 0 -1px 0 rgb(0 0 0 / 0.16),
+      var(--e-2),
+      0 0 0 0 color-mix(in oklab, var(--w-500) 55%, transparent);
+  }
+  .btn-order:hover {
+    background-color: var(--w-700);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.24),
+      inset 0 -1px 0 rgb(0 0 0 / 0.16),
+      var(--e-3),
+      0 0 0 5px color-mix(in oklab, var(--w-500) 20%, transparent);
+  }
+  .btn-order:active {
+    box-shadow: inset 0 2px 5px rgb(0 0 0 / 0.26), var(--e-1);
+  }
+  [data-theme='night'] .btn-order {
+    background-color: var(--w-500);
+    color: #062313;
+  }
+  [data-theme='night'] .btn-order:hover {
+    background-color: var(--w-600);
+  }
+
+  /* Ink — neutral high contrast. Quiet luxury; never competes with order. */
+  .btn-ink {
+    background-color: var(--s-inverse);
+    color: var(--c-ink-inverse);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.14),
+      inset 0 -1px 0 rgb(0 0 0 / 0.2),
+      var(--e-2);
+  }
+  .btn-ink:hover {
+    background-color: color-mix(in oklab, var(--s-inverse) 90%, var(--jade-500));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.14),
+      inset 0 -1px 0 rgb(0 0 0 / 0.2),
+      var(--e-3);
+  }
+  .btn-ink:active {
+    box-shadow: inset 0 2px 5px rgb(0 0 0 / 0.3), var(--e-1);
+  }
+
+  /* Tonal — a solid tinted fill, not an outline. This is the workhorse: nav
+     icons, filter tabs, carousel controls, "try this world". */
+  .btn-tonal {
+    background-color: var(--s-inset);
+    color: var(--c-ink);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.5),
+      inset 0 0 0 1px var(--l-hairline),
+      var(--e-1);
+  }
+  .btn-tonal:hover {
+    background-color: color-mix(in oklab, var(--s-inset) 88%, var(--c-ink));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.5),
+      inset 0 0 0 1px var(--l-strong),
+      var(--e-2);
+  }
+  .btn-tonal:active {
+    box-shadow: inset 0 2px 4px rgb(16 46 42 / 0.18);
+  }
+  [data-theme='night'] .btn-tonal {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.07),
+      inset 0 0 0 1px var(--l-strong),
+      var(--e-1);
+  }
+
+  /* Tonal sitting on a glass pane must not repeat the pane's own fill, or the
+     control disappears into it. It gets its own slightly denser tint. */
+  .glass .btn-tonal {
+    background-color: color-mix(in srgb, var(--s-inset) 82%, transparent);
+  }
+
+  /* Against the deep pine surface the order button is green-on-green: the hue
+     gap to sage is wide, but the gap to a dark green BACKGROUND is lightness
+     only. A brass hairline restores the edge without introducing a second
+     action colour. */
+  [data-tone='inverse'] .btn-order {
+    border: 1px solid color-mix(in oklab, var(--gold-500) 48%, transparent);
+  }
+
+  /* Brass rule at the top of every inverse band. One hairline, doing the same
+     job as the gold edge on a good dust jacket: it announces a change of
+     material. */
+  [data-tone='inverse']::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--gold-500) 70%, transparent) 22%,
+      color-mix(in oklab, var(--gold-300) 90%, transparent) 50%,
+      color-mix(in oklab, var(--gold-500) 70%, transparent) 78%,
+      transparent
+    );
+  }
+
+  .btn-quiet {
+    background-color: transparent;
+    color: var(--c-ink-soft);
+  }
+  .btn-quiet:hover {
+    color: var(--c-ink);
+    background-color: color-mix(in oklab, var(--c-ink) 6%, transparent);
+  }
+
+  /* ---- GLASS MATERIAL ----------------------------------------------------
+     Applied ONLY to layers that genuinely float over content: the nav, the
+     sticky bar, the mobile sheet, call-out pills, the price pane.
+
+     Glass is not applied to cards, and that restraint is the point. If every
+     surface is translucent, nothing reads as floating, the page loses its depth
+     hierarchy, and `backdrop-filter` — one of the most expensive things you can
+     ask a compositor to do — gets multiplied across dozens of nodes. iOS itself
+     follows this rule: materials are for chrome, not for content. */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--glass-tint);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    box-shadow: 0 0 0 1px var(--glass-ring), var(--e-3);
+    /* Promotes the element so the blur is rasterised once on the GPU instead of
+       being recomputed on the main thread during every scroll frame. */
+    transform: translateZ(0);
+  }
+
+  /* The specular rim. Drawn as a gradient BORDER via mask-composite rather than
+     an inset box-shadow, because an inset shadow only lights the flat top edge —
+     this follows the full corner radius the way a real bevel does. */
+  .glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      var(--glass-highlight) 0%,
+      transparent 38%,
+      transparent 62%,
+      var(--glass-lowlight) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* One diagonal wipe. Any more and it stops reading as a material and starts
+     reading as a gradient. */
+  .glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(147deg, var(--glass-sheen) 0%, transparent 44%);
+    pointer-events: none;
+  }
+
+  .glass-thin {
+    background-color: var(--glass-tint-thin);
+    --glass-blur: 14px;
+  }
+  .glass-thick {
+    background-color: var(--glass-tint-thick);
+    --glass-blur: 30px;
+  }
+
+  /* For panes that always sit on a dark surface regardless of theme — the price
+     pane inside the inverse closing section, for instance. */
+  .glass-onDark {
+    background-color: rgb(255 255 255 / 0.07);
+    --glass-highlight: rgb(255 255 255 / 0.3);
+    --glass-lowlight: rgb(0 0 0 / 0.35);
+    --glass-ring: rgb(255 255 255 / 0.12);
+    --glass-sheen: rgb(255 255 255 / 0.08);
+  }
+
+  /* Progressive enhancement. Without a working backdrop-filter the tint alone
+     would leave text on a semi-transparent pane over live content — unreadable.
+     So we go fully opaque instead. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      background-color: var(--s-paper);
+    }
+    .glass-onDark {
+      background-color: color-mix(in srgb, var(--s-inverse) 92%, #fff);
+    }
+  }
+
+  /* Respect the OS-level request for less transparency. Users who set this
+     usually need it, so this drops the effect entirely rather than softening it. */
+  @media (prefers-reduced-transparency: reduce) {
+    .glass {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background-color: var(--s-paper);
+    }
+    .glass-onDark {
+      background-color: color-mix(in srgb, var(--s-inverse) 92%, #fff);
+    }
+    .glass::after {
+      display: none;
+    }
+  }
+
+  /* ---- Surfaces ---------------------------------------------------------- */
+  .card {
+    position: relative;
+    background-color: var(--s-raised);
+    border: 1px solid var(--l-hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--e-1);
+  }
+
+  .card-lift {
+    transition: transform var(--duration-base) var(--ease-spring),
+      box-shadow var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--e-3);
+      border-color: var(--l-strong);
+    }
+  }
+
+  /* ---- Type helpers ------------------------------------------------------ */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-micro);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-ink-muted);
+  }
+
+  /* Marker highlight: mimics a wax-crayon swipe under a word. Drawn with a
+     gradient rather than an SVG so it inherits the type's line-height. */
+  .marker {
+    position: relative;
+    white-space: nowrap;
+  }
+  .marker::after {
+    content: '';
+    position: absolute;
+    inset-inline: -0.12em;
+    bottom: 0.08em;
+    height: 0.34em;
+    background: linear-gradient(
+      100deg,
+      color-mix(in oklab, var(--gold-300) 0%, transparent) 0%,
+      var(--gold-300) 6%,
+      var(--gold-300) 94%,
+      color-mix(in oklab, var(--gold-300) 0%, transparent) 100%
+    );
+    border-radius: 999px;
+    z-index: -1;
+    transform: scaleX(var(--marker-scale, 1));
+    transform-origin: left;
+    transition: transform var(--duration-story) var(--ease-out) 200ms;
+  }
+  [data-reveal] .marker::after,
+  [data-reveal].marker::after {
+    --marker-scale: 0;
+  }
+  [data-reveal='in'] .marker::after,
+  [data-reveal='in'].marker::after {
+    --marker-scale: 1;
+  }
+
+  /* Ink-drawn underline for the "story" accent word. */
+  .quill {
+    color: var(--clay-500);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  }
+
+  /* ---- Section framing --------------------------------------------------- */
+  .rule-top {
+    border-top: 1px solid var(--l-hairline);
+  }
+
+  /* Paper grain. A single fixed layer over the whole document costs one
+     composited texture instead of per-section overlays. */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: multiply;
+    background-image: var(--grain-url);
+    background-size: 180px 180px;
+  }
+  [data-theme='night'] .grain {
+    mix-blend-mode: screen;
+  }
+
+  /* ---- The book as a physical object -------------------------------------
+     Board thickness, a page block and a cast shadow. Rotation is held in a
+     variable so the pointer handler only has to write one custom property —
+     no React re-render per mouse move. */
+  .book3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(var(--ry, -17deg)) rotateX(var(--rx, 3deg)) translateZ(0);
+    transition: transform var(--duration-slow) var(--ease-spring);
+  }
+  [data-interactive] .book3d {
+    transition: transform 120ms var(--ease-out);
+  }
+
+  .book3d-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 2px var(--radius-sm) var(--radius-sm) 2px;
+    overflow: hidden;
+    box-shadow: var(--e-book);
+    background: var(--s-inverse);
+    transform: translateZ(calc(var(--thickness) / 2));
+    backface-visibility: hidden;
+  }
+  .book3d-face > svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Spine: the left board edge, rotated into depth. */
+  .book3d-spine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--thickness);
+    transform-origin: left center;
+    transform: rotateY(-90deg) translateZ(calc(var(--thickness) / -2));
+    /* Linen texture, faked with a repeating micro-gradient. */
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgb(255 255 255 / 0.06) 0 1px,
+        transparent 1px 3px
+      ),
+      linear-gradient(90deg, #0d0a12, #2a2233 55%, #14101a);
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* Page block: offset stack of cream edges on the fore-edge side. */
+  .book3d-pages {
+    position: absolute;
+    inset: 1.5% 0 1.5% auto;
+    right: -2px;
+    width: 96%;
+    border-radius: 2px var(--radius-sm) var(--radius-sm) 2px;
+    transform: translateZ(calc(var(--thickness) / 2 - 3px));
+    background: linear-gradient(90deg, transparent 82%, #efe6d5 82%, #cdbfa6 100%);
+    box-shadow: 3px 0 0 -1px #e8dfcd, 6px 0 0 -2px #ded3bd, 9px 0 0 -3px #d2c5ac;
+  }
+
+  /* ---- Page turn ---------------------------------------------------------
+     The leaf is a half-width overlay hinged on the gutter. Forward: it lifts
+     from the recto and lays down on the verso. Backward: the reverse. Easing is
+     asymmetric on purpose — paper accelerates as it falls and settles slowly,
+     which is what makes 640ms read as weight rather than as a slideshow. */
+  .page-turn-fwd {
+    animation: leaf-fwd 640ms var(--ease-in-out) forwards;
+  }
+  .page-turn-back {
+    animation: leaf-back 640ms var(--ease-in-out) forwards;
+  }
+
+  /* ---- Chat primitives -------------------------------------------------- */
+  .bubble {
+    position: relative;
+    max-width: 85%;
+    padding: 0.55rem 0.7rem 0.45rem;
+    border-radius: 0.85rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 0.1);
+    overflow-wrap: anywhere;
+  }
+  .bubble-in {
+    background: var(--chat-in);
+    color: var(--chat-in-ink);
+    border-start-start-radius: 0.2rem;
+    align-self: flex-start;
+  }
+  .bubble-out {
+    background: var(--chat-out);
+    color: var(--chat-out-ink);
+    border-start-end-radius: 0.2rem;
+    align-self: flex-end;
+  }
+}
+
+/* =============================================================================
+   UTILITIES
+============================================================================= */
+@utility text-balance-tight {
+  text-wrap: balance;
+  letter-spacing: -0.02em;
+}
+
+/* Edge-fade for horizontal rails and marquees: signals "more content this way"
+   without adding a visible scrollbar. */
+@utility mask-x-fade {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--fade, 6%),
+    #000 calc(100% - var(--fade, 6%)),
+    transparent
+  );
+}
+
+@utility mask-b-fade {
+  mask-image: linear-gradient(180deg, #000 65%, transparent);
+}
+
+/* Full-bleed escape hatch inside a constrained grid. */
+@utility bleed {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}

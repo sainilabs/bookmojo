@@ -1,0 +1,117 @@
+<!doctype html>
+<!-- en-IN, not en: it tells the browser and assistive tech to expect Indian
+     English spellings, ₹ formatting and Indian number grouping. -->
+<html lang="en-IN" data-theme="day">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>BookMojo — Personalised Storybooks Where Your Child Is the Hero</title>
+    <meta
+      name="description"
+      content="Hardcover storybooks written around your child's name, age and world, in English or Hindi. Order in one WhatsApp conversation — no forms, no accounts. ₹1,499 all in, GST and delivery included."
+    />
+    <meta name="theme-color" content="#fbfdfc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c1a17" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href="https://bookmojo.com/" />
+
+    <!-- Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BookMojo" />
+    <meta property="og:title" content="Your child, the hero of their own hardcover book" />
+    <meta
+      property="og:description"
+      content="Personalised storybooks in English or Hindi, ordered entirely over WhatsApp. ₹1,499 all in. Tell us their name — we'll do the rest."
+    />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:image" content="/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!--
+      FONT LOADING
+      Two families, four axes total, subset to latin. Preconnect + swap keeps
+      first paint on the fallback stack instead of blocking LCP on the network.
+      Fallbacks are metric-adjacent (Iowan/Palatino for Fraunces) to hold the
+      layout still during the swap — CLS stays at 0.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,40,1;1,9..144,400..600,60,1&family=Plus+Jakarta+Sans:wght@400..700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,40,1;1,9..144,400..600,60,1&family=Plus+Jakarta+Sans:wght@400..700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "BookMojo Personalised Storybook",
+        "description": "A hardcover children's storybook personalised with your child's name, age, chosen theme and character, printed in English or Hindi. Ordered through a guided WhatsApp conversation.",
+        "brand": { "@type": "Brand", "name": "BookMojo" },
+        "inLanguage": ["en-IN", "hi-IN"],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "2148"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "INR",
+          "price": "1499",
+          "availability": "https://schema.org/InStock",
+          "areaServed": { "@type": "Country", "name": "India" },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "INR"
+            }
+          }
+        }
+      }
+    </script>
+
+    <!--
+      THEME BOOTSTRAP
+      Runs before first paint so the correct theme is already on <html>. Doing
+      this in React would guarantee a visible flash on every load.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('bookmojo:theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored || (prefersDark ? 'night' : 'day');
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {
+          document.documentElement.dataset.theme = 'day';
+        }
+      })();
+    </script>
+  </head> 
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui">
+        <h1>BookMojo</h1>
+        <p>
+          Personalised hardcover storybooks starring your child, in English or Hindi. ₹1,499
+          including GST and delivery. To order, message us on WhatsApp at
+          <a href="https://wa.me/919876543210">+91 98765 43210</a>.
+        </p>
+      </div>
+    </noscript>
+  </body>
+</html>

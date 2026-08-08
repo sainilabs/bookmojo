@@ -1,0 +1,487 @@
+/* =============================================================================
+   BOOKMOJO — DESIGN TOKENS
+   -----------------------------------------------------------------------------
+   Every token below is a decision, not a preference. Rationale is inline so the
+   system stays defensible as the product grows.
+
+   PALETTE STRATEGY — "Eau de Nil & Brass"
+   Premium children's gifting sits in a trap: primary "cartoon" colours read as
+   toy-shop and cheap, while cold SaaS greys kill the emotion parents buy on.
+
+   THE HUE DECISION, which is the whole palette.
+   Green splits into two families and they do opposite jobs. Yellow-leaning
+   greens (sage, olive, ~90°) belong to eco and herbal brands; at scale they go
+   dusty and read cheap. Blue-leaning greens (celadon, eau de nil, jade, ~170°)
+   are the luxury family — porcelain, malachite, Fortnum's, Penhaligon's — and
+   they are the ones that hold up next to gold. This palette lives at ~170°.
+   An earlier revision used sage at ~90° and it read olive; the hue was the
+   fault, not the saturation.
+
+     · Eau de nil = the brand hue. Pale, cool, porcelain. Carries the surfaces.
+     · Jade       = the same hue at depth. Dark bands, the closing section.
+     · Brass      = luxury, gifting, foil. In an Indian gifting context gold is
+                    the colour of a present before it is even opened; muted
+                    brass buys that association without costume-jewellery glare.
+     · Clay       = terracotta warmth. Stops jade + brass reading like a bank.
+     · Verdant    = WhatsApp channel identity. Reserved EXCLUSIVELY for the
+                    ordering action so the click target is unmistakable.
+
+   ON THE VERDANT COLLISION: jade sits ~18° from the WhatsApp green, which would
+   be a problem for a mid-tone, mid-chroma brand green used on controls. It is
+   not one here, because the brand hue only ever appears either very pale (a
+   surface tint) or very dark (a band). The CTA owns the entire saturated
+   mid-lightness region of that hue, alone.
+
+   Text never sits on brass at small sizes; primary buttons are ink-on-paper
+   for maximum contrast and a quieter, more expensive feel.
+
+   THEMES
+   Two themes, both first-class. "Daylight" is the default (paper metaphor).
+   "Bedtime" exists because parent purchase intent peaks 21:00–00:00, after
+   kids are asleep, on a phone in a dark room — a genuine usage context, not a
+   trend. Both themes are tuned to WCAG 2.2 AA for text and UI boundaries.
+============================================================================= */
+
+/* --- Runtime palette: Daylight (default) ---------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* WHERE THE COLOUR LIVES — the decision that drives this whole revision.
+     The page FIELD is near-white and the colour is spent on PANELS instead.
+     That inversion is what makes a crisp interface read as expensive: a clean
+     field, very dark cool text, and tinted blocks that group related content.
+     Tinting the entire page is the flatter option — it lowers text contrast
+     everywhere at once and leaves panels with nowhere left to go. */
+  --s-paper: #fbfdfc; /* near-white field, faintest cool cast */
+  --s-raised: #ffffff; /* cards: a crisp sheet laid on the field */
+  --s-sunken: #eef7f4; /* tinted panels and bands — the colour lives here */
+  --s-inset: #e0efeb; /* wells, chips, unselected controls */
+  --s-inverse: #0e3e36; /* deep jade — the luxury depth note, kept */
+
+  /* Content — a dark, cool, desaturated slate rather than a warm black or a
+     pure #000. High-contrast cool text on a near-white field is the single
+     biggest contributor to a "clean and expensive" impression; warm ink on
+     white goes slightly muddy, and #000 goes harsh. */
+  --c-ink: #17262c;
+  --c-ink-soft: #3e4e54;
+  /* Smallest permitted body colour. Tuned against the INSET surface, not paper:
+     muted text sits on all three, and inset is the tightest constraint. */
+  --c-ink-muted: #5b6d73;
+  --c-ink-inverse: #f4faf8;
+
+  /* Lines & separation — re-derived against the near-white field. On a crisp
+     layout the hairline is doing structural work that shadows used to do, so it
+     needs to be visible rather than merely present. */
+  --l-hairline: #dfeae7;
+  --l-strong: #c2d6d1;
+  --l-focus: #6d3a29; /* clay: deliberately off-hue so focus is never ambiguous */
+
+  /* Brass — the luxury and gifting note.
+     A MUTED brass (#be9245), not a bright yellow-gold. Saturated gold reads
+     costume; desaturated brass reads foil-stamped. This is the accent that does
+     the emotional work in an Indian gifting context, where gold is the colour of
+     a present before anything is unwrapped. */
+  --gold-50: #faf3e1;
+  --gold-100: #f1e2b4;
+  --gold-300: #dcbe76;
+  --gold-500: #be9245;
+  --gold-600: #9a7228;
+  --gold-700: #6f5117;
+
+  /* Jade / eau de nil — the brand hue, held at ~170°.
+     300 is the decorative tint: hero grid, blurred fields, soft rules. 500 and
+     above are the ink-weight steps for icons and small text. Nothing in this
+     family is ever used as a button fill — that region belongs to verdant. */
+  --jade-50: #d7ebe7;
+  --jade-100: #bbdcd6;
+  --jade-300: #7fb3a9;
+  /* 500 is darkened past its "natural" midpoint so the step is safe for small
+     text on paper (4.5:1). A scale step that cannot legally hold text is a trap
+     left in the system for the next person. */
+  --jade-500: #35726a;
+  --jade-600: #2b625b;
+  --jade-700: #1d4741;
+
+  /* Clay — human warmth. Jade and brass alone are cool and metallic; clay is
+     the terracotta note that stops the palette feeling like a bank. Used for the
+     story accent, focus rings and portrait monograms. */
+  --clay-50: #faece5;
+  --clay-100: #f2d5c7;
+  --clay-300: #d79c84;
+  --clay-500: #b4674f;
+  --clay-600: #91503b;
+  --clay-700: #6d3a29;
+
+  /* Verdant — the WhatsApp channel. Untouched by the rebrand on purpose: this
+     is not our colour to style, it is a channel signal the user already knows. */
+  --w-50: #e7f7ee;
+  --w-300: #4fc47e;
+  --w-500: #0f9d54;
+  --w-600: #0b7c43;
+  --w-700: #085c32;
+
+  /* Elevation: jade-tinted, low-spread. A neutral black shadow on eau de nil
+     goes grey and muddy; tinting it toward the surface hue keeps it looking like
+     light falling on paper rather than dirt under an element. */
+  --e-1: 0 1px 2px -1px rgb(16 46 42 / 0.1), 0 1px 3px rgb(16 46 42 / 0.06);
+  --e-2: 0 2px 4px -2px rgb(16 46 42 / 0.1), 0 6px 14px -4px rgb(16 46 42 / 0.1);
+  --e-3: 0 4px 8px -4px rgb(16 46 42 / 0.12), 0 16px 32px -12px rgb(16 46 42 / 0.16);
+  --e-4: 0 8px 16px -8px rgb(16 46 42 / 0.14), 0 32px 64px -24px rgb(16 46 42 / 0.2);
+  --e-book: 0 2px 4px rgb(16 46 42 / 0.14), 0 18px 30px -14px rgb(16 46 42 / 0.3),
+    0 40px 70px -30px rgb(16 46 42 / 0.26);
+
+  /* Pulled well back for the near-white field. Grain that read as paper tooth on
+     a tinted surface reads as dirt on white, and it directly fights the crispness
+     this palette exists to deliver. */
+  --grain-opacity: 0.18;
+  --sheen: rgb(255 255 255 / 0.7);
+
+  /* =========================================================================
+     GLASS MATERIAL
+     -------------------------------------------------------------------------
+     Four properties separate real iOS glass from a `backdrop-blur` class:
+
+       1. SATURATION. iOS boosts chroma behind the blur, so colour blooms
+          through instead of going grey. This is the biggest single tell.
+       2. SPECULAR EDGE. A bright hairline on the TOP arc, fading out by the
+          middle — light arriving from above, as it does in the physical world.
+       3. THICKNESS. A darker hairline on the BOTTOM arc. Together with (2) it
+          reads as a pane with depth rather than a flat translucent rectangle.
+       4. SHEEN. One faint diagonal wipe across the surface.
+
+     Tint alpha is kept high (68–88%) rather than fashionably low, because nav
+     labels and prices sit on these panes and have to survive whatever colour
+     scrolls underneath them. Pretty glass that drops text to 3:1 is a bug.
+  ========================================================================= */
+  --glass-tint: color-mix(in srgb, var(--s-paper) 74%, transparent);
+  --glass-tint-thin: color-mix(in srgb, var(--s-paper) 55%, transparent);
+  --glass-tint-thick: color-mix(in srgb, var(--s-paper) 88%, transparent);
+  --glass-blur: 22px;
+  --glass-saturate: 180%;
+  --glass-highlight: rgb(255 255 255 / 0.85);
+  --glass-lowlight: rgb(16 46 42 / 0.12);
+  --glass-ring: rgb(16 46 42 / 0.07);
+  --glass-sheen: rgb(255 255 255 / 0.2);
+
+  /* Chat surface tokens — WhatsApp's own visual language, kept in tokens so the
+     simulation stays honest to the real app the customer is about to open. */
+  --chat-canvas: #e9e0d4;
+  --chat-in: #ffffff;
+  --chat-in-ink: #14231c;
+  --chat-out: #d5f7c4;
+  --chat-out-ink: #0d2318;
+  --chat-header: #075e54;
+
+  /* Procedural paper grain. Cheaper than a bitmap, resolution-independent, and
+     it gives every surface the tooth of uncoated stock — the single strongest
+     cue that this brand makes physical objects. */
+  --grain-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+}
+
+/* --- Runtime palette: Bedtime --------------------------------------------- */
+[data-theme='night'] {
+  color-scheme: dark;
+
+  /* Bedtime keeps the same hue family — a deep forest-black rather than a
+     neutral charcoal, so switching theme changes the light, not the brand. */
+  /* Chroma is raised here too. A near-neutral dark surface reads as "app grey"
+     and would throw away the brand hue in the theme parents actually browse in. */
+  --s-paper: #0c1a17;
+  --s-raised: #132521;
+  --s-sunken: #070f0d;
+  --s-inset: #1b2f2a;
+  /* In Bedtime the inverse surface is the LIGHT one, so it tracks the daylight
+     field. Left at the old tinted value it would have shipped as a stale colour
+     nobody could trace back to a decision. */
+  --s-inverse: #fbfdfc;
+
+  --c-ink: #e9f3f1;
+  --c-ink-soft: #bac9c6;
+  --c-ink-muted: #8a9b97;
+  --c-ink-inverse: #0c1a17;
+
+  --l-hairline: #22332f;
+  --l-strong: #354a45;
+  --l-focus: #dcbe76; /* brass reads unmistakably on a dark surface */
+
+  /* Lightness is raised and chroma lifted: the daylight brass and clay would
+     both go muddy and vibrate against a near-black surface. */
+  --gold-50: #2a2010;
+  --gold-100: #3c2e15;
+  --gold-300: #c9a25c;
+  --gold-500: #dfbb77;
+  --gold-600: #ecd39d;
+  --gold-700: #f6e8c7;
+
+  --jade-50: #14231f;
+  --jade-100: #1d3129;
+  --jade-300: #7faea5;
+  --jade-500: #9bc7bf;
+  --jade-600: #badad4;
+  --jade-700: #d8eae6;
+
+  --clay-50: #2b1710;
+  --clay-100: #3d2117;
+  --clay-300: #c98a70;
+  --clay-500: #d79c84;
+  --clay-600: #e5b6a2;
+  --clay-700: #f0d2c4;
+
+  --w-50: #0d2c1c;
+  --w-300: #3aa96c;
+  --w-500: #45d182;
+  --w-600: #6ee0a0;
+  --w-700: #a6efc6;
+
+  --e-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --e-2: 0 2px 6px rgb(0 0 0 / 0.45), 0 8px 18px -6px rgb(0 0 0 / 0.5);
+  --e-3: 0 6px 14px -6px rgb(0 0 0 / 0.5), 0 20px 40px -14px rgb(0 0 0 / 0.6);
+  --e-4: 0 10px 20px -10px rgb(0 0 0 / 0.55), 0 40px 80px -28px rgb(0 0 0 / 0.7);
+  --e-book: 0 2px 4px rgb(0 0 0 / 0.5), 0 20px 34px -14px rgb(0 0 0 / 0.6),
+    0 44px 80px -30px rgb(0 0 0 / 0.7);
+
+  --grain-opacity: 0.28;
+  --sheen: rgb(255 255 255 / 0.14);
+
+  /* Dark glass inverts the logic: the specular edge drops to a whisper (a bright
+     hairline on near-black looks like a bug, not a highlight) and the thickness
+     shadow does most of the work. */
+  --glass-tint: color-mix(in srgb, var(--s-paper) 70%, transparent);
+  --glass-tint-thin: color-mix(in srgb, var(--s-paper) 50%, transparent);
+  --glass-tint-thick: color-mix(in srgb, var(--s-paper) 86%, transparent);
+  --glass-blur: 24px;
+  --glass-saturate: 165%;
+  --glass-highlight: rgb(255 255 255 / 0.16);
+  --glass-lowlight: rgb(0 0 0 / 0.45);
+  --glass-ring: rgb(255 255 255 / 0.07);
+  --glass-sheen: rgb(255 255 255 / 0.05);
+
+  --chat-canvas: #0b141a;
+  --chat-in: #202c33;
+  --chat-in-ink: #e9edef;
+  --chat-out: #005c4b;
+  --chat-out-ink: #e9edef;
+  --chat-header: #202c33;
+}
+
+/* =============================================================================
+   TAILWIND THEME BRIDGE
+   Utilities point at the runtime variables above, so a single [data-theme]
+   swap re-themes the entire product with zero JS re-render and no FOUC.
+============================================================================= */
+@theme {
+  /* ---- Colour ---- */
+  --color-paper: var(--s-paper);
+  --color-raised: var(--s-raised);
+  --color-sunken: var(--s-sunken);
+  --color-inset: var(--s-inset);
+  --color-inverse: var(--s-inverse);
+
+  --color-ink: var(--c-ink);
+  --color-ink-soft: var(--c-ink-soft);
+  --color-ink-muted: var(--c-ink-muted);
+  --color-ink-inverse: var(--c-ink-inverse);
+
+  --color-hairline: var(--l-hairline);
+  --color-strong: var(--l-strong);
+
+  --color-gold-50: var(--gold-50);
+  --color-gold-100: var(--gold-100);
+  --color-gold-300: var(--gold-300);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
+  --color-gold-700: var(--gold-700);
+
+  --color-jade-50: var(--jade-50);
+  --color-jade-100: var(--jade-100);
+  --color-jade-300: var(--jade-300);
+  --color-jade-500: var(--jade-500);
+  --color-jade-600: var(--jade-600);
+  --color-jade-700: var(--jade-700);
+
+  --color-clay-50: var(--clay-50);
+  --color-clay-100: var(--clay-100);
+  --color-clay-300: var(--clay-300);
+  --color-clay-500: var(--clay-500);
+  --color-clay-600: var(--clay-600);
+  --color-clay-700: var(--clay-700);
+
+  --color-verdant-50: var(--w-50);
+  --color-verdant-300: var(--w-300);
+  --color-verdant-500: var(--w-500);
+  --color-verdant-600: var(--w-600);
+  --color-verdant-700: var(--w-700);
+
+  /* ---- Type ----
+     Fraunces: a variable optical serif with SOFT and WONK axes. It is the rare
+     face that can be childlike and expensive at once — exactly the emotional
+     overlap between "my kid's storybook" and "an heirloom I paid for".
+     Plus Jakarta Sans: quiet, tall x-height, excellent at 14–16px on phones,
+     carries all UI and long-form copy where personality would cost legibility. */
+  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  /* Fluid scale, 1.25 ratio at mobile widening to 1.333 at desktop. Clamped so
+     no step ever collides with the one below it during viewport interpolation. */
+  --text-display-1: clamp(2.9rem, 1.6rem + 6.2vw, 6rem);
+  --text-display-1--line-height: 0.94;
+  --text-display-1--letter-spacing: -0.03em;
+  --text-display-2: clamp(2.25rem, 1.4rem + 4vw, 4.25rem);
+  --text-display-2--line-height: 0.98;
+  --text-display-2--letter-spacing: -0.025em;
+  --text-display-3: clamp(1.75rem, 1.2rem + 2.4vw, 2.85rem);
+  --text-display-3--line-height: 1.06;
+  --text-display-3--letter-spacing: -0.02em;
+  --text-title: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.015em;
+  --text-lead: clamp(1.075rem, 1rem + 0.5vw, 1.3rem);
+  --text-lead--line-height: 1.55;
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.55;
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.4;
+  --text-micro--letter-spacing: 0.06em;
+
+  /* ---- Radius ----
+     Derived from physical book geometry: trimmed board corners are ~3mm on a
+     210mm page, so radii stay modest. Pill shapes are reserved for actions. */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.625rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.25rem;
+
+  /* ---- Elevation ---- */
+  --shadow-e1: var(--e-1);
+  --shadow-e2: var(--e-2);
+  --shadow-e3: var(--e-3);
+  --shadow-e4: var(--e-4);
+  --shadow-book: var(--e-book);
+
+  /* ---- Motion ----
+     One spring for entrances (slight overshoot = "alive"), one decisive ease
+     for state changes, one linear for continuous progress. Nothing else.
+     Durations stay under 500ms so the page never feels like it is waiting. */
+  --ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 0.9, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 140ms;
+  --duration-base: 260ms;
+  --duration-slow: 420ms;
+  --duration-story: 700ms;
+
+  /* ---- Layout ----
+     Content measure caps at 68ch: research-backed 45–75 characters per line. */
+  --container-shell: 84rem;
+  --container-reading: 44rem;
+
+  /* ---- Custom animations ---- */
+  --animate-float: float 7s var(--ease-in-out) infinite;
+  --animate-drift: drift 13s var(--ease-in-out) infinite;
+  --animate-twinkle: twinkle 3.4s var(--ease-in-out) infinite;
+  --animate-marquee: marquee 46s linear infinite;
+  --animate-shimmer: shimmer 2.4s var(--ease-in-out) infinite;
+  --animate-blink: blink 1.2s steps(2, jump-none) infinite;
+}
+
+/* Breakpoints: mobile-first, with an explicit ultra-wide stop so the layout
+   gains structure (not just stretched whitespace) past 1800px. */
+@theme {
+  --breakpoint-xs: 24rem;
+  --breakpoint-3xl: 112.5rem;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(14px, -12px, 0) rotate(2.5deg);
+  }
+  66% {
+    transform: translate3d(-10px, 8px, 0) rotate(-2deg);
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes shimmer {
+  0% {
+    transform: translate3d(-120%, 0, 0);
+  }
+  100% {
+    transform: translate3d(220%, 0, 0);
+  }
+}
+@keyframes leaf-fwd {
+  from {
+    transform: rotateY(0deg);
+    box-shadow: -10px 0 24px -8px rgb(0 0 0 / 0.25);
+  }
+  to {
+    transform: rotateY(-168deg);
+    box-shadow: 10px 0 30px -6px rgb(0 0 0 / 0.35);
+  }
+}
+@keyframes leaf-back {
+  from {
+    transform: rotateY(-168deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+/* Message arrival: rises and settles, like a bubble being placed. */
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
