@@ -36,8 +36,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: clip;
-    transition: background-color var(--duration-slow) var(--ease-out),
-      color var(--duration-slow) var(--ease-out);
+    /* No colour transition here on purpose. The body's colour and background only
+       ever change on a theme flip, and animating them over 420ms is what made the
+       switch look staged: the background eased while cards (260ms) and nav links
+       (150ms) arrived at their own times. The flip is now instant and
+       simultaneous — see [data-theme-switching] below. */
   }
 
   h1,
@@ -129,6 +132,28 @@
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* =============================================================================
+   THEME SWITCH
+   Set on <html> for the single frame in which the theme flips, then removed.
+
+   Every surface, border, icon and text colour on the page is a token, and many
+   of the elements holding them carry their own `transition-colors` at their own
+   duration. Left alone they each ease independently, so a theme change reads as
+   a ripple rather than a switch — the background lands first and the text
+   appears to lag by most of a second.
+
+   Suppressing transitions for that one frame makes the entire page repaint in a
+   single step, which is how a native theme toggle behaves.
+============================================================================= */
+[data-theme-switching] *,
+[data-theme-switching] *::before,
+[data-theme-switching] *::after {
+  /* Transitions only. Looping animations — the twinkling stars, the floating
+     book — are deliberately left alone: zeroing their duration would restart
+     them mid-cycle and cause a visible jump on every theme toggle. */
+  transition: none !important;
 }
 
 @media (prefers-contrast: more) {

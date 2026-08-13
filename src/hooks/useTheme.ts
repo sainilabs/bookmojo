@@ -31,6 +31,24 @@ export function useTheme() {
     }
   }, [theme]);
 
+  /**
+   * Flags the document while the theme flips so CSS can suppress every
+   * transition for that frame, and clears the flag after the new colours have
+   * actually been painted.
+   *
+   * Two nested rAFs, not one: the first fires before the paint that applies the
+   * new tokens, the second after it. Clearing on a single frame re-enables
+   * transitions too early and the staggered ripple comes back.
+   */
+  const flipInstantly = useCallback((apply: () => void) => {
+    const root = document.documentElement;
+    root.setAttribute('data-theme-switching', '');
+    apply();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => root.removeAttribute('data-theme-switching'));
+    });
+  }, []);
+
   // Follow the OS only while the user has expressed no preference of their own.
   useEffect(() => {
     let stored: string | null = null;
@@ -41,18 +59,21 @@ export function useTheme() {
     }
     if (stored) return;
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const onChange = (e: MediaQueryListEvent) => setTheme(e.matches ? 'night' : 'day');
+    const onChange = (e: MediaQueryListEvent) =>
+      flipInstantly(() => setTheme(e.matches ? 'night' : 'day'));
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
-  }, []);
+  }, [flipInstantly]);
 
   const toggle = useCallback(() => {
-    setTheme((current) => {
-      const next = current === 'day' ? 'night' : 'day';
-      track('theme_toggle', { to: next });
-      return next;
-    });
-  }, []);
+    flipInstantly(() =>
+      setTheme((current) => {
+        const next = current === 'day' ? 'night' : 'day';
+        track('theme_toggle', { to: next });
+        return next;
+      }),
+    );
+  }, [flipInstantly]);
 
   return { theme, toggle } as const;
 }
