@@ -160,16 +160,16 @@ export function Journey() {
         <div ref={sentinel} />
 
         <div className="max-w-[46rem]">
-          <Reveal y={12} className="eyebrow !text-white/55">
+          <Reveal y={12} className="eyebrow !text-ink-inverse-muted">
             <WhatsAppMark size={14} /> The ordering conversation
           </Reveal>
           <Reveal y={20} delay={70} as="h2" className="mt-4 text-display-2">
             Watch the entire order happen.
             <br />
-            <span className="text-white/55">Then decide.</span>
+            <span className="text-ink-inverse-muted">Then decide.</span>
           </Reveal>
           <Reveal y={18} delay={140}>
-            <p className="mt-5 max-w-[46ch] text-lead text-white/70">
+            <p className="mt-5 max-w-[46ch] text-lead text-ink-inverse-soft">
               The real flow, with your choices in it. Nothing is hidden behind the click.
             </p>
           </Reveal>
@@ -180,7 +180,7 @@ export function Journey() {
           <div className="min-w-0">
             <div className="flex items-center gap-4">
               <div
-                className="h-1 flex-1 overflow-hidden rounded-full bg-white/12"
+                className="h-1 flex-1 overflow-hidden rounded-full bg-inverse-hover"
                 role="progressbar"
                 aria-valuenow={Math.round(overallProgress)}
                 aria-valuemin={0}
@@ -194,11 +194,11 @@ export function Journey() {
               </div>
               {/* Playback controls read as a physical transport cluster rather
                   than two loose icons — the glass capsule groups them. */}
-              <div className="glass glass-onDark flex shrink-0 items-center gap-1 rounded-full p-1">
+              <div className="glass glass-inverse flex shrink-0 items-center gap-1 rounded-full p-1">
                 <button
                   type="button"
                   onClick={() => setPlaying((p) => !p)}
-                  className="btn btn-quiet btn-icon-sm text-white/75 hover:!bg-white/12 hover:text-white"
+                  className="btn btn-quiet btn-icon-sm text-ink-inverse-soft hover:!bg-inverse-hover hover:text-ink-inverse"
                   disabled={still}
                   aria-label={playing ? 'Pause the conversation' : 'Play the conversation'}
                 >
@@ -207,7 +207,7 @@ export function Journey() {
                 <button
                   type="button"
                   onClick={() => goToStage(0)}
-                  className="btn btn-quiet btn-icon-sm text-white/75 hover:!bg-white/12 hover:text-white"
+                  className="btn btn-quiet btn-icon-sm text-ink-inverse-soft hover:!bg-inverse-hover hover:text-ink-inverse"
                   aria-label="Start the conversation again"
                 >
                   <Replay size={16} />
@@ -227,7 +227,7 @@ export function Journey() {
                 const active = i === stageIndex;
                 const complete = i < stageIndex;
                 return (
-                  <div key={s.id} className="border-b border-white/10 last:border-0">
+                  <div key={s.id} className="border-b border-inverse-line last:border-0">
                     <button
                       role="tab"
                       type="button"
@@ -244,7 +244,7 @@ export function Journey() {
                           'grid size-8 shrink-0 place-items-center rounded-full border text-[0.7rem] font-bold tabular-nums transition-all duration-300',
                           active && 'border-verdant-500 bg-verdant-500 text-[#06230f] scale-105',
                           complete && 'border-verdant-500/40 bg-verdant-500/15 text-verdant-500',
-                          !active && !complete && 'border-white/20 text-white/45',
+                          !active && !complete && 'border-inverse-line text-ink-inverse-muted',
                         )}
                       >
                         {complete ? '✓' : i + 1}
@@ -254,7 +254,7 @@ export function Journey() {
                         <span
                           className={cx(
                             'font-display block text-[1.05rem] leading-tight font-semibold transition-colors',
-                            active ? 'text-white' : 'text-white/55 group-hover:text-white/85',
+                            active ? 'text-ink-inverse' : 'text-ink-inverse-muted group-hover:text-ink-inverse-soft',
                           )}
                         >
                           {s.title}
@@ -266,7 +266,7 @@ export function Journey() {
                           'shrink-0 rounded-full px-2 py-0.5 text-[0.62rem] font-bold tracking-[0.08em] uppercase transition-colors',
                           s.actor === 'you'
                             ? 'bg-verdant-500/15 text-verdant-500'
-                            : 'bg-white/8 text-white/50',
+                            : 'bg-inverse-raised text-ink-inverse-muted',
                         )}
                       >
                         {s.actor === 'you' ? 'You' : 'Us'} · {s.eta}
@@ -280,7 +280,7 @@ export function Journey() {
                       style={{ gridTemplateRows: active ? '1fr' : '0fr' }}
                     >
                       <div className="overflow-hidden">
-                        <p className="max-w-[54ch] pb-5 pl-12 text-small text-white/65">
+                        <p className="max-w-[54ch] pb-5 pl-12 text-small text-ink-inverse-soft">
                           {s.reassurance}
                         </p>
                       </div>
@@ -296,7 +296,7 @@ export function Journey() {
                 label="Do this for real"
                 sublabel="Opens WhatsApp · about 4 minutes"
               />
-              <p className="max-w-[22ch] text-small text-white/55">
+              <p className="max-w-[22ch] text-small text-ink-inverse-muted">
                 Nothing is charged before you approve the cover.
               </p>
             </Reveal>

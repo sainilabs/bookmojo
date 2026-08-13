@@ -69,6 +69,22 @@
   --c-ink-muted: #5b6d73;
   --c-ink-inverse: #f4faf8;
 
+  /* CONTENT ON THE INVERSE SURFACE.
+     Replaces the hard-coded `text-white/70` family, which was the dark-mode bug:
+     in Bedtime the inverse surface flips to near-white, so white text on it
+     disappeared entirely.
+
+     These are set EXPLICITLY per theme rather than derived with a single mix
+     percentage, because contrast is asymmetric. Mixing ink 76% toward a dark
+     surface yields 8.7:1; the identical mix against a near-white surface yields
+     3.6:1. One ratio cannot serve both directions, and a 97%-light surface
+     simply has less room for a three-step ladder than a 15%-light one. */
+  --c-inverse-soft: #d5dedb; /* 8.6:1 on the dark jade surface */
+  --c-inverse-muted: #a8b5b1; /* 5.5:1 */
+  --l-inverse-line: rgb(244 250 248 / 0.16);
+  --s-inverse-raised: rgb(244 250 248 / 0.08);
+  --s-inverse-hover: rgb(244 250 248 / 0.15);
+
   /* Lines & separation — re-derived against the near-white field. On a crisp
      layout the hairline is doing structural work that shadows used to do, so it
      needs to be visible rather than merely present. */
@@ -171,6 +187,16 @@
   --chat-out: #d5f7c4;
   --chat-out-ink: #0d2318;
   --chat-header: #075e54;
+  /* WhatsApp's own accent for icons and labels inside the chat. Needs a night
+     value: the dark green reads fine on a white bubble but goes dark-on-dark
+     against WhatsApp's own dark-mode bubble. */
+  --chat-accent: #0b7c43;
+  /* Filled controls inside the chat need their own pair. The accent above is
+     tuned for icons and text ON a bubble; reusing it as a button fill would put
+     white text on a light green in Bedtime. WhatsApp itself does this — a dark
+     green button in light mode, a bright teal with dark ink in dark mode. */
+  --chat-btn: #0b7c43;
+  --chat-btn-ink: #ffffff;
 
   /* Procedural paper grain. Cheaper than a bitmap, resolution-independent, and
      it gives every surface the tooth of uncoated stock — the single strongest
@@ -199,6 +225,14 @@
   --c-ink-soft: #bac9c6;
   --c-ink-muted: #8a9b97;
   --c-ink-inverse: #0c1a17;
+
+  /* In Bedtime the inverse surface is the light one, so this ladder mirrors the
+     daylight ink ladder — which is already proven against exactly this colour. */
+  --c-inverse-soft: #3e4e54;
+  --c-inverse-muted: #5b6d73;
+  --l-inverse-line: rgb(12 26 23 / 0.14);
+  --s-inverse-raised: rgb(12 26 23 / 0.05);
+  --s-inverse-hover: rgb(12 26 23 / 0.1);
 
   --l-hairline: #22332f;
   --l-strong: #354a45;
@@ -262,6 +296,9 @@
   --chat-out: #005c4b;
   --chat-out-ink: #e9edef;
   --chat-header: #202c33;
+  --chat-accent: #46d17f;
+  --chat-btn: #00a884;
+  --chat-btn-ink: #04231a;
 }
 
 /* =============================================================================
@@ -281,6 +318,11 @@
   --color-ink-soft: var(--c-ink-soft);
   --color-ink-muted: var(--c-ink-muted);
   --color-ink-inverse: var(--c-ink-inverse);
+  --color-ink-inverse-soft: var(--c-inverse-soft);
+  --color-ink-inverse-muted: var(--c-inverse-muted);
+  --color-inverse-line: var(--l-inverse-line);
+  --color-inverse-raised: var(--s-inverse-raised);
+  --color-inverse-hover: var(--s-inverse-hover);
 
   --color-hairline: var(--l-hairline);
   --color-strong: var(--l-strong);

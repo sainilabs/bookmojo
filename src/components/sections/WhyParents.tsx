@@ -55,7 +55,7 @@ export function WhyParents() {
                 }}
               />
               <div className="relative">
-                <span className="eyebrow !text-white/50">
+                <span className="eyebrow !text-ink-inverse-muted">
                   <Sparkle size={14} /> The whole idea
                 </span>
                 <h3
@@ -64,13 +64,13 @@ export function WhyParents() {
                 >
                   “Wait — that’s <span className="text-gold-300">me</span>.”
                 </h3>
-                <p className="mt-5 max-w-[40ch] text-lead text-white/70">
+                <p className="mt-5 max-w-[40ch] text-lead text-ink-inverse-soft">
                   It happens around page three, and you can watch it happen. Children read a story
                   about themselves more slowly, more carefully, and far more often.
                 </p>
               </div>
 
-              <div className="relative mt-10 grid gap-6 border-t border-white/12 pt-7 sm:grid-cols-3">
+              <div className="relative mt-10 grid gap-6 border-t border-inverse-line pt-7 sm:grid-cols-3">
                 {[
                   { v: '9×', l: `Times ${who} will ask for it again`, s: 'parent-reported, first month' },
                   { v: `${Math.round(PROOF.repeatBuyerRate * 100)}%`, l: 'Order a second book', s: 'usually for a sibling' },
@@ -81,7 +81,7 @@ export function WhyParents() {
                       {stat.v}
                     </p>
                     <p className="mt-1.5 text-small font-semibold">{stat.l}</p>
-                    <p className="text-small text-white/50">{stat.s}</p>
+                    <p className="text-small text-ink-inverse-muted">{stat.s}</p>
                   </div>
                 ))}
               </div>

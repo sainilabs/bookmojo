@@ -67,7 +67,7 @@ export function FinalCta() {
       <Container className="relative">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
-            <Reveal y={14} className="eyebrow !text-white/50">
+            <Reveal y={14} className="eyebrow !text-ink-inverse-muted">
               One conversation away
             </Reveal>
 
@@ -90,19 +90,19 @@ export function FinalCta() {
             </Reveal>
 
             <Reveal y={18} delay={140}>
-              <p className="mt-6 max-w-[38ch] text-lead text-white/70">
+              <p className="mt-6 max-w-[38ch] text-lead text-ink-inverse-soft">
                 Five questions, approve the cover, done in {PROOF.avgOrderMinutes} minutes.
               </p>
             </Reveal>
 
             {/* Price, stated once, stated fully. */}
             <Reveal y={18} delay={200} className="mt-9">
-              <div className="glass glass-onDark rounded-[1.5rem] p-6 sm:p-7">
+              <div className="glass glass-inverse rounded-[1.5rem] p-6 sm:p-7">
                 <div className="flex flex-wrap items-end gap-x-4 gap-y-2">
                   <p className="font-display text-[3rem] leading-none font-semibold tabular-nums">
                     {formatINR(PRICING.hardcover)}
                   </p>
-                  <p className="text-small text-white/55">
+                  <p className="text-small text-ink-inverse-muted">
                     <s className="opacity-70">{formatINR(PRICING.hardcoverCompare)}</s> · GST and
                     delivery included · no per-page or per-name extras
                   </p>
@@ -110,7 +110,7 @@ export function FinalCta() {
 
                 <ul className="mt-5 grid gap-2 sm:grid-cols-2">
                   {included.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-small text-white/75">
+                    <li key={item} className="flex items-start gap-2 text-small text-ink-inverse-soft">
                       <Check
                         size={15}
                         className="mt-0.5 shrink-0 text-verdant-500"
@@ -141,7 +141,7 @@ export function FinalCta() {
                   { icon: Shield, text: `${GUARANTEE.headline} · ${GUARANTEE.window}` },
                   { icon: Clock, text: 'Cancel free before approval' },
                 ].map(({ icon: Icon, text }) => (
-                  <li key={text} className="flex items-center gap-2 text-small text-white/65">
+                  <li key={text} className="flex items-center gap-2 text-small text-ink-inverse-soft">
                     <Icon size={16} className="shrink-0 text-verdant-500" />
                     {text}
                   </li>

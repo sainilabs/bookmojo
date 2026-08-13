@@ -448,14 +448,16 @@
     --glass-blur: 30px;
   }
 
-  /* For panes that always sit on a dark surface regardless of theme — the price
-     pane inside the inverse closing section, for instance. */
-  .glass-onDark {
-    background-color: rgb(255 255 255 / 0.07);
-    --glass-highlight: rgb(255 255 255 / 0.3);
-    --glass-lowlight: rgb(0 0 0 / 0.35);
-    --glass-ring: rgb(255 255 255 / 0.12);
-    --glass-sheen: rgb(255 255 255 / 0.08);
+  /* For panes sitting ON the inverse surface — the price pane in the closing
+     section, the playback cluster in the journey.
+     Derived from the inverse ink rather than from white, so it inverts with the
+     theme instead of turning into a white pane on a white background. */
+  .glass-inverse {
+    background-color: var(--s-inverse-raised);
+    --glass-highlight: color-mix(in oklab, var(--c-ink-inverse) 26%, transparent);
+    --glass-lowlight: color-mix(in oklab, var(--s-inverse) 40%, transparent);
+    --glass-ring: color-mix(in oklab, var(--c-ink-inverse) 14%, transparent);
+    --glass-sheen: color-mix(in oklab, var(--c-ink-inverse) 8%, transparent);
   }
 
   /* Progressive enhancement. Without a working backdrop-filter the tint alone
@@ -478,8 +480,8 @@
       backdrop-filter: none;
       background-color: var(--s-paper);
     }
-    .glass-onDark {
-      background-color: color-mix(in srgb, var(--s-inverse) 92%, #fff);
+    .glass-inverse {
+      background-color: color-mix(in oklab, var(--s-inverse) 88%, var(--c-ink-inverse));
     }
     .glass::after {
       display: none;

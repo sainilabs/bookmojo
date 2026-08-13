@@ -48,7 +48,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                 className={cx(
                   'rounded-full border px-2.5 py-1 text-[0.7rem] font-semibold transition-colors',
                   i === msg.chosen
-                    ? 'border-transparent bg-[#0b7c43] text-white shadow-sm'
+                    ? 'border-transparent bg-[var(--chat-accent)] text-white shadow-sm'
                     : 'border-black/12 bg-[var(--chat-in)] text-[var(--chat-in-ink)] opacity-65',
                 )}
               >
@@ -67,7 +67,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
             <span className="text-[0.62rem] font-bold tracking-[0.1em] uppercase opacity-70">
               Your book
             </span>
-            <span className="rounded-full bg-[#0b7c43]/12 px-2 py-0.5 text-[0.6rem] font-bold uppercase text-[#0b7c43]">
+            <span className="rounded-full bg-[var(--chat-accent)]/15 px-2 py-0.5 text-[0.6rem] font-bold uppercase text-[var(--chat-accent)]">
               Preview
             </span>
           </div>
@@ -92,7 +92,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
       return (
         <div className="w-[88%] self-start overflow-hidden rounded-xl border border-black/10 bg-[var(--chat-in)] text-[var(--chat-in-ink)] shadow-sm">
           <div className="flex items-center gap-2 border-b border-black/[0.08] px-3 py-2">
-            <Lock size={14} className="text-[#0b7c43]" />
+            <Lock size={14} className="text-[var(--chat-accent)]" />
             <span className="text-[0.68rem] font-bold">Secure checkout link</span>
             <span className="ml-auto text-[0.6rem] opacity-55">expires in 30 min</span>
           </div>
@@ -111,7 +111,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                 </span>
               ))}
             </div>
-            <span className="mt-3 flex h-9 items-center justify-center rounded-lg bg-[#0b7c43] text-[0.75rem] font-bold text-white">
+            <span className="mt-3 flex h-9 items-center justify-center rounded-lg bg-[var(--chat-btn)] text-[0.75rem] font-bold text-[var(--chat-btn-ink)]">
               Pay securely
             </span>
             <p className="mt-2 text-[0.6rem] leading-snug opacity-55">
@@ -126,7 +126,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
       return (
         <div className="w-[80%] self-start overflow-hidden rounded-xl bg-[var(--chat-in)] text-[var(--chat-in-ink)] shadow-sm">
           <div className="flex items-center gap-2.5 px-3 py-3">
-            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#0b7c43] text-white">
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[var(--chat-btn)] text-[var(--chat-btn-ink)]">
               <Check size={16} strokeWidth={2.6} />
             </span>
             <span className="min-w-0">
@@ -153,9 +153,9 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                   <span
                     className={cx(
                       'mt-1 size-2.5 shrink-0 rounded-full',
-                      step.state === 'done' && 'bg-[#0b7c43]',
+                      step.state === 'done' && 'bg-[var(--chat-accent)]',
                       step.state === 'active' &&
-                        'bg-[#e08a2e] ring-3 ring-[#e08a2e]/25 animate-pulse',
+                        'bg-[var(--gold-500)] ring-3 ring-[#e08a2e]/25 animate-pulse',
                       step.state === 'todo' && 'bg-black/15',
                     )}
                   />
@@ -163,7 +163,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                     <span
                       className={cx(
                         'w-px flex-1',
-                        step.state === 'done' ? 'bg-[#0b7c43]/40' : 'bg-black/12',
+                        step.state === 'done' ? 'bg-[var(--chat-accent)]/40' : 'bg-black/12',
                       )}
                     />
                   )}
@@ -176,7 +176,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                 >
                   {step.label}
                   {step.state === 'active' && (
-                    <span className="ml-1.5 text-[0.6rem] font-bold uppercase text-[#b06a12]">
+                    <span className="ml-1.5 text-[0.6rem] font-bold uppercase text-[var(--gold-700)]">
                       now
                     </span>
                   )}
@@ -191,7 +191,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
       return (
         <div className="w-[88%] self-start overflow-hidden rounded-xl bg-[var(--chat-in)] text-[var(--chat-in-ink)] shadow-sm">
           <div className="flex items-center gap-2.5 border-b border-black/[0.08] px-3 py-2">
-            <Truck size={15} className="text-[#0b7c43]" />
+            <Truck size={15} className="text-[var(--chat-accent)]" />
             <span className="text-[0.7rem] font-bold">{msg.courier}</span>
             <span className="ml-auto font-mono text-[0.62rem] opacity-60">{msg.code}</span>
           </div>
@@ -202,7 +202,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                   key={s}
                   className={cx(
                     'h-1.5 flex-1 rounded-full',
-                    i < 4 ? 'bg-[#0b7c43]' : 'bg-black/12',
+                    i < 4 ? 'bg-[var(--chat-accent)]' : 'bg-black/12',
                   )}
                 />
               ))}
