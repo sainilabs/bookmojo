@@ -43,15 +43,16 @@
        simultaneous — see [data-theme-switching] below. */
   }
 
+  /* 700, not 400. The previous display face shipped a single weight, so every
+     `font-semibold` in the product silently did nothing and headings rendered
+     thin — combined with `font-synthesis-weight: none` there was no fallback
+     bolding either. Figtree carries real weights, so the hierarchy is honest. */
   h1,
   h2,
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    /* WONK 1 unlocks Fraunces' single-storey g and quirked l — the detail that
-       makes the type feel hand-set rather than defaulted. */
-    font-variation-settings: 'SOFT' 40, 'WONK' 1;
+    font-weight: 700;
     text-wrap: balance;
     margin: 0;
   }
@@ -99,7 +100,7 @@
   }
 
   [data-theme='night'] ::selection {
-    background: var(--clay-300);
+    background: var(--gold-300);
     color: #101815;
   }
 
@@ -207,7 +208,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
     font-weight: 600;
     letter-spacing: -0.01em;
     white-space: nowrap;
@@ -492,8 +493,8 @@
     .glass {
       background-color: var(--s-paper);
     }
-    .glass-onDark {
-      background-color: color-mix(in srgb, var(--s-inverse) 92%, #fff);
+    .glass-inverse {
+      background-color: color-mix(in srgb, var(--s-inverse) 92%, var(--c-ink-inverse));
     }
   }
 
@@ -541,71 +542,21 @@
     gap: 0.5rem;
     font-size: var(--text-micro);
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--c-ink-muted);
   }
 
-  /* Marker highlight: mimics a wax-crayon swipe under a word. Drawn with a
-     gradient rather than an SVG so it inherits the type's line-height. */
-  .marker {
-    position: relative;
-    white-space: nowrap;
-  }
-  .marker::after {
-    content: '';
-    position: absolute;
-    inset-inline: -0.12em;
-    bottom: 0.08em;
-    height: 0.34em;
-    background: linear-gradient(
-      100deg,
-      color-mix(in oklab, var(--gold-300) 0%, transparent) 0%,
-      var(--gold-300) 6%,
-      var(--gold-300) 94%,
-      color-mix(in oklab, var(--gold-300) 0%, transparent) 100%
-    );
-    border-radius: 999px;
-    z-index: -1;
-    transform: scaleX(var(--marker-scale, 1));
-    transform-origin: left;
-    transition: transform var(--duration-story) var(--ease-out) 200ms;
-  }
-  [data-reveal] .marker::after,
-  [data-reveal].marker::after {
-    --marker-scale: 0;
-  }
-  [data-reveal='in'] .marker::after,
-  [data-reveal='in'].marker::after {
-    --marker-scale: 1;
-  }
-
-  /* Ink-drawn underline for the "story" accent word. */
-  .quill {
-    color: var(--clay-500);
-    font-style: italic;
-    font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  /* Eyebrows are navigational labels, not illustration slots. Section-level
+     icon ornaments are intentionally suppressed; functional icons elsewhere
+     remain visible. */
+  .eyebrow > svg {
+    display: none;
   }
 
   /* ---- Section framing --------------------------------------------------- */
   .rule-top {
     border-top: 1px solid var(--l-hairline);
-  }
-
-  /* Paper grain. A single fixed layer over the whole document costs one
-     composited texture instead of per-section overlays. */
-  .grain {
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    pointer-events: none;
-    opacity: var(--grain-opacity);
-    mix-blend-mode: multiply;
-    background-image: var(--grain-url);
-    background-size: 180px 180px;
-  }
-  [data-theme='night'] .grain {
-    mix-blend-mode: screen;
   }
 
   /* ---- The book as a physical object -------------------------------------
@@ -734,4 +685,28 @@
 @utility bleed {
   width: 100vw;
   margin-inline: calc(50% - 50vw);
+}
+
+/* Terminal caret for typed-looking lines.
+
+   Drawn as a coloured box rather than a literal "|" glyph. The pipe character
+   sits at a different height, weight and vertical offset in every monospace
+   family this stack might fall back to, and a few of them draw it with a centre
+   gap. A 1.5px box is identical everywhere.
+
+   Animation comes from the existing --animate-blink primitive rather than a
+   second keyframe of its own: the token was already defined in tokens.css and
+   unused, and two near-identical blink animations in one stylesheet is how a
+   design system starts to rot. */
+@utility caret {
+  display: inline-block;
+  width: 1.5px;
+  /* Sized from the line box, not a fixed px, so it tracks the type scale at
+     every breakpoint without a second media query. */
+  height: 1em;
+  margin-inline-start: 0.14em;
+  translate: 0 0.12em;
+  /* currentcolor, so it inherits both the text colour and the theme flip. */
+  background-color: currentcolor;
+  animation: var(--animate-blink);
 }

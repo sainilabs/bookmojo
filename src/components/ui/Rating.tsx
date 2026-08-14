@@ -57,7 +57,7 @@ export function Pill({
   className,
 }: {
   children: React.ReactNode;
-  tone?: 'neutral' | 'gold' | 'clay' | 'verdant' | 'outline';
+  tone?: 'neutral' | 'gold' | 'verdant' | 'outline';
   className?: string;
 }) {
   return (
@@ -66,7 +66,6 @@ export function Pill({
         'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-micro font-bold tracking-[0.08em] uppercase',
         tone === 'neutral' && 'bg-inset text-ink-soft',
         tone === 'gold' && 'bg-gold-50 text-gold-700',
-        tone === 'clay' && 'bg-clay-50 text-clay-700',
         tone === 'verdant' && 'bg-verdant-50 text-verdant-700',
         tone === 'outline' && 'border border-hairline text-ink-muted',
         className,
@@ -92,7 +91,9 @@ export function Stat({
 }) {
   return (
     <div className={cx('flex flex-col gap-1', className)}>
-      <span className="font-display text-display-3 leading-none tabular-nums">{value}</span>
+      <span className="font-display text-display-3 leading-none font-bold tabular-nums">
+        {value}
+      </span>
       <span className="text-small font-semibold">{label}</span>
       {sub && <span className="text-small text-ink-muted">{sub}</span>}
     </div>

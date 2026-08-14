@@ -1,7 +1,6 @@
 import { Container, Reveal, Section } from '@/components/ui/Layout';
 import { OrderButton } from '@/components/ui/Button';
 import { Book3D } from '@/components/art/BookCover';
-import { ScribbleArrow } from '@/components/art/Brand';
 import { Check, Clock, Lock, Shield } from '@/components/art/Icons';
 import { GUARANTEE, PRICING, PROOF } from '@/lib/config';
 import { useDraft } from '@/hooks/useDraft';
@@ -12,11 +11,12 @@ import { formatINR, formatName, possessive } from '@/lib/utils';
  * -----------------------------------------------------------------------------
  * The close. Three jobs, in this order:
  *
- * 1. PRICE, PLAINLY. This is the first and only place the number appears, and it
+ * 1. PRICE, PLAINLY. This is the only place the full price story appears, and it
  *    appears with everything that is included and nothing that is not. Hiding
  *    price until the chat would be the single fastest way to poison a
  *    conversational funnel: a buyer who feels the number was withheld stops
- *    trusting the channel.
+ *    trusting the channel. The ₹199 digital edition is stated here too, but
+ *    subordinated — see the note on the price pane below.
  * 2. REVERSE THE RISK. Guarantee, no-charge-before-approval, and free shipping
  *    sit adjacent to the button, where the hesitation actually occurs.
  * 3. ONE ACTION. No secondary CTA, no newsletter, no "browse more". Every
@@ -46,21 +46,10 @@ export function FinalCta() {
     <Section id="final-cta" space="grand" tone="inverse" className="relative overflow-hidden">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-70"
+        className="pointer-events-none absolute inset-0 opacity-50"
         style={{
           background:
-            'radial-gradient(46rem 32rem at 18% 12%, color-mix(in oklab, var(--gold-500) 30%, transparent), transparent 66%), radial-gradient(44rem 34rem at 86% 84%, color-mix(in oklab, var(--clay-500) 42%, transparent), transparent 68%)',
-        }}
-      />
-      {/* Star field — the bedtime register the brand closes on. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-45"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, rgb(255 255 255 / 0.9) 0.9px, transparent 1px), radial-gradient(circle, rgb(255 255 255 / 0.6) 0.7px, transparent 1px)',
-          backgroundSize: '140px 120px, 90px 160px',
-          backgroundPosition: '0 0, 40px 60px',
+            'radial-gradient(48rem 32rem at 18% 10%, color-mix(in oklab, var(--gold-500) 18%, transparent), transparent 70%)',
         }}
       />
 
@@ -76,7 +65,7 @@ export function FinalCta() {
                 <>
                   Let’s make
                   <br />
-                  <span className="quill !text-gold-300">{possessive(name)}</span> book.
+                  <span className="text-gold-300">{possessive(name)}</span> book.
                 </>
               ) : (
                 <>
@@ -84,7 +73,7 @@ export function FinalCta() {
                   <br />
                   name. We’ll do
                   <br />
-                  <span className="quill !text-gold-300">the rest.</span>
+                  <span className="text-gold-300">the rest.</span>
                 </>
               )}
             </Reveal>
@@ -95,11 +84,11 @@ export function FinalCta() {
               </p>
             </Reveal>
 
-            {/* Price, stated once, stated fully. */}
+            {/* Price, stated fully. Two tiers, deliberately unequal in weight. */}
             <Reveal y={18} delay={200} className="mt-9">
-              <div className="glass glass-inverse rounded-[1.5rem] p-6 sm:p-7">
+              <div className="glass glass-inverse rounded-xl p-6 sm:p-7">
                 <div className="flex flex-wrap items-end gap-x-4 gap-y-2">
-                  <p className="font-display text-[3rem] leading-none font-semibold tabular-nums">
+                  <p className="font-display text-[2.75rem] leading-none font-extrabold tracking-[-0.03em] tabular-nums">
                     {formatINR(PRICING.hardcover)}
                   </p>
                   <p className="text-small text-ink-inverse-muted">
@@ -120,20 +109,31 @@ export function FinalCta() {
                     </li>
                   ))}
                 </ul>
+
+                {/* The digital edition sits below the rule at body-text size, not
+                    as a second price card. Giving the two tiers equal visual
+                    weight would turn a gift decision into a spec comparison, and
+                    the cheaper option always wins that. Here it reads as a way in
+                    for someone not ready to spend ₹1,499 — which is most of the
+                    market. */}
+                <div className="mt-6 border-t border-inverse-line pt-5">
+                  <p className="text-small text-ink-inverse-soft">
+                    <span className="font-semibold text-ink-inverse">
+                      Not ready for the hardcover? {formatINR(PRICING.digital)} digital edition.
+                    </span>{' '}
+                    The same story, written for the same child, sent to your phone — nothing to
+                    ship, nothing to wait for. Put it towards the printed book later.
+                  </p>
+                </div>
               </div>
             </Reveal>
 
             <Reveal y={18} delay={260} className="mt-7">
-              <div className="relative inline-block">
-                <OrderButton
-                  intent="final"
-                  label={isPersonalised ? `Start ${possessive(name)} book` : 'Start your book'}
-                  sublabel="No account · nothing charged until you approve"
-                />
-                <span className="pointer-events-none absolute -right-24 -top-6 hidden text-gold-300 lg:block">
-                  <ScribbleArrow className="w-20 rotate-[196deg] opacity-70" />
-                </span>
-              </div>
+              <OrderButton
+                intent="final"
+                label={isPersonalised ? `Start ${possessive(name)} book` : 'Start your book'}
+                sublabel="No account · nothing charged until you approve"
+              />
 
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
                 {[

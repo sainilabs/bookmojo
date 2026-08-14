@@ -22,7 +22,6 @@
      · Brass      = luxury, gifting, foil. In an Indian gifting context gold is
                     the colour of a present before it is even opened; muted
                     brass buys that association without costume-jewellery glare.
-     · Clay       = terracotta warmth. Stops jade + brass reading like a bank.
      · Verdant    = WhatsApp channel identity. Reserved EXCLUSIVELY for the
                     ordering action so the click target is unmistakable.
 
@@ -90,18 +89,31 @@
      needs to be visible rather than merely present. */
   --l-hairline: #dfeae7;
   --l-strong: #c2d6d1;
-  --l-focus: #6d3a29; /* clay: deliberately off-hue so focus is never ambiguous */
+  --l-focus: #96690f; /* brass: off-hue from jade and visible on pale surfaces.
+                         Tracks --gold-600 by design; change both or neither. */
 
   /* Brass — the luxury and gifting note.
      A MUTED brass (#be9245), not a bright yellow-gold. Saturated gold reads
      costume; desaturated brass reads foil-stamped. This is the accent that does
      the emotional work in an Indian gifting context, where gold is the colour of
-     a present before anything is unwrapped. */
+     a present before anything is unwrapped.
+
+     600 IS THE TEXT STEP, and it is the one place the "muted" instinct went too
+     far. It was #9a7228: same hue (≈39°), same value, but only 74% saturated —
+     enough grey in it to read olive rather than brass. On paper that is a
+     problem of company, not of the colour alone: the headline it accents is a
+     cool slate (#17262c), and a warm-but-greyed word beside cool near-black
+     looks like a stain instead of an emphasis.
+     #96690f holds the hue and the lightness and takes saturation to 90%, which
+     is what actually makes brass read as brass. Contrast against paper improves
+     4.28:1 → 4.76:1, so it now clears AA for body text too, not just display.
+     Night is untouched: on a near-black field 300 is the accent step, and a 90%
+     saturated gold there would glare rather than gild. */
   --gold-50: #faf3e1;
   --gold-100: #f1e2b4;
   --gold-300: #dcbe76;
   --gold-500: #be9245;
-  --gold-600: #9a7228;
+  --gold-600: #96690f;
   --gold-700: #6f5117;
 
   /* Jade / eau de nil — the brand hue, held at ~170°.
@@ -118,23 +130,36 @@
   --jade-600: #2b625b;
   --jade-700: #1d4741;
 
-  /* Clay — human warmth. Jade and brass alone are cool and metallic; clay is
-     the terracotta note that stops the palette feeling like a bank. Used for the
-     story accent, focus rings and portrait monograms. */
-  --clay-50: #faece5;
-  --clay-100: #f2d5c7;
-  --clay-300: #d79c84;
-  --clay-500: #b4674f;
-  --clay-600: #91503b;
-  --clay-700: #6d3a29;
+  /* Verdant — the brand green, and the WhatsApp channel. One family, both jobs.
 
-  /* Verdant — the WhatsApp channel. Untouched by the rebrand on purpose: this
-     is not our colour to style, it is a channel signal the user already knows. */
-  --w-50: #e7f7ee;
-  --w-300: #4fc47e;
-  --w-500: #0f9d54;
-  --w-600: #0b7c43;
-  --w-700: #085c32;
+     Brass keeps the printed-object accents it was always better at: rating stars,
+     drop caps, foil edges, section eyebrows.
+
+     THE SCALE MOVED TO A 142° HUE (#16a34a and its ladder). It used to sit at
+     WhatsApp's own slightly teal green. One green family now does both jobs —
+     brand accent and channel — because two greens a single degree of hue apart
+     read as one colour to everybody except the person who chose them, and the
+     duplicate family was a maintenance trap rather than a distinction.
+
+     STEPS ARE NOT INTERCHANGEABLE. This is the whole reason the scale is written
+     out rather than generated:
+       · 500 (#16a34a) — the brand green. 3.23:1 on paper, which clears WCAG for
+         LARGE text only (24px, or 18.66px bold). Display headlines, decorative
+         fills, dots, rings, checks. Never body copy.
+       · 600 (#118639) — 4.58:1, and the reason it exists: it is the LIGHTEST green
+         in this hue that still holds a white button label at AA. The order button
+         fills with this, one step darker than the brand green, because the primary
+         CTA on the page cannot be the one thing with unreadable text on it. It is
+         also the lightest step allowed to set body-size copy, such as the hero
+         sub-line, which renders at 16.8px on a phone.
+       · 700 (#0d6b2d) — 6.51:1. Button hover and active.
+     Filling the button with 500 because it matches the headline exactly is the
+     trade that puts the CTA label at 3.23:1. Do not make it. */
+  --w-50: #e8f8ee;
+  --w-300: #4ade80;
+  --w-500: #16a34a;
+  --w-600: #118639;
+  --w-700: #0d6b2d;
 
   /* Elevation: jade-tinted, low-spread. A neutral black shadow on eau de nil
      goes grey and muddy; tinting it toward the surface hue keeps it looking like
@@ -145,12 +170,6 @@
   --e-4: 0 8px 16px -8px rgb(16 46 42 / 0.14), 0 32px 64px -24px rgb(16 46 42 / 0.2);
   --e-book: 0 2px 4px rgb(16 46 42 / 0.14), 0 18px 30px -14px rgb(16 46 42 / 0.3),
     0 40px 70px -30px rgb(16 46 42 / 0.26);
-
-  /* Pulled well back for the near-white field. Grain that read as paper tooth on
-     a tinted surface reads as dirt on white, and it directly fights the crispness
-     this palette exists to deliver. */
-  --grain-opacity: 0.18;
-  --sheen: rgb(255 255 255 / 0.7);
 
   /* =========================================================================
      GLASS MATERIAL
@@ -189,7 +208,14 @@
   --chat-header: #075e54;
   /* WhatsApp's own accent for icons and labels inside the chat. Needs a night
      value: the dark green reads fine on a white bubble but goes dark-on-dark
-     against WhatsApp's own dark-mode bubble. */
+     against WhatsApp's own dark-mode bubble.
+
+     DO NOT REPOINT THE --chat-* GREENS AT --w-*. They look like leftovers from the
+     old verdant scale, and they are not: the phone mockup's entire job is to look
+     like WhatsApp, so that a visitor believes the ordering flow is real before they
+     start it. Tracking our brand green would turn the one honest screenshot on the
+     page into brand illustration, which is the opposite of what it is for. These
+     stay on WhatsApp's palette even when ours moves. */
   --chat-accent: #0b7c43;
   /* Filled controls inside the chat need their own pair. The accent above is
      tuned for icons and text ON a bubble; reusing it as a button fill would put
@@ -238,8 +264,8 @@
   --l-strong: #354a45;
   --l-focus: #dcbe76; /* brass reads unmistakably on a dark surface */
 
-  /* Lightness is raised and chroma lifted: the daylight brass and clay would
-     both go muddy and vibrate against a near-black surface. */
+  /* Bedtime raises both brass lightness and chroma so the accent remains clean
+     instead of going muddy against a near-black surface. */
   --gold-50: #2a2010;
   --gold-100: #3c2e15;
   --gold-300: #c9a25c;
@@ -254,18 +280,16 @@
   --jade-600: #badad4;
   --jade-700: #d8eae6;
 
-  --clay-50: #2b1710;
-  --clay-100: #3d2117;
-  --clay-300: #c98a70;
-  --clay-500: #d79c84;
-  --clay-600: #e5b6a2;
-  --clay-700: #f0d2c4;
-
-  --w-50: #0d2c1c;
-  --w-300: #3aa96c;
-  --w-500: #45d182;
-  --w-600: #6ee0a0;
-  --w-700: #a6efc6;
+  /* Bedtime inverts the ladder. On a near-black field the DARK end of a green
+     scale is the unusable one, so every step lightens and the order of usefulness
+     flips: 500 is now bright enough to carry dark ink as a button fill (9.6:1),
+     and the large-text-only caveat that governs 500 in daylight does not apply
+     here at all — it sits above 10:1 as text. Hue tracks daylight at 142°. */
+  --w-50: #0b2c17;
+  --w-300: #3ab866;
+  --w-500: #4ade80;
+  --w-600: #6ee79a;
+  --w-700: #a7f3c0;
 
   --e-1: 0 1px 2px rgb(0 0 0 / 0.4);
   --e-2: 0 2px 6px rgb(0 0 0 / 0.45), 0 8px 18px -6px rgb(0 0 0 / 0.5);
@@ -273,9 +297,6 @@
   --e-4: 0 10px 20px -10px rgb(0 0 0 / 0.55), 0 40px 80px -28px rgb(0 0 0 / 0.7);
   --e-book: 0 2px 4px rgb(0 0 0 / 0.5), 0 20px 34px -14px rgb(0 0 0 / 0.6),
     0 44px 80px -30px rgb(0 0 0 / 0.7);
-
-  --grain-opacity: 0.28;
-  --sheen: rgb(255 255 255 / 0.14);
 
   /* Dark glass inverts the logic: the specular edge drops to a whisper (a bright
      hairline on near-black looks like a bug, not a highlight) and the thickness
@@ -341,13 +362,6 @@
   --color-jade-600: var(--jade-600);
   --color-jade-700: var(--jade-700);
 
-  --color-clay-50: var(--clay-50);
-  --color-clay-100: var(--clay-100);
-  --color-clay-300: var(--clay-300);
-  --color-clay-500: var(--clay-500);
-  --color-clay-600: var(--clay-600);
-  --color-clay-700: var(--clay-700);
-
   --color-verdant-50: var(--w-50);
   --color-verdant-300: var(--w-300);
   --color-verdant-500: var(--w-500);
@@ -355,31 +369,45 @@
   --color-verdant-700: var(--w-700);
 
   /* ---- Type ----
-     Fraunces: a variable optical serif with SOFT and WONK axes. It is the rare
-     face that can be childlike and expensive at once — exactly the emotional
-     overlap between "my kid's storybook" and "an heirloom I paid for".
-     Plus Jakarta Sans: quiet, tall x-height, excellent at 14–16px on phones,
-     carries all UI and long-form copy where personality would cost legibility. */
-  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+     THREE ROLES, and the split is the whole decision.
+
+     The interface is set in a confident geometric sans with a real weight range,
+     because that is what makes a storefront read as an established business
+     rather than a template: sturdy headings, flawless legibility at 13px, and
+     no reliance on a decorative face to supply personality.
+
+     The BOOK, however, is set in a book typeface. Interior spreads, the
+     page-one preview and the cover use Literata, so the artefact on screen is
+     typeset the way the printed object actually is. Personality lives in the
+     product, not in the chrome.
+
+     Mukta covers Devanagari in both roles. Neither Figtree nor Literata ships
+     the script, and leaving Hindi to a platform fallback is how bilingual
+     products end up looking unfinished in one of their two languages. */
+  --font-display: 'Figtree', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
     sans-serif;
+  --font-sans: 'Figtree', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+  /* Exposed as a utility (`font-book`) so only genuine book surfaces opt in. */
+  --font-book: 'Literata', 'Mukta', 'Iowan Old Style', Georgia, serif;
   --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
 
-  /* Fluid scale, 1.25 ratio at mobile widening to 1.333 at desktop. Clamped so
-     no step ever collides with the one below it during viewport interpolation. */
-  --text-display-1: clamp(2.9rem, 1.6rem + 6.2vw, 6rem);
-  --text-display-1--line-height: 0.94;
-  --text-display-1--letter-spacing: -0.03em;
-  --text-display-2: clamp(2.25rem, 1.4rem + 4vw, 4.25rem);
-  --text-display-2--line-height: 0.98;
-  --text-display-2--letter-spacing: -0.025em;
-  --text-display-3: clamp(1.75rem, 1.2rem + 2.4vw, 2.85rem);
-  --text-display-3--line-height: 1.06;
-  --text-display-3--letter-spacing: -0.02em;
-  --text-title: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
-  --text-title--line-height: 1.2;
-  --text-title--letter-spacing: -0.015em;
-  --text-lead: clamp(1.075rem, 1rem + 0.5vw, 1.3rem);
+  /* Display tops out at 68px. Tracking is tighter than the previous serif scale
+     because a geometric sans at heavy weights opens up at large sizes and reads
+     loose if it is left at default spacing. */
+  --text-display-1: clamp(2.7rem, 2rem + 3.2vw, 4.25rem);
+  --text-display-1--line-height: 1;
+  --text-display-1--letter-spacing: -0.035em;
+  --text-display-2: clamp(2.15rem, 1.65rem + 2.4vw, 3.5rem);
+  --text-display-2--line-height: 1.04;
+  --text-display-2--letter-spacing: -0.03em;
+  --text-display-3: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --text-display-3--line-height: 1.1;
+  --text-display-3--letter-spacing: -0.024em;
+  --text-title: clamp(1.25rem, 1.1rem + 0.65vw, 1.6rem);
+  --text-title--line-height: 1.24;
+  --text-title--letter-spacing: -0.018em;
+  --text-lead: clamp(1.05rem, 1rem + 0.35vw, 1.22rem);
   --text-lead--line-height: 1.55;
   --text-body: 1rem;
   --text-body--line-height: 1.65;
@@ -390,14 +418,14 @@
   --text-micro--letter-spacing: 0.06em;
 
   /* ---- Radius ----
-     Derived from physical book geometry: trimmed board corners are ~3mm on a
-     210mm page, so radii stay modest. Pill shapes are reserved for actions. */
+     Ordinary interface controls use an 8–10px system. Larger radii remain
+     available only for major content surfaces; pills are reserved for tags. */
   --radius-xs: 0.375rem;
-  --radius-sm: 0.625rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 1.75rem;
-  --radius-2xl: 2.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
 
   /* ---- Elevation ---- */
   --shadow-e1: var(--e-1);
@@ -436,6 +464,11 @@
    gains structure (not just stretched whitespace) past 1800px. */
 @theme {
   --breakpoint-xs: 24rem;
+  /* 992px. Sits between md and lg specifically for two-column hero layouts:
+     a 1024px-class laptop reports roughly 1000–1008px of inner width once the
+     scrollbar is taken out, which misses lg (1024px) and silently collapses
+     side-by-side compositions on the most common laptop size there is. */
+  --breakpoint-mdlg: 62rem;
   --breakpoint-3xl: 112.5rem;
 }
 
@@ -517,13 +550,23 @@
     transform: none;
   }
 }
+/* The final frame is OPAQUE, not transparent, and that is the whole point.
+   The reduced-motion policy in global.css forces `animation-iteration-count: 1`
+   on everything, so an animation is left sitting on its last keyframe. Ending
+   this one at `opacity: 0` meant any caret or cursor built on it silently
+   disappeared for users who ask for less motion — the element would be there,
+   correctly sized, and invisible. Ending opaque leaves a static caret instead,
+   which is exactly what a non-animated cursor should look like. */
 @keyframes blink {
   0%,
-  49% {
+  45% {
     opacity: 1;
   }
   50%,
-  100% {
+  95% {
     opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

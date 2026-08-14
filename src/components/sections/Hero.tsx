@@ -1,12 +1,18 @@
 import { Container, Reveal } from '@/components/ui/Layout';
 import { OrderButton } from '@/components/ui/Button';
 import { Rating } from '@/components/ui/Rating';
-import { Book3D } from '@/components/art/BookCover';
-import { Aurora, ScribbleArrow } from '@/components/art/Brand';
-import { ArrowDown, Camera, Clock, Feather, Lock } from '@/components/art/Icons';
+import { Typewriter } from '@/components/ui/Typewriter';
+import { BookBuild } from '@/components/art/BookBuild';
+import { ArrowDown, Camera, Clock, Lock } from '@/components/art/Icons';
+import { THEMES } from '@/data/catalogue';
 import { useDraft } from '@/hooks/useDraft';
 import { PROOF } from '@/lib/config';
 import { formatName, possessive } from '@/lib/utils';
+
+/** Derived, not hand-listed, so adding a seventh story to the catalogue puts its
+ *  role in the hero automatically — and, more importantly, so the hero can never
+ *  advertise a role we have no manuscript for. */
+const HERO_ROLES = THEMES.map((t) => t.role);
 
 /**
  * HERO
@@ -44,67 +50,140 @@ export function Hero() {
   const name = formatName(draft.childName);
 
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-28 pb-16 sm:pt-32 lg:pt-40 lg:pb-24">
-      {/* Pulled back for the near-white field. The blobs were previously being
-          absorbed by a tinted paper; against white they carry much further, and
-          at the old strength they turned a crisp field into a coloured one. */}
-      <Aurora className="pointer-events-none absolute inset-0 -z-10 opacity-45 night:opacity-40" />
-      {/* Faint baseline grid: a printer's registration mark, not decoration. */}
+    // Top padding clears the fixed header AND the announcement strip above it
+    // (h-9 bar + h-20 nav = 116px), so the badge is never tucked under either.
+    <section id="top" className="relative isolate overflow-hidden pt-32 pb-16 sm:pt-36 lg:pt-44 lg:pb-24">
+      {/* A single quiet grid gives the hero structure without competing with
+          the product artwork. No nested grid, glow field, grain or illustration
+          behind the interface. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 opacity-55 night:opacity-40"
+        className="absolute inset-0 -z-10 opacity-35 night:opacity-25"
         style={{
-          /**
-           * One grid, one line weight, one cell size.
-           *
-           * Presence comes entirely from the LINE COLOUR — jade-300 rather than
-           * the hairline token, which at 1.09:1 against paper was effectively
-           * invisible. Reaching for a second, denser grid to create texture is
-           * the wrong lever: it fights the headline for attention and starts to
-           * read as a wireframe rather than as a surface.
-           *
-           * 64px cell: large enough that the type sits ON the grid instead of
-           * inside it, small enough to still register as ruled stock.
-           */
           backgroundImage: [
             'linear-gradient(to right, var(--jade-300) 1px, transparent 1px)',
             'linear-gradient(to bottom, var(--jade-300) 1px, transparent 1px)',
           ].join(', '),
           backgroundSize: '64px 64px',
-          /* Elliptical and pushed further out than a circle: the grid should
-             still be present behind the book on the right, and behind the CTA,
-             not only under the headline. */
-          maskImage: 'radial-gradient(120% 95% at 50% 26%, #000 38%, transparent 84%)',
+          maskImage: 'linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%)',
         }}
       />
 
       <Container>
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 3xl:gap-20">
+        {/* mdlg (62rem), not lg. At 1024px-class laptop widths the inner viewport
+            lands just under Tailwind's lg breakpoint, so the hero stayed single
+            column and the book — the one thing worth looking at — fell below the
+            fold while the right half of the screen sat empty. */}
+        <div className="grid items-center gap-14 mdlg:grid-cols-[1.05fr_0.95fr] mdlg:gap-8 3xl:gap-20">
           {/* ---------------------------------------------------------------- */}
-          <div className="max-w-[38rem] lg:max-w-none">
-            <Reveal y={14} className="inline-flex flex-wrap items-center gap-x-4 gap-y-2">
-              <Rating count={PROOF.reviewCount} />
-              <span className="hidden h-4 w-px bg-strong sm:block" />
-              <span className="text-small font-semibold text-ink-soft">
-                {PROOF.booksDeliveredLabel} books on shelves across India
+          <div className="max-w-[38rem] mdlg:max-w-none">
+            {/* Positioning pill, then proof. Two rows, not one, because they are
+                two different arguments: the pill says what category we are in, the
+                rating says whether we are any good at it. Run together on a single
+                line they compete, and the stars — the more persuasive of the two —
+                lose. The live dot is the only piece of pure decoration here; it
+                reads as "this is an operating business", which for a page asking
+                for prepayment is worth its two pixels. */}
+            <Reveal y={14} className="flex flex-col items-start gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-hairline bg-raised px-3 py-1.5 text-[0.78rem] font-semibold text-ink-soft shadow-e1">
+                <span
+                  aria-hidden="true"
+                  className="inline-block size-1.5 animate-pulse rounded-full bg-verdant-500"
+                />
+                India’s personalised storybook studio
+              </span>
+
+              <span className="inline-flex flex-wrap items-center gap-x-4 gap-y-2">
+                <Rating count={PROOF.reviewCount} />
+                <span className="hidden h-4 w-px bg-strong sm:block" />
+                <span className="text-small font-semibold text-ink-soft">
+                  {PROOF.booksDeliveredLabel} books on shelves across India
+                </span>
               </span>
             </Reveal>
 
-            <Reveal y={22} delay={80} as="h1" className="mt-6 text-display-1">
-              Tonight, the hero
-              <br />
-              of the story has{' '}
-              <span className="marker whitespace-nowrap">
-                {isPersonalised ? possessive(name) : 'your child’s'}
-              </span>
-              <br />
-              <span className="quill">name.</span>
+            {/* "The gift where…", not "Tonight,…". The old opener promised same-night
+                delivery of a physical hardcover that takes 5–7 days to print and
+                2–3 more to ship — the page contradicted itself in its own first
+                line, and the first line is the one a buyer checks hardest.
+                "Gift" also sets the right budget: a parent compares this to a
+                birthday present, not to a ₹300 picture book.
+
+                The accent phrase is held on one line; at this measure it used to
+                split "your child" across a break, which read as an accident
+                rather than as emphasis. */}
+            <Reveal y={22} delay={80} as="h1" className="mt-6 max-w-[18ch] text-display-1">
+              The gift where{' '}
+              {/* 500 is the display step: 3.23:1, legal here because this is
+                  display-1 and nowhere near body size. The sub-line below uses 600
+                  for exactly that reason. */}
+              <span className="whitespace-nowrap text-verdant-500">
+                {isPersonalised ? name : 'your child'}
+              </span>{' '}
+              is the hero.
             </Reveal>
 
+            {/* One line, deliberately.
+
+                "become", not "as". "See X as Y" is the idiom for regarding someone
+                a certain way — "I see him as a leader" is an opinion, not an
+                observation. It quietly turned our promise into a suggestion that
+                the parent adjust their imagination. "See X become Y" is literal:
+                something happens and you watch it happen.
+
+                "their own storybook", not "their storybook". The possessive is the
+                whole product — not a book about them, a book that belongs to them —
+                and "own" is what stops it reading as a book that already exists.
+
+                Note for whoever edits this next: the hardcover, the WhatsApp
+                channel and "no account" all used to live in this line and are no
+                longer stated above the fold. They are still on the page (trust row
+                immediately below, HowItWorks, FinalCta), so nothing is unsupported,
+                but the hero now sells the feeling only. If conversion softens, this
+                is the first place to add one short factual clause back.
+
+                TYPEWRITER TREATMENT. Monospace, full-strength ink and a blinking
+                caret, which does three things a plain sub-line could not: it reads
+                as something being written rather than marketed, which is exactly
+                what we sell; the caret implies the story is still unfinished and
+                waiting on the name field directly below it; and the mono/sans
+                contrast against a Figtree headline separates the two lines so they
+                stop looking like one paragraph broken in half.
+
+                What rotates is one role per REAL STORY, read straight off the
+                catalogue — never a hand-kept list here. A list in this file would
+                drift, and the way it drifts is by advertising a role we have no
+                manuscript for, which is the same failure as the old "Tonight"
+                headline: a promise the rest of the site cannot keep.
+
+                The prefix is "become", not "become the hero of". "The hero of an
+                astronaut" is not a sentence; "become an astronaut" is. Each role
+                therefore carries its own article and full stop, so the phrase and
+                the prefix always agree without a helper.
+
+                Sans and `text-lead`, not monospace at body size. The typewriter
+                MOTION stays — that is what sells a story being written — but the
+                typewriter FONT went, because it was shrinking the line to the size
+                of a caption. This is the second most important sentence on the
+                page; it should be set like a lead paragraph, which is what the
+                token is for.
+
+                `text-ink`, not `#000`. The token is the strongest text colour the
+                system has (#17262c on paper) and at this size it reads as black,
+                but it FLIPS: in Bedtime it becomes near-white. A literal black
+                would be invisible against that theme's near-black field.
+
+                min-h is load-bearing, not padding. The roles differ in length, which
+                moves the wrap point: one line at this measure on desktop, two on a
+                narrow phone. Without a reserved box the paragraph would breathe in
+                and out and drag the name field and CTA with it on every rotation. */}
             <Reveal y={18} delay={160}>
-              <p className="mt-6 max-w-[42ch] text-lead text-ink-soft">
-                Original hardcover storybooks written around one child. Ordered in a single WhatsApp
-                conversation — no forms, no account.
+              <p className="mt-6 flex min-h-[3.3rem] max-w-[46ch] flex-wrap items-start gap-x-[0.4ch] text-lead font-medium text-ink sm:min-h-[1.95rem]">
+                <span>See your child become</span>
+                <Typewriter
+                  phrases={HERO_ROLES}
+                  className="font-semibold text-verdant-600 night:text-verdant-500"
+                />
               </p>
             </Reveal>
 
@@ -123,15 +202,11 @@ export function Hero() {
                     type="text"
                     value={draft.childName}
                     onChange={(e) => update({ childName: e.target.value })}
-                    placeholder="Type their name…"
+                    placeholder="Type their name"
                     maxLength={20}
                     autoComplete="off"
                     spellCheck={false}
-                    className="font-display h-14 w-full rounded-full border-2 border-strong bg-raised pl-5 pr-12 text-[1.15rem] font-semibold shadow-e1 outline-none transition-colors placeholder:font-normal placeholder:italic placeholder:text-ink-muted/60 hover:border-ink/40 focus:border-clay-500"
-                  />
-                  <Feather
-                    size={18}
-                    className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-ink-muted"
+                    className="h-14 w-full rounded-md border border-strong bg-raised px-4 text-[1.05rem] font-medium shadow-e1 outline-none transition-colors placeholder:font-normal placeholder:text-ink-muted/60 hover:border-ink/40 focus:border-gold-500"
                   />
                 </div>
                 <OrderButton
@@ -168,30 +243,17 @@ export function Hero() {
           </div>
 
           {/* ---------------------------------------------------------------- */}
-          <Reveal y={30} delay={140} scale={0.96} className="relative flex justify-center lg:justify-end">
-            <div className="relative">
-              <Book3D draft={draft} width={362} className="relative z-10" />
-
-              {/* Annotations. Positioned as call-outs on a physical object so
-                  the eye reads them as notes on the book, not UI chrome. */}
-              <Annotation className="-left-4 top-[16%] sm:-left-10" delay={520}>
-                Their name, foil-stamped
-              </Annotation>
-              <Annotation className="-right-2 top-[46%] sm:-right-8" delay={640} align="right">
-                Illustrated to match your photo
-              </Annotation>
-              <Annotation className="bottom-[8%] -left-2 sm:-left-8" delay={760}>
-                Hardcover · linen spine
-              </Annotation>
-
-              <div className="pointer-events-none absolute -bottom-6 -right-2 hidden rotate-6 text-gold-500 lg:block">
-                <ScribbleArrow className="w-20 opacity-70" flip />
-              </div>
-            </div>
+          <Reveal
+            y={30}
+            delay={140}
+            scale={0.96}
+            className="relative flex justify-center mdlg:justify-end"
+          >
+            <BookBuild className="max-w-[26rem]" />
           </Reveal>
         </div>
 
-        <Reveal y={12} delay={400} className="mt-10 flex justify-center lg:mt-12">
+        <Reveal y={12} delay={400} className="mt-10 flex justify-center mdlg:mt-12">
           <a
             href="#create"
             className="btn btn-quiet group flex-col !gap-1 text-micro font-bold tracking-[0.14em] uppercase"
@@ -205,34 +267,5 @@ export function Hero() {
         </Reveal>
       </Container>
     </section>
-  );
-}
-
-function Annotation({
-  children,
-  className,
-  delay = 0,
-  align = 'left',
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-  align?: 'left' | 'right';
-}) {
-  return (
-    <Reveal
-      y={10}
-      delay={delay}
-      className={`pointer-events-none absolute z-20 hidden sm:block ${className ?? ''}`}
-    >
-      <span
-        className={`glass glass-thin flex items-center gap-2 rounded-full px-3 py-1.5 text-[0.7rem] font-semibold ${
-          align === 'right' ? 'flex-row-reverse' : ''
-        }`}
-      >
-        <span aria-hidden="true" className="size-1.5 rounded-full bg-gold-500" />
-        {children}
-      </span>
-    </Reveal>
   );
 }

@@ -98,7 +98,7 @@ export function StickyCta() {
             {isPersonalised ? `${possessive(name)} book is ready to make` : 'Your book, in about 4 minutes'}
           </p>
           <p className="truncate text-[0.72rem] text-ink-muted">
-            {formatINR(PRICING.hardcover)} all in · GST & delivery included
+            {formatINR(PRICING.hardcover)} all in · or {formatINR(PRICING.digital)} digital
           </p>
         </div>
 

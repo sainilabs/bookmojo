@@ -9,7 +9,7 @@
     <title>BookMojo — Personalised Storybooks Where Your Child Is the Hero</title>
     <meta
       name="description"
-      content="Hardcover storybooks written around your child's name, age and world, in English or Hindi. Order in one WhatsApp conversation — no forms, no accounts. ₹1,499 all in, GST and delivery included."
+      content="The gift where your child is the hero: hardcover storybooks written around their name, age and world, in English or Hindi. Order in one WhatsApp conversation — no forms, no accounts. ₹1,499 all in, GST and delivery included, or ₹199 for the digital edition."
     />
     <meta name="theme-color" content="#fbfdfc" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0c1a17" media="(prefers-color-scheme: dark)" />
@@ -18,10 +18,10 @@
     <!-- Social -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="BookMojo" />
-    <meta property="og:title" content="Your child, the hero of their own hardcover book" />
+    <meta property="og:title" content="The gift where your child is the hero" />
     <meta
       property="og:description"
-      content="Personalised storybooks in English or Hindi, ordered entirely over WhatsApp. ₹1,499 all in. Tell us their name — we'll do the rest."
+      content="Personalised hardcover storybooks in English or Hindi, ordered entirely over WhatsApp. ₹1,499 all in, or ₹199 digital. Tell us their name — we'll do the rest."
     />
     <meta property="og:locale" content="en_IN" />
     <!-- Absolute, because Vite rewrites asset paths in href/src but NOT inside a
@@ -34,22 +34,28 @@
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
     <!--
-      FONT LOADING
-      Two families, four axes total, subset to latin. Preconnect + swap keeps
-      first paint on the fallback stack instead of blocking LCP on the network.
-      Fallbacks are metric-adjacent (Iowan/Palatino for Fraunces) to hold the
-      layout still during the swap — CLS stays at 0.
+      FONT LOADING — three roles, each with a job.
+
+        Figtree  · interface and headlines. A geometric sans with a genuine
+                   300–900 range, so headings can carry real weight. Established
+                   consumer brands lead with confident, highly legible type and
+                   let product imagery do the emotional work.
+        Literata · book text only: interior spreads, the page-one preview, the
+                   cover. It is a typeface built for reading books, which is
+                   exactly what we are selling.
+        Mukta    · Devanagari. Covers Hindi in both roles so the script is never
+                   left to an arbitrary platform fallback.
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,40,1;1,9..144,400..600,60,1&family=Plus+Jakarta+Sans:wght@400..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Mukta:wght@400;500;600;700&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,40,1;1,9..144,400..600,60,1&family=Plus+Jakarta+Sans:wght@400..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Mukta:wght@400;500;600;700&display=swap"
       media="print"
       onload="this.media='all'"
     />
@@ -68,9 +74,11 @@
           "reviewCount": "2148"
         },
         "offers": {
-          "@type": "Offer",
+          "@type": "AggregateOffer",
           "priceCurrency": "INR",
-          "price": "1499",
+          "lowPrice": "199",
+          "highPrice": "1499",
+          "offerCount": "2",
           "availability": "https://schema.org/InStock",
           "areaServed": { "@type": "Country", "name": "India" },
           "shippingDetails": {

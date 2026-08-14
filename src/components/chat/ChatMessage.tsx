@@ -98,7 +98,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
           </div>
           <div className="px-3 py-3">
             <p className="text-[0.65rem] opacity-60">Amount due</p>
-            <p className="font-display text-[1.5rem] leading-none font-semibold tabular-nums">
+            <p className="font-display text-[1.5rem] leading-none font-extrabold tabular-nums">
               {msg.total}
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5">

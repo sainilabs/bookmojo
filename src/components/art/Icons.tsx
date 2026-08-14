@@ -4,9 +4,8 @@ import type { SVGProps } from 'react';
  * ICONOGRAPHY
  * -----------------------------------------------------------------------------
  * One family, drawn to a single spec: 24px grid, 1.6px stroke, round caps and
- * joins, no fills. Rounded terminals are the deliberate choice — they read as
- * warm and hand-drawn next to Fraunces, where a sharp technical icon set would
- * fight the type and make the brand feel like a dashboard.
+ * joins, no fills. The restrained line style stays legible beside both the
+ * editorial serif and the neutral interface typography.
  *
  * Icons are inline SVG components, not a font or a sprite: they inherit
  * `currentColor`, cost nothing at runtime, and never cause a layout shift while

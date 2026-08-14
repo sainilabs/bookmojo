@@ -41,7 +41,7 @@ export function Delivery() {
       icon: Camera,
       when: `Day ${PROOF.productionDays.split('–')[0]}`,
       title: 'Off the press',
-      message: `📸 Here is ${book}, before the gift box goes on.`,
+      message: `Here is ${book}, before the gift box goes on.`,
     },
     {
       icon: Truck,
@@ -120,7 +120,7 @@ export function Delivery() {
           <Reveal y={20} delay={90}>
             <article className="card flex h-full flex-col justify-between gap-5 p-7">
               <div>
-                <p className="font-display text-[2.4rem] leading-none font-semibold tabular-nums">
+                <p className="font-display text-[2.4rem] leading-none font-extrabold tracking-[-0.035em] tabular-nums">
                   {PROOF.pincodes}
                 </p>
                 <p className="mt-2 text-small text-ink-soft">

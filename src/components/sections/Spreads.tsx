@@ -270,19 +270,18 @@ function Page({
 
       <div className="relative">
         {spread.heading && (
-          <p className="font-display mb-4 text-[0.68rem] font-bold tracking-[0.22em] uppercase text-[#8c7f6b]">
+          <p className="font-book mb-4 text-[0.68rem] font-bold tracking-[0.22em] uppercase text-[#8c7f6b]">
             {spread.heading}
           </p>
         )}
 
         <div
           className={cx(
-            'font-display flex flex-col gap-4',
+            'font-book flex flex-col gap-4',
             isDedication
               ? 'items-center text-center text-[1.35rem] leading-[1.5] italic'
               : 'text-[0.98rem] leading-[1.75] sm:text-[1.04rem]',
           )}
-          style={{ fontVariationSettings: "'SOFT' 50, 'WONK' 1" }}
         >
           {spread.paragraphs.map((p, i) => (
             <p

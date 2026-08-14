@@ -24,6 +24,16 @@ export interface StoryTheme {
   name: string;
   /** One-line promise: what the child *feels* by the last page. */
   promise: string;
+  /**
+   * What the child BECOMES in this story, phrased to complete the sentence
+   * "See your child become ___" — so it carries its own article and full stop.
+   *
+   * It lives on the theme rather than in a list inside the hero on purpose. The
+   * hero rotates these, and a hand-maintained list there would eventually
+   * advertise a role we have no story for. Tying the role to the manuscript
+   * means the claim cannot outlive the product.
+   */
+  role: string;
   blurb: string;
   /** Ages the manuscript is written for. Drives the age-aware recommendation. */
   ages: AgeBand[];

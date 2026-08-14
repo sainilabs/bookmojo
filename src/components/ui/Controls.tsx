@@ -96,7 +96,7 @@ export function ChoiceGroup<T extends string>({
                 <span
                   className={cx(
                     'grid size-11 place-items-center rounded-full transition-all duration-200',
-                    'ring-offset-2 ring-offset-raised peer-focus-visible:ring-2 peer-focus-visible:ring-clay-500',
+                    'ring-offset-2 ring-offset-raised peer-focus-visible:ring-2 peer-focus-visible:ring-gold-500',
                     selected ? 'ring-2 ring-ink' : 'ring-1 ring-hairline hover:ring-strong',
                   )}
                 >
@@ -117,8 +117,8 @@ export function ChoiceGroup<T extends string>({
               ) : (
                 <span
                   className={cx(
-                    'flex min-h-11 flex-col items-center justify-center rounded-[0.8rem] px-3 py-2 text-center transition-all duration-200',
-                    'ring-offset-2 ring-offset-raised peer-focus-visible:ring-2 peer-focus-visible:ring-clay-500',
+                    'flex min-h-11 flex-col items-center justify-center rounded-md px-3 py-2 text-center transition-all duration-200',
+                    'ring-offset-2 ring-offset-raised peer-focus-visible:ring-2 peer-focus-visible:ring-gold-500',
                     selected
                       ? 'bg-inverse text-ink-inverse shadow-e2 font-semibold'
                       : 'bg-inset text-ink-soft hover:bg-strong/25 hover:text-ink',
@@ -190,11 +190,11 @@ export function NameField({
           enterKeyHint="done"
           aria-describedby={hint ? hintId : undefined}
           className={cx(
-            'font-display w-full rounded-[0.9rem] border-2 border-hairline bg-raised px-4 py-3',
-            'text-[1.35rem] leading-tight font-semibold tracking-[-0.01em]',
+            'font-sans w-full rounded-md border border-hairline bg-raised px-4 py-3',
+            'text-[1.1rem] leading-tight font-medium tracking-[-0.01em]',
             'transition-colors duration-200 outline-none',
-            'placeholder:text-ink-muted/55 placeholder:font-normal placeholder:italic',
-            'hover:border-strong focus:border-clay-500',
+            'placeholder:text-ink-muted/55 placeholder:font-normal',
+            'hover:border-strong focus:border-gold-500',
           )}
         />
         <span

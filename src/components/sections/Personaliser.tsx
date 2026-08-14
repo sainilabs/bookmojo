@@ -168,7 +168,7 @@ export function Personaliser() {
                       <label
                         key={option.id}
                         className={cx(
-                          'group relative flex cursor-pointer gap-3 rounded-[0.9rem] border-2 p-3 transition-all duration-200',
+                          'group relative flex cursor-pointer gap-3 rounded-md border p-3 transition-all duration-200',
                           selected
                             ? 'border-ink bg-raised shadow-e2'
                             : 'border-hairline bg-raised/50 hover:border-strong',
@@ -191,7 +191,7 @@ export function Personaliser() {
                         />
                         <span className="min-w-0 flex-1">
                           <span className="flex items-center gap-2">
-                            <span className="font-display text-[0.95rem] leading-tight font-semibold">
+                            <span className="text-[0.95rem] leading-tight font-semibold">
                               {option.name}
                             </span>
                             {selected && (
@@ -285,10 +285,7 @@ export function Personaliser() {
                       {theme.name}
                     </span>
                   </div>
-                  <p
-                    className="font-display px-6 py-6 text-[1.05rem] leading-[1.7] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-display first-letter:text-[3.2rem] first-letter:leading-[0.8] first-letter:font-semibold first-letter:text-gold-600"
-                    style={{ fontVariationSettings: "'SOFT' 50, 'WONK' 1" }}
-                  >
+                  <p className="font-book px-6 py-6 text-[1.05rem] leading-[1.7] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-book first-letter:text-[3.2rem] first-letter:leading-[0.8] first-letter:font-semibold first-letter:text-gold-600">
                     {opening}
                   </p>
                   <p className="border-t border-hairline bg-sunken px-6 py-3 text-[0.72rem] text-ink-muted">

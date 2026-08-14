@@ -60,12 +60,12 @@ export function buildJourney(draft: Draft): Stage[] {
       messages: [
         {
           kind: 'in',
-          text: `Hello! 👋 I’ll build the book with you right here. Five quick questions — you can type or just tap.\n\n1️⃣ What is your child’s first name, exactly as it should be printed?`,
+          text: `Hello. I’ll build the book with you right here. Five quick questions — type a reply or tap an option.\n\n1. What is your child’s first name, exactly as it should be printed?`,
         },
         { kind: 'out', text: name },
         {
           kind: 'in',
-          text: `${name}. Lovely. 2️⃣ How old is ${name}? This sets the reading level and page count.`,
+          text: `${name}. Lovely. 2. How old is ${name}? This sets the reading level and page count.`,
         },
         {
           kind: 'chips',
@@ -73,7 +73,7 @@ export function buildJourney(draft: Draft): Stage[] {
           options: ['2–3', '4–5', '6–8', '9–12'],
           chosen: ['2-3', '4-5', '6-8', '9-12'].indexOf(draft.age),
         },
-        { kind: 'in', text: '3️⃣ Should the book be printed in English or Hindi?' },
+        { kind: 'in', text: '3. Should the book be printed in English or Hindi?' },
         {
           kind: 'chips',
           label: 'Language',
@@ -92,7 +92,7 @@ export function buildJourney(draft: Draft): Stage[] {
       messages: [
         {
           kind: 'in',
-          text: `4️⃣ Here are the three stories that fit ${name} best. I’ve sent a sample page for each. 📖`,
+          text: `4. Here are the three stories that fit ${name} best. I’ve sent a sample page for each.`,
         },
         {
           kind: 'chips',
@@ -102,12 +102,12 @@ export function buildJourney(draft: Draft): Stage[] {
         },
         {
           kind: 'in',
-          text: `5️⃣ Last one — what does ${name} look like? Send a photo and I’ll match skin tone, hair and glasses, or pick from the illustrated options.`,
+          text: `5. Last one — what does ${name} look like? Send a photo and I’ll match skin tone, hair and glasses, or pick from the illustrated options.`,
         },
-        { kind: 'out', text: '📎 photo.jpg' },
+        { kind: 'out', text: 'photo.jpg attached' },
         {
           kind: 'in',
-          text: `Got it — matched. ✨ Want to add a private dedication on the first page? Grandparents love this one. (Optional, tap skip.)`,
+          text: `Got it — matched. Want to add a private dedication on the first page? This is optional, and you can skip it.`,
         },
         {
           kind: 'out',
@@ -138,9 +138,9 @@ export function buildJourney(draft: Draft): Stage[] {
         },
         {
           kind: 'in',
-          text: 'Tap ✅ to approve, or tell me what to change — spelling, story, hair colour, anything.',
+          text: 'Approve it, or tell me what to change — spelling, story, hair colour, anything.',
         },
-        { kind: 'out', text: '✅ Approved. It’s perfect.' },
+        { kind: 'out', text: 'Approved. It’s perfect.' },
       ],
     },
     {
@@ -166,7 +166,7 @@ export function buildJourney(draft: Draft): Stage[] {
         },
         {
           kind: 'in',
-          text: '🔒 Secure one-time link. Nothing is stored in this chat. GST and tracked delivery are already in the price.',
+          text: 'Secure one-time payment link. Nothing is stored in this chat. GST and tracked delivery are already in the price.',
         },
       ],
     },
@@ -181,7 +181,7 @@ export function buildJourney(draft: Draft): Stage[] {
         { kind: 'receipt', id: 'BM-8241', total },
         {
           kind: 'in',
-          text: `Payment received — thank you! 🎉 ${possessive(name)} book is going to our studio now. I’ll message you at every stage, and you can reply here any time.`,
+          text: `Payment received — thank you. ${possessive(name)} book is going to our studio now. I’ll message you at every stage, and you can reply here any time.`,
         },
       ],
     },
@@ -205,7 +205,7 @@ export function buildJourney(draft: Draft): Stage[] {
         },
         {
           kind: 'in',
-          text: '📸 Off the press this morning. Here she is before the gift box goes on.',
+          text: 'Off the press this morning. Here is the finished book before the gift box goes on.',
         },
       ],
     },
@@ -220,9 +220,9 @@ export function buildJourney(draft: Draft): Stage[] {
         { kind: 'shipment', courier: 'Blue Dart', code: 'BM8241KA', eta: 'Tomorrow, before 1pm' },
         {
           kind: 'in',
-          text: `Out for delivery. 📦 If it’s a surprise, I can hold it for a date you choose — just say the word.`,
+          text: `Out for delivery. If it’s a surprise, I can hold it for a date you choose — just say the word.`,
         },
-        { kind: 'out', text: 'She has not put it down. Thank you. 🥹' },
+        { kind: 'out', text: 'She has not put it down. Thank you.' },
       ],
     },
   ];

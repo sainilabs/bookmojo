@@ -14,7 +14,7 @@ import type { MotifId, StoryTheme } from '@/types';
  *   · Flat shapes with no gradients scale to any density, print-match the real
  *     litho artwork, and stay legible at 40px in the theme rail.
  *   · Every motif is drawn from the same 6-shape vocabulary (arc, disc, wedge,
- *     ribbon, dot-field, silhouette), so six very different story worlds still
+ *     ribbon, dot-field, silhouette), so nine very different story worlds still
  *     read as one brand.
  *
  * Everything is procedural SVG: no image requests, nothing to lazy-load, no

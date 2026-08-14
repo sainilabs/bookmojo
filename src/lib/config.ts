@@ -13,7 +13,10 @@
 
 export const BRAND = {
   name: 'BookMojo',
-  tagline: 'Your child, the hero of their own book.',
+  /** GIFT, not book. A parent's annual book budget for one child is roughly
+   *  ₹2,000 (NSS 2025); their gifting budget is not. Sold as a book this is
+   *  priced at a year's worth of books. Sold as a gift it is priced normally. */
+  tagline: 'The gift where your child is the hero.',
   /** E.164, digits only — required format for wa.me deep links. */
   whatsappNumber: '919876543210',
   whatsappDisplay: '+91 98765 43210',
@@ -25,6 +28,13 @@ export const BRAND = {
   studio: 'Bengaluru',
   press: 'Sivakasi, Tamil Nadu',
 } as const;
+
+/** The strip above the nav. One line, one fact, no dismiss button.
+ *  Kept here because it is the most-edited string on the site — seasonal offers,
+ *  festive cutoffs, a pause on orders — and none of that should require opening
+ *  a component. */
+export const ANNOUNCEMENT =
+  'Written, illustrated and printed in India — delivered to 19,000+ PIN codes.';
 
 export const PROOF = {
   booksDelivered: 41_820,
@@ -47,6 +57,11 @@ export const PRICING = {
   symbol: '₹',
   hardcover: 1499,
   hardcoverCompare: 1999,
+  /** The printed book is the gift and stays the hero of every price surface.
+   *  The digital edition exists to widen the top of the funnel, not to be the
+   *  offer: roughly 10–12% of Indian households can spend ₹199 on a whim,
+   *  against 2–3% for a ₹1,499 gift. Lead with ₹199 and we sell a PDF. */
+  digital: 199,
   giftBoxIncluded: true,
   /** Shipping and GST are inside the price. In a market trained on surprise
    *  delivery charges at the last step, saying so early is a conversion feature. */

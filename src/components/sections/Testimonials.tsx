@@ -48,7 +48,7 @@ export function Testimonials() {
         <Reveal y={20} className="mx-auto mt-12 max-w-[46rem]">
           <div className="card flex flex-col gap-6 p-7 sm:flex-row sm:items-center sm:gap-10">
             <div className="shrink-0 text-center sm:text-left">
-              <p className="font-display text-[3.4rem] leading-none font-semibold tabular-nums">
+              <p className="font-display text-[3.4rem] leading-none font-extrabold tracking-[-0.04em] tabular-nums">
                 {PROOF.rating}
               </p>
               <Rating value={PROOF.rating} className="mt-2 justify-center sm:justify-start" />
@@ -94,17 +94,14 @@ export function Testimonials() {
               <figure className="card card-lift flex flex-col gap-4 p-6">
                 <Quote size={20} className="text-gold-300" />
 
-                <blockquote
-                  className="font-display text-[1.02rem] leading-[1.6]"
-                  style={{ fontVariationSettings: "'SOFT' 50, 'WONK' 1" }}
-                >
+                <blockquote className="font-book text-[1.02rem] leading-[1.6]">
                   {review.quote}
                 </blockquote>
 
                 <figcaption className="mt-auto flex items-center gap-3 border-t border-hairline pt-4">
                   <span
                     aria-hidden="true"
-                    className="grid size-10 shrink-0 place-items-center rounded-full bg-clay-50 font-display text-[0.9rem] font-semibold text-clay-700"
+                    className="grid size-10 shrink-0 place-items-center rounded-md bg-inset font-sans text-[0.8rem] font-semibold text-ink-soft"
                   >
                     {review.name
                       .split(' ')

@@ -1,5 +1,4 @@
 import { DraftProvider } from '@/hooks/useDraft';
-import { Grain } from '@/components/art/Brand';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { StickyCta } from '@/components/layout/StickyCta';
@@ -29,7 +28,7 @@ import { FinalCta } from '@/components/sections/FinalCta';
  *   Personaliser  imagination. They build the artefact and own it.
  *   HowItWorks    the mechanism, in four honest steps.
  *   Journey       trust. The entire purchase replayed, including payment.
- *   Themes        excitement. Their child, six times over.
+ *   Themes        excitement. Their child, nine times over.
  *   Spreads       the interior — is the writing and printing any good?
  *   WhyParents    why it works on a child, argued not asserted.
  *   Craft         materials and specifications. Kills "print-on-demand tat".
@@ -48,7 +47,6 @@ import { FinalCta } from '@/components/sections/FinalCta';
 export default function App() {
   return (
     <DraftProvider>
-      <Grain />
       <Navbar />
 
       {/* pb on mobile clears the floating bar so nothing is ever trapped under it. */}

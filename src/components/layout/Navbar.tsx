@@ -3,7 +3,7 @@ import { Container } from '@/components/ui/Layout';
 import { OrderButton } from '@/components/ui/Button';
 import { Logo } from '@/components/art/Brand';
 import { Close, Menu, Moon, Sun } from '@/components/art/Icons';
-import { NAV_LINKS, PROOF } from '@/lib/config';
+import { ANNOUNCEMENT, NAV_LINKS, PROOF } from '@/lib/config';
 import { useTheme } from '@/hooks/useTheme';
 import { useEscape, useScrollLock, useScrolledPast, useScrollSpy } from '@/hooks/useUi';
 import { cx } from '@/lib/utils';
@@ -57,6 +57,31 @@ export function Navbar() {
           condensed ? 'pt-2.5 sm:pt-3.5' : 'pt-0',
         )}
       >
+        {/* ANNOUNCEMENT STRIP.
+            Lives inside the fixed header rather than as its own block at the top
+            of the document, because the header is `position: fixed` — a normal
+            sibling above it would simply be covered.
+
+            It collapses on scroll, which is the point: the nav's whole design is
+            to detach into a floating capsule past 80px, and a full-bleed band
+            still welded to the top of the viewport would fight that. So the strip
+            is a greeting, shown once, and then it gets out of the way.
+
+            bg-inverse (deep jade), not verdant. Verdant is reserved for the
+            WhatsApp channel across the entire site — spending it on a decorative
+            band would make the one colour that means "this is the order button"
+            mean nothing. */}
+        <div
+          className={cx(
+            'overflow-hidden bg-inverse transition-all duration-[380ms] ease-[var(--ease-spring)]',
+            condensed ? 'h-0 opacity-0' : 'h-9 opacity-100',
+          )}
+        >
+          <p className="flex h-9 items-center justify-center px-4 text-center text-[0.78rem] font-medium text-ink-inverse-soft">
+            <span className="truncate">{ANNOUNCEMENT}</span>
+          </p>
+        </div>
+
         <Container>
           <nav
             aria-label="Main"
@@ -167,7 +192,7 @@ export function Navbar() {
                 <a
                   href={`#${link.id}`}
                   onClick={close}
-                  className="font-display flex items-baseline justify-between py-4 text-[1.4rem] font-semibold"
+                  className="flex items-baseline justify-between py-4 text-[1.15rem] font-semibold"
                 >
                   {link.label}
                   <span className="text-micro font-sans font-bold text-ink-muted tabular-nums">

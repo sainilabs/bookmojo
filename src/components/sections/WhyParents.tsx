@@ -51,17 +51,14 @@ export function WhyParents() {
                 className="pointer-events-none absolute inset-0 opacity-60"
                 style={{
                   background:
-                    'radial-gradient(38rem 26rem at 88% 8%, color-mix(in oklab, var(--gold-500) 34%, transparent), transparent 68%), radial-gradient(30rem 26rem at 4% 96%, color-mix(in oklab, var(--clay-500) 40%, transparent), transparent 70%)',
+                    'radial-gradient(38rem 26rem at 88% 8%, color-mix(in oklab, var(--gold-500) 22%, transparent), transparent 70%)',
                 }}
               />
               <div className="relative">
                 <span className="eyebrow !text-ink-inverse-muted">
                   <Sparkle size={14} /> The whole idea
                 </span>
-                <h3
-                  className="mt-5 max-w-[24ch] text-display-3"
-                  style={{ fontVariationSettings: "'SOFT' 50, 'WONK' 1" }}
-                >
+                <h3 className="mt-5 max-w-[24ch] text-display-3">
                   “Wait — that’s <span className="text-gold-300">me</span>.”
                 </h3>
                 <p className="mt-5 max-w-[40ch] text-lead text-ink-inverse-soft">
@@ -77,7 +74,7 @@ export function WhyParents() {
                   { v: '20 yrs', l: 'Built to survive', s: 'sewn binding, board pages' },
                 ].map((stat) => (
                   <div key={stat.l}>
-                    <p className="font-display text-[1.9rem] leading-none font-semibold tabular-nums text-gold-300">
+                    <p className="font-display text-[1.9rem] leading-none font-extrabold tracking-[-0.03em] tabular-nums text-gold-300">
                       {stat.v}
                     </p>
                     <p className="mt-1.5 text-small font-semibold">{stat.l}</p>
@@ -101,7 +98,7 @@ export function WhyParents() {
               icon: Gift,
               title: 'A gift nobody else gives',
               body: 'Rigid gift box, no pricing inside. The one present that is not in a charity bag by spring.',
-              tone: 'clay' as const,
+              tone: 'neutral' as const,
             },
             {
               icon: Shield,
@@ -122,7 +119,6 @@ export function WhyParents() {
                   className={cx(
                     'grid size-11 place-items-center rounded-[0.8rem]',
                     card.tone === 'gold' && 'bg-gold-50 text-gold-700',
-                    card.tone === 'clay' && 'bg-clay-50 text-clay-700',
                     card.tone === 'verdant' && 'bg-verdant-50 text-verdant-700',
                     card.tone === 'neutral' && 'bg-inset text-ink-soft',
                   )}

@@ -109,7 +109,7 @@ export function HowItWorks() {
                 >
                   <step.icon size={19} />
                 </span>
-                <span className="font-display text-small font-semibold text-ink-muted tabular-nums">
+                <span className="text-small font-semibold text-ink-muted tabular-nums">
                   0{step.n}
                 </span>
               </div>

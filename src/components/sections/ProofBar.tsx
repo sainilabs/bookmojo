@@ -51,7 +51,7 @@ export function ProofBar() {
               delay={i * 70}
               className="flex flex-col gap-1 lg:border-l lg:border-hairline lg:pl-6 lg:first:border-0 lg:first:pl-0"
             >
-              <span className="font-display text-[2rem] leading-none font-semibold tabular-nums sm:text-[2.4rem]">
+              <span className="font-display text-[2rem] leading-none font-extrabold tracking-[-0.035em] tabular-nums sm:text-[2.4rem]">
                 {stat.value}
               </span>
               <span className="max-w-[18ch] text-small text-ink-muted">{stat.label}</span>
@@ -69,7 +69,7 @@ export function ProofBar() {
           <Marquee className="min-w-0 flex-1" speed={52}>
             {ENDORSEMENTS.map((item) => (
               <div key={item.label} className="flex items-baseline gap-2 whitespace-nowrap">
-                <span className="font-display text-[0.95rem] font-semibold">{item.label}</span>
+                <span className="text-[0.95rem] font-semibold">{item.label}</span>
                 <span className="text-small text-ink-muted">{item.note}</span>
               </div>
             ))}

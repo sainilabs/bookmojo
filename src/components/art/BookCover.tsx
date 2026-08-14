@@ -26,7 +26,7 @@ import type { Draft } from '@/types';
  */
 
 /** Greedy wrap. Titles are authored short, so a simple measure is honest and
- *  avoids shipping a text-measuring dependency for six known strings. */
+ *  avoids shipping a text-measuring dependency for nine known strings. */
 function wrap(text: string, max: number, maxLines = 3): string[] {
   const words = text.split(' ');
   const lines: string[] = [];
@@ -121,17 +121,16 @@ export function BookCover({ draft, placeholderName = 'Aarav', className }: BookC
         textAnchor="middle"
         fill={`url(#foil-${uid})`}
         fontSize={size}
-        fontFamily="var(--font-display)"
+        fontFamily="var(--font-book)"
         fontWeight="600"
         letterSpacing="-0.5"
-        style={{ fontVariationSettings: "'SOFT' 40, 'WONK' 1" }}
       >
         {name}
       </text>
 
       {/* Title, set beneath the name in the way a series title sits under a
           character name on a real jacket. */}
-      <g fill="#fff" fontFamily="var(--font-display)" fontStyle="italic" opacity="0.95">
+      <g fill="#fff" fontFamily="var(--font-book)" fontStyle="italic" opacity="0.95">
         {titleLines.map((line, i) => (
           <text
             key={line}

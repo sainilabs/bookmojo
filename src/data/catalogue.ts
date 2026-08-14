@@ -81,7 +81,20 @@ export const HAIR_STYLES: ReadonlyArray<{ id: HairId; label: string }> = [
  * evidence that the outcome is credible.
  */
 /**
- * SIX STORY WORLDS, SET WHERE THE CHILD ACTUALLY LIVES.
+ * NINE STORY WORLDS, SET WHERE THE CHILD ACTUALLY LIVES.
+ *
+ * ORDER IS COMMERCIAL, NOT CHRONOLOGICAL. The first three — police officer,
+ * doctor, engineer — lead because those are the three answers an Indian parent
+ * has already heard from their own child, and the hero rotates roles in this
+ * order. A stargazer is a lovelier idea; a doctor is the one that makes a parent
+ * stop scrolling. The literary six that follow are what makes the product worth
+ * buying once they have stopped.
+ *
+ * The aspiration three are still written as stories, not as career posters. There
+ * is no child in a plastic stethoscope on a stage: there is a crow with a bad
+ * wing, a missing blue cycle, and a footbridge eleven inches short. The role is
+ * what the child DOES in the story, which is the only version of "become a
+ * doctor" a four-year-old can actually feel.
  *
  * The earlier set — a wood called Whisperwood, a museum with a curator, a
  * skyline of pigeons — was competently written and completely foreign. An Indian
@@ -103,9 +116,51 @@ export const HAIR_STYLES: ReadonlyArray<{ id: HairId; label: string }> = [
  */
 export const THEMES: readonly StoryTheme[] = [
   {
+    id: 'lane-four',
+    name: 'The Constable of Lane Number Four',
+    promise: 'For the child who notices who has been left out',
+    blurb:
+      'Nobody hands out the job. But when something goes missing on Lane Number Four — a cycle, a tiffin, a very old dog — one person starts asking questions before the grown-ups have finished their tea.',
+    ages: ['4-5', '6-8'],
+    palette: { base: '#2B4468', accent: '#E8C170', deep: '#152438' },
+    motif: 'city',
+    opening:
+      'Nobody had appointed {name} to anything. But when the blue cycle vanished from outside number twelve, {name} was the only one who thought to look at the ground.',
+    role: 'a police officer.',
+    popular: true,
+  },
+  {
+    id: 'gulmohar',
+    name: 'The Clinic Behind the Gulmohar',
+    promise: 'For the child who looks after everyone before themselves',
+    blurb:
+      'Behind the gulmohar at the end of the compound is a clinic with a waiting room, three patients and one doctor who is not yet tall enough for the top shelf. All three patients have feathers or fur.',
+    ages: ['2-3', '4-5'],
+    palette: { base: '#1F6B63', accent: '#F4C9B0', deep: '#0D3A35' },
+    motif: 'forest',
+    opening:
+      'The crow with the bad wing had been waiting since Thursday, and out of everybody in the compound, it had decided to wait for {name}.',
+    role: 'a doctor.',
+    popular: true,
+  },
+  {
+    id: 'nala-bridge',
+    name: 'The Bridge That Was One Plank Short',
+    promise: 'For the child who takes things apart to see how they work',
+    blurb:
+      'The footbridge over the nala has been one plank short for as long as anyone can remember, and the grown-ups have stopped seeing the gap. Somebody four feet tall has measured it. Twice.',
+    ages: ['6-8', '9-12'],
+    palette: { base: '#8A4A22', accent: '#F0D08A', deep: '#4A2410' },
+    motif: 'dream',
+    opening:
+      'The gap in the bridge was eleven inches across. {name} knew, because {name} had measured it once with a ruler and once with a shoe, to be sure.',
+    role: 'an engineer.',
+  },
+  {
     id: 'chandni',
     name: 'The Night the Terrace Grew Stars',
     promise: 'For the child who does not want the day to end',
+    role: 'a stargazer.',
     blurb:
       'A hot April night on the terrace, a charpai still warm from the afternoon, and a sky that turns out to have been keeping count of everyone who has ever been loved.',
     ages: ['2-3', '4-5'],
@@ -119,6 +174,7 @@ export const THEMES: readonly StoryTheme[] = [
     id: 'backwater',
     name: 'The Temple Under the Backwaters',
     promise: 'For the child who asks one more question about everything',
+    role: 'an explorer.',
     blurb:
       'Past the fourth bend of the canal, under water the colour of strong tea, there is a temple that has been waiting four hundred years for somebody who is not afraid of the dark.',
     ages: ['4-5', '6-8'],
@@ -131,6 +187,9 @@ export const THEMES: readonly StoryTheme[] = [
     id: 'banyan',
     name: 'The Banyan That Remembered Everything',
     promise: 'For the child learning that brave is not the same as unafraid',
+    /* Not a job title, and that is deliberate — this manuscript is about nerve,
+       not an occupation. Forcing it into a noun would have meant inventing one. */
+    role: 'braver than they knew.',
     blurb:
       'The old banyan at the end of the lane has been listening for two hundred years. What it finally says out loud is small, and kind, and exactly what they needed to hear.',
     ages: ['4-5', '6-8'],
@@ -144,6 +203,7 @@ export const THEMES: readonly StoryTheme[] = [
     id: 'local',
     name: 'The Morning the 7:04 Was Late',
     promise: 'For the child who fixes things nobody asked them to fix',
+    role: 'a detective.',
     blurb:
       'The local has not been late in ninety years. This morning it is eleven minutes behind, the crows have strong opinions about it, and the only person who has noticed is nine years old.',
     ages: ['6-8', '9-12'],
@@ -156,6 +216,7 @@ export const THEMES: readonly StoryTheme[] = [
     id: 'sriharikota',
     name: 'Nine Moons Past Sriharikota',
     promise: 'For the child who wants to know what is past the last page',
+    role: 'an astronaut.',
     blurb:
       'A one-seat expedition from a launch pad on the Bay of Bengal, a stowaway who eats star charts, and a decision that only a child would be brave enough to make.',
     ages: ['6-8', '9-12'],
@@ -168,6 +229,7 @@ export const THEMES: readonly StoryTheme[] = [
     id: 'karkhana',
     name: 'The Workshop of Almost',
     promise: 'For the child who is quietly making something',
+    role: 'an inventor.',
     blurb:
       'Down a gali behind the clock tower is a workshop holding every idea the world nearly had. The last shelf is empty, and there is a small brass plate on it with their name already engraved.',
     ages: ['9-12'],

@@ -81,7 +81,7 @@ export const FAQS: readonly FaqItem[] = [
   {
     group: 'Payment',
     q: 'What does it cost, and what if we do not love it?',
-    a: `${formatINR(PRICING.hardcover)} including the gift box, GST and tracked delivery. Nothing is added at the last step. ${GUARANTEE.headline}, for ${GUARANTEE.window} after delivery.`,
+    a: `${formatINR(PRICING.hardcover)} for the hardcover, including the gift box, GST and tracked delivery. Nothing is added at the last step. There is also a ${formatINR(PRICING.digital)} digital edition — the same story, sent to your phone — and what you pay for it comes off the printed book if you upgrade. ${GUARANTEE.headline}, for ${GUARANTEE.window} after delivery.`,
   },
 ];
 

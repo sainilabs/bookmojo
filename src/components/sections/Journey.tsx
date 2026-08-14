@@ -152,7 +152,7 @@ export function Journey() {
         className="pointer-events-none absolute inset-0 opacity-40"
         style={{
           background:
-            'radial-gradient(60rem 40rem at 78% 30%, color-mix(in oklab, var(--w-500) 26%, transparent), transparent 70%), radial-gradient(50rem 40rem at 12% 70%, color-mix(in oklab, var(--clay-500) 32%, transparent), transparent 70%)',
+            'radial-gradient(60rem 40rem at 78% 30%, color-mix(in oklab, var(--jade-500) 18%, transparent), transparent 72%)',
         }}
       />
 
@@ -253,7 +253,7 @@ export function Journey() {
                       <span className="min-w-0 flex-1">
                         <span
                           className={cx(
-                            'font-display block text-[1.05rem] leading-tight font-semibold transition-colors',
+                            'font-sans block text-[1rem] leading-tight font-semibold transition-colors',
                             active ? 'text-ink-inverse' : 'text-ink-inverse-muted group-hover:text-ink-inverse-soft',
                           )}
                         >

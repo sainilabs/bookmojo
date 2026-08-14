@@ -12,10 +12,10 @@ import { cx, formatName } from '@/lib/utils';
  * STORY WORLDS
  * -----------------------------------------------------------------------------
  * The strategic idea: every card renders the SAME child — theirs, with the skin
- * tone and hair they picked upstairs — in six different worlds.
+ * tone and hair they picked upstairs — in nine different worlds.
  *
  * A generic catalogue asks the visitor to imagine the personalisation. This
- * shows it six times over, which turns browsing into a second wave of the same
+ * shows it nine times over, which turns browsing into a second wave of the same
  * emotional payoff that drove the preview. It also quietly proves the artwork is
  * genuinely generated rather than a stock cover with a name plate on it.
  *
@@ -43,15 +43,15 @@ export function Themes() {
         <SectionHeading
           eyebrow={
             <>
-              <BookGlyph size={14} /> Six original worlds
+              <BookGlyph size={14} /> Nine original worlds
             </>
           }
           title={
             isPersonalised ? (
               <>
-                Six stories. Same hero:
+                Nine stories. Same hero:
                 <br />
-                <span className="quill">{name}</span>.
+                <span className="text-verdant-500">{name}</span>.
               </>
             ) : (
               <>
