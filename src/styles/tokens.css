@@ -51,22 +51,22 @@
      field, very dark cool text, and tinted blocks that group related content.
      Tinting the entire page is the flatter option — it lowers text contrast
      everywhere at once and leaves panels with nowhere left to go. */
-  --s-paper: #fbfdfc; /* near-white field, faintest cool cast */
+  --s-paper: #ffffff; /* clean white field */
   --s-raised: #ffffff; /* cards: a crisp sheet laid on the field */
-  --s-sunken: #eef7f4; /* tinted panels and bands — the colour lives here */
-  --s-inset: #e0efeb; /* wells, chips, unselected controls */
-  --s-inverse: #0e3e36; /* deep jade — the luxury depth note, kept */
+  --s-sunken: #f7fafc; /* cool neutral panels and bands */
+  --s-inset: #edf4fb; /* pale blue wells, chips, unselected controls */
+  --s-inverse: #25213f; /* deep purple-blue for contrast bands */
 
   /* Content — a dark, cool, desaturated slate rather than a warm black or a
      pure #000. High-contrast cool text on a near-white field is the single
      biggest contributor to a "clean and expensive" impression; warm ink on
      white goes slightly muddy, and #000 goes harsh. */
-  --c-ink: #17262c;
-  --c-ink-soft: #3e4e54;
+  --c-ink: #0b0d0c;
+  --c-ink-soft: #5e6260;
   /* Smallest permitted body colour. Tuned against the INSET surface, not paper:
      muted text sits on all three, and inset is the tightest constraint. */
-  --c-ink-muted: #5b6d73;
-  --c-ink-inverse: #f4faf8;
+  --c-ink-muted: #686d6a;
+  --c-ink-inverse: #ffffff;
 
   /* CONTENT ON THE INVERSE SURFACE.
      Replaces the hard-coded `text-white/70` family, which was the dark-mode bug:
@@ -78,19 +78,18 @@
      surface yields 8.7:1; the identical mix against a near-white surface yields
      3.6:1. One ratio cannot serve both directions, and a 97%-light surface
      simply has less room for a three-step ladder than a 15%-light one. */
-  --c-inverse-soft: #d5dedb; /* 8.6:1 on the dark jade surface */
-  --c-inverse-muted: #a8b5b1; /* 5.5:1 */
-  --l-inverse-line: rgb(244 250 248 / 0.16);
-  --s-inverse-raised: rgb(244 250 248 / 0.08);
-  --s-inverse-hover: rgb(244 250 248 / 0.15);
+  --c-inverse-soft: #e5e9e7;
+  --c-inverse-muted: #b7bfbb;
+  --l-inverse-line: rgb(255 255 255 / 0.16);
+  --s-inverse-raised: rgb(255 255 255 / 0.08);
+  --s-inverse-hover: rgb(255 255 255 / 0.15);
 
   /* Lines & separation — re-derived against the near-white field. On a crisp
      layout the hairline is doing structural work that shadows used to do, so it
      needs to be visible rather than merely present. */
-  --l-hairline: #dfeae7;
-  --l-strong: #c2d6d1;
-  --l-focus: #96690f; /* brass: off-hue from jade and visible on pale surfaces.
-                         Tracks --gold-600 by design; change both or neither. */
+  --l-hairline: #e5e9e7;
+  --l-strong: #cdd5d1;
+  --l-focus: #176bc1;
 
   /* Brass — the luxury and gifting note.
      A MUTED brass (#be9245), not a bright yellow-gold. Saturated gold reads
@@ -109,26 +108,26 @@
      4.28:1 → 4.76:1, so it now clears AA for body text too, not just display.
      Night is untouched: on a near-black field 300 is the accent step, and a 90%
      saturated gold there would glare rather than gild. */
-  --gold-50: #faf3e1;
-  --gold-100: #f1e2b4;
-  --gold-300: #dcbe76;
-  --gold-500: #be9245;
-  --gold-600: #96690f;
-  --gold-700: #6f5117;
+  --gold-50: #f7f1ff;
+  --gold-100: #eadcff;
+  --gold-300: #bd96eb;
+  --gold-500: #9258cf;
+  --gold-600: #7739b7;
+  --gold-700: #5d298f;
 
   /* Jade / eau de nil — the brand hue, held at ~170°.
      300 is the decorative tint: hero grid, blurred fields, soft rules. 500 and
      above are the ink-weight steps for icons and small text. Nothing in this
      family is ever used as a button fill — that region belongs to verdant. */
-  --jade-50: #d7ebe7;
-  --jade-100: #bbdcd6;
-  --jade-300: #7fb3a9;
+  --jade-50: #eaf3ff;
+  --jade-100: #d8eaff;
+  --jade-300: #82b7eb;
   /* 500 is darkened past its "natural" midpoint so the step is safe for small
      text on paper (4.5:1). A scale step that cannot legally hold text is a trap
      left in the system for the next person. */
-  --jade-500: #35726a;
-  --jade-600: #2b625b;
-  --jade-700: #1d4741;
+  --jade-500: #2478ca;
+  --jade-600: #176bc1;
+  --jade-700: #115292;
 
   /* Verdant — the brand green, and the WhatsApp channel. One family, both jobs.
 
@@ -155,21 +154,21 @@
        · 700 (#0d6b2d) — 6.51:1. Button hover and active.
      Filling the button with 500 because it matches the headline exactly is the
      trade that puts the CTA label at 3.23:1. Do not make it. */
-  --w-50: #e8f8ee;
-  --w-300: #4ade80;
-  --w-500: #16a34a;
-  --w-600: #118639;
-  --w-700: #0d6b2d;
+  --w-50: #f0f8e8;
+  --w-300: #9bd867;
+  --w-500: #69bd28;
+  --w-600: #477f16;
+  --w-700: #35650f;
 
   /* Elevation: jade-tinted, low-spread. A neutral black shadow on eau de nil
      goes grey and muddy; tinting it toward the surface hue keeps it looking like
      light falling on paper rather than dirt under an element. */
-  --e-1: 0 1px 2px -1px rgb(16 46 42 / 0.1), 0 1px 3px rgb(16 46 42 / 0.06);
-  --e-2: 0 2px 4px -2px rgb(16 46 42 / 0.1), 0 6px 14px -4px rgb(16 46 42 / 0.1);
-  --e-3: 0 4px 8px -4px rgb(16 46 42 / 0.12), 0 16px 32px -12px rgb(16 46 42 / 0.16);
-  --e-4: 0 8px 16px -8px rgb(16 46 42 / 0.14), 0 32px 64px -24px rgb(16 46 42 / 0.2);
-  --e-book: 0 2px 4px rgb(16 46 42 / 0.14), 0 18px 30px -14px rgb(16 46 42 / 0.3),
-    0 40px 70px -30px rgb(16 46 42 / 0.26);
+  --e-1: 0 1px 2px -1px rgb(37 33 63 / 0.1), 0 1px 3px rgb(37 33 63 / 0.06);
+  --e-2: 0 2px 4px -2px rgb(37 33 63 / 0.1), 0 6px 14px -4px rgb(37 33 63 / 0.1);
+  --e-3: 0 4px 8px -4px rgb(37 33 63 / 0.12), 0 16px 32px -12px rgb(37 33 63 / 0.14);
+  --e-4: 0 8px 16px -8px rgb(37 33 63 / 0.14), 0 32px 64px -24px rgb(37 33 63 / 0.18);
+  --e-book: 0 2px 4px rgb(37 33 63 / 0.14), 0 18px 30px -14px rgb(37 33 63 / 0.28),
+    0 40px 70px -30px rgb(37 33 63 / 0.22);
 
   /* =========================================================================
      GLASS MATERIAL
@@ -194,8 +193,8 @@
   --glass-blur: 22px;
   --glass-saturate: 180%;
   --glass-highlight: rgb(255 255 255 / 0.85);
-  --glass-lowlight: rgb(16 46 42 / 0.12);
-  --glass-ring: rgb(16 46 42 / 0.07);
+  --glass-lowlight: rgb(37 33 63 / 0.12);
+  --glass-ring: rgb(37 33 63 / 0.07);
   --glass-sheen: rgb(255 255 255 / 0.2);
 
   /* Chat surface tokens — WhatsApp's own visual language, kept in tokens so the
@@ -217,6 +216,8 @@
      page into brand illustration, which is the opposite of what it is for. These
      stay on WhatsApp's palette even when ours moves. */
   --chat-accent: #0b7c43;
+  --chat-line: rgb(20 35 28 / 0.14);
+  --chat-muted-fill: rgb(20 35 28 / 0.15);
   /* Filled controls inside the chat need their own pair. The accent above is
      tuned for icons and text ON a bubble; reusing it as a button fill would put
      white text on a light green in Bedtime. WhatsApp itself does this — a dark
@@ -238,58 +239,58 @@
      neutral charcoal, so switching theme changes the light, not the brand. */
   /* Chroma is raised here too. A near-neutral dark surface reads as "app grey"
      and would throw away the brand hue in the theme parents actually browse in. */
-  --s-paper: #0c1a17;
-  --s-raised: #132521;
-  --s-sunken: #070f0d;
-  --s-inset: #1b2f2a;
+  --s-paper: #14121f;
+  --s-raised: #1d1a2d;
+  --s-sunken: #0c0b14;
+  --s-inset: #29253d;
   /* In Bedtime the inverse surface is the LIGHT one, so it tracks the daylight
      field. Left at the old tinted value it would have shipped as a stale colour
      nobody could trace back to a decision. */
-  --s-inverse: #fbfdfc;
+  --s-inverse: #ffffff;
 
-  --c-ink: #e9f3f1;
-  --c-ink-soft: #bac9c6;
-  --c-ink-muted: #8a9b97;
-  --c-ink-inverse: #0c1a17;
+  --c-ink: #f4f6f5;
+  --c-ink-soft: #c6cbc8;
+  --c-ink-muted: #969d99;
+  --c-ink-inverse: #0b0d0c;
 
   /* In Bedtime the inverse surface is the light one, so this ladder mirrors the
      daylight ink ladder — which is already proven against exactly this colour. */
-  --c-inverse-soft: #3e4e54;
-  --c-inverse-muted: #5b6d73;
-  --l-inverse-line: rgb(12 26 23 / 0.14);
-  --s-inverse-raised: rgb(12 26 23 / 0.05);
-  --s-inverse-hover: rgb(12 26 23 / 0.1);
+  --c-inverse-soft: #5e6260;
+  --c-inverse-muted: #737775;
+  --l-inverse-line: rgb(11 13 12 / 0.14);
+  --s-inverse-raised: rgb(11 13 12 / 0.05);
+  --s-inverse-hover: rgb(11 13 12 / 0.1);
 
-  --l-hairline: #22332f;
-  --l-strong: #354a45;
-  --l-focus: #dcbe76; /* brass reads unmistakably on a dark surface */
+  --l-hairline: #312d46;
+  --l-strong: #494461;
+  --l-focus: #82b7eb;
 
   /* Bedtime raises both brass lightness and chroma so the accent remains clean
      instead of going muddy against a near-black surface. */
-  --gold-50: #2a2010;
-  --gold-100: #3c2e15;
-  --gold-300: #c9a25c;
-  --gold-500: #dfbb77;
-  --gold-600: #ecd39d;
-  --gold-700: #f6e8c7;
+  --gold-50: #271735;
+  --gold-100: #3b2052;
+  --gold-300: #bd96eb;
+  --gold-500: #cfaff2;
+  --gold-600: #dec9f7;
+  --gold-700: #eee3fb;
 
-  --jade-50: #14231f;
-  --jade-100: #1d3129;
-  --jade-300: #7faea5;
-  --jade-500: #9bc7bf;
-  --jade-600: #badad4;
-  --jade-700: #d8eae6;
+  --jade-50: #111f2e;
+  --jade-100: #172b40;
+  --jade-300: #82b7eb;
+  --jade-500: #9bc9f2;
+  --jade-600: #bdddf8;
+  --jade-700: #deedfb;
 
   /* Bedtime inverts the ladder. On a near-black field the DARK end of a green
      scale is the unusable one, so every step lightens and the order of usefulness
      flips: 500 is now bright enough to carry dark ink as a button fill (9.6:1),
      and the large-text-only caveat that governs 500 in daylight does not apply
      here at all — it sits above 10:1 as text. Hue tracks daylight at 142°. */
-  --w-50: #0b2c17;
-  --w-300: #3ab866;
-  --w-500: #4ade80;
-  --w-600: #6ee79a;
-  --w-700: #a7f3c0;
+  --w-50: #1a2b0e;
+  --w-300: #79c63d;
+  --w-500: #8bd250;
+  --w-600: #a6df76;
+  --w-700: #c7edaa;
 
   --e-1: 0 1px 2px rgb(0 0 0 / 0.4);
   --e-2: 0 2px 6px rgb(0 0 0 / 0.45), 0 8px 18px -6px rgb(0 0 0 / 0.5);
@@ -318,6 +319,8 @@
   --chat-out-ink: #e9edef;
   --chat-header: #202c33;
   --chat-accent: #46d17f;
+  --chat-line: rgb(233 237 239 / 0.16);
+  --chat-muted-fill: rgb(233 237 239 / 0.2);
   --chat-btn: #00a884;
   --chat-btn-ink: #04231a;
 }

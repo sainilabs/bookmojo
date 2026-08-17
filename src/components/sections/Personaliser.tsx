@@ -107,7 +107,7 @@ export function Personaliser() {
           {/* ------------------------------ CONTROLS ------------------------ */}
           <Reveal y={24} className="order-2 lg:order-1">
             <div className="flex items-center justify-between gap-4 border-b border-hairline pb-4">
-              <p className="eyebrow !text-ink">Your choices</p>
+              <p className="eyebrow eyebrow-green">Your choices</p>
               <div className="flex items-center gap-3">
                 <span className="text-small font-semibold tabular-nums text-ink-muted">
                   {done} of 5
@@ -214,7 +214,7 @@ export function Personaliser() {
               </fieldset>
 
               <div className="flex flex-col gap-5">
-                <p className="eyebrow">5 · What they look like</p>
+                <p className="eyebrow eyebrow-purple">5 · What they look like</p>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <ChoiceGroup
                     legend="Skin tone"

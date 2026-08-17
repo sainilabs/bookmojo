@@ -1,6 +1,5 @@
 import { Container, Reveal } from '@/components/ui/Layout';
 import { OrderButton } from '@/components/ui/Button';
-import { Rating } from '@/components/ui/Rating';
 import { Typewriter } from '@/components/ui/Typewriter';
 import { BookBuild } from '@/components/art/BookBuild';
 import { ArrowDown, Camera, Clock, Lock } from '@/components/art/Icons';
@@ -77,31 +76,6 @@ export function Hero() {
         <div className="grid items-center gap-14 mdlg:grid-cols-[1.05fr_0.95fr] mdlg:gap-8 3xl:gap-20">
           {/* ---------------------------------------------------------------- */}
           <div className="max-w-[38rem] mdlg:max-w-none">
-            {/* Positioning pill, then proof. Two rows, not one, because they are
-                two different arguments: the pill says what category we are in, the
-                rating says whether we are any good at it. Run together on a single
-                line they compete, and the stars — the more persuasive of the two —
-                lose. The live dot is the only piece of pure decoration here; it
-                reads as "this is an operating business", which for a page asking
-                for prepayment is worth its two pixels. */}
-            <Reveal y={14} className="flex flex-col items-start gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-hairline bg-raised px-3 py-1.5 text-[0.78rem] font-semibold text-ink-soft shadow-e1">
-                <span
-                  aria-hidden="true"
-                  className="inline-block size-1.5 animate-pulse rounded-full bg-verdant-500"
-                />
-                India’s personalised storybook studio
-              </span>
-
-              <span className="inline-flex flex-wrap items-center gap-x-4 gap-y-2">
-                <Rating count={PROOF.reviewCount} />
-                <span className="hidden h-4 w-px bg-strong sm:block" />
-                <span className="text-small font-semibold text-ink-soft">
-                  {PROOF.booksDeliveredLabel} books on shelves across India
-                </span>
-              </span>
-            </Reveal>
-
             {/* "The gift where…", not "Tonight,…". The old opener promised same-night
                 delivery of a physical hardcover that takes 5–7 days to print and
                 2–3 more to ship — the page contradicted itself in its own first
@@ -112,7 +86,7 @@ export function Hero() {
                 The accent phrase is held on one line; at this measure it used to
                 split "your child" across a break, which read as an accident
                 rather than as emphasis. */}
-            <Reveal y={22} delay={80} as="h1" className="mt-6 max-w-[18ch] text-display-1">
+            <Reveal y={22} delay={80} as="h1" className="max-w-[18ch] text-display-1">
               The gift where{' '}
               {/* 500 is the display step: 3.23:1, legal here because this is
                   display-1 and nowhere near body size. The sub-line below uses 600
@@ -193,7 +167,7 @@ export function Hero() {
                 onSubmit={(e) => e.preventDefault()}
                 className="flex max-w-[30rem] flex-col gap-3 sm:flex-row"
               >
-                <div className="relative flex-1">
+                <div className="hero-name-glow relative flex-1">
                   <label htmlFor="hero-name" className="sr-only">
                     Your child’s first name
                   </label>
@@ -206,7 +180,7 @@ export function Hero() {
                     maxLength={20}
                     autoComplete="off"
                     spellCheck={false}
-                    className="h-14 w-full rounded-md border border-strong bg-raised px-4 text-[1.05rem] font-medium shadow-e1 outline-none transition-colors placeholder:font-normal placeholder:text-ink-muted/60 hover:border-ink/40 focus:border-gold-500"
+                    className="relative z-10 h-14 w-full rounded-md border border-strong bg-raised px-4 text-[1.05rem] font-medium shadow-e1 outline-none transition-colors placeholder:font-normal placeholder:text-ink-muted/60 hover:border-ink/40 focus:border-gold-500"
                   />
                 </div>
                 <OrderButton

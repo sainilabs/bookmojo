@@ -56,7 +56,7 @@ export function FinalCta() {
       <Container className="relative">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
-            <Reveal y={14} className="eyebrow !text-ink-inverse-muted">
+            <Reveal y={14} className="eyebrow">
               One conversation away
             </Reveal>
 

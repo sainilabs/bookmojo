@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { Container } from '@/components/ui/Layout';
 import { OrderButton } from '@/components/ui/Button';
 import { Logo } from '@/components/art/Brand';
-import { Close, Menu, Moon, Sun } from '@/components/art/Icons';
+import { Close, Gift, Menu, Moon, Sun } from '@/components/art/Icons';
 import { ANNOUNCEMENT, NAV_LINKS, PROOF } from '@/lib/config';
 import { useTheme } from '@/hooks/useTheme';
 import { useEscape, useScrollLock, useScrolledPast, useScrollSpy } from '@/hooks/useUi';
@@ -67,19 +67,21 @@ export function Navbar() {
             still welded to the top of the viewport would fight that. So the strip
             is a greeting, shown once, and then it gets out of the way.
 
-            bg-inverse (deep jade), not verdant. Verdant is reserved for the
-            WhatsApp channel across the entire site — spending it on a decorative
-            band would make the one colour that means "this is the order button"
-            mean nothing. */}
+            The lavender-blue surface separates the offer from the green ordering
+            action, while the rail keeps the promotion visible without making the
+            navigation itself busier. */}
         <div
           className={cx(
-            'overflow-hidden bg-inverse transition-all duration-[380ms] ease-[var(--ease-spring)]',
+            'overflow-hidden border-b border-[#c7caeb] bg-[#d9dcf5] transition-all duration-[380ms] ease-[var(--ease-spring)]',
             condensed ? 'h-0 opacity-0' : 'h-9 opacity-100',
           )}
         >
-          <p className="flex h-9 items-center justify-center px-4 text-center text-[0.78rem] font-medium text-ink-inverse-soft">
-            <span className="truncate">{ANNOUNCEMENT}</span>
-          </p>
+          <div className="relative h-9 text-[#352f64]">
+            <p className="announcement-offer absolute inset-y-0 left-0 flex items-center gap-2.5 whitespace-nowrap text-[0.78rem] font-bold uppercase tracking-[0.08em]">
+              <Gift aria-hidden="true" className="size-4 text-[#7772bd]" />
+              <span>{ANNOUNCEMENT}</span>
+            </p>
+          </div>
         </div>
 
         <Container>

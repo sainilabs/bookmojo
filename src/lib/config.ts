@@ -34,7 +34,7 @@ export const BRAND = {
  *  festive cutoffs, a pause on orders — and none of that should require opening
  *  a component. */
 export const ANNOUNCEMENT =
-  'Written, illustrated and printed in India — delivered to 19,000+ PIN codes.';
+  '70% OFF on personalised storybooks';
 
 export const PROOF = {
   booksDelivered: 41_820,

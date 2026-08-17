@@ -130,14 +130,14 @@ export function PhoneFrame({
           {/* Composer. Non-interactive by design: this is a depiction, and a
               fake input that swallowed keystrokes would be a usability trap. */}
           <div
-            className="flex items-center gap-2 border-t border-black/10 px-3 py-2.5"
+            className="flex items-center gap-2 border-t border-[var(--chat-line)] px-3 py-2.5"
             style={{ background: 'var(--chat-canvas)' }}
             aria-hidden="true"
           >
             <span className="flex h-9 flex-1 items-center rounded-full bg-[var(--chat-in)] px-3.5 text-[0.74rem] text-[var(--chat-in-ink)] opacity-45">
               Message
             </span>
-            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#0b7c43] text-white">
+            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[var(--chat-btn)] text-[var(--chat-btn-ink)]">
               <svg viewBox="0 0 24 24" className="size-4" fill="currentColor">
                 <path d="M3 20.5l18-8.5L3 3.5l3.6 7.1L15 12l-8.4 1.4z" />
               </svg>

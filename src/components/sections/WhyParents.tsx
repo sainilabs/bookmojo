@@ -55,7 +55,7 @@ export function WhyParents() {
                 }}
               />
               <div className="relative">
-                <span className="eyebrow !text-ink-inverse-muted">
+                <span className="eyebrow">
                   <Sparkle size={14} /> The whole idea
                 </span>
                 <h3 className="mt-5 max-w-[24ch] text-display-3">

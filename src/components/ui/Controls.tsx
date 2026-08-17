@@ -120,8 +120,8 @@ export function ChoiceGroup<T extends string>({
                     'flex min-h-11 flex-col items-center justify-center rounded-md px-3 py-2 text-center transition-all duration-200',
                     'ring-offset-2 ring-offset-raised peer-focus-visible:ring-2 peer-focus-visible:ring-gold-500',
                     selected
-                      ? 'bg-inverse text-ink-inverse shadow-e2 font-semibold'
-                      : 'bg-inset text-ink-soft hover:bg-strong/25 hover:text-ink',
+                      ? 'border border-gold-300 bg-gold-50 text-gold-700 shadow-e1 font-semibold'
+                      : 'border border-transparent bg-inset text-ink-soft hover:border-jade-300 hover:bg-jade-50 hover:text-jade-700',
                   )}
                 >
                   <span className="text-small leading-tight font-semibold">{option.label}</span>
@@ -129,7 +129,7 @@ export function ChoiceGroup<T extends string>({
                     <span
                       className={cx(
                         'text-[0.68rem] leading-tight',
-                        selected ? 'opacity-70' : 'text-ink-muted',
+                        selected ? 'text-gold-700/75' : 'text-ink-muted',
                       )}
                     >
                       {option.hint}

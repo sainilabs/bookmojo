@@ -63,7 +63,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
     case 'summary':
       return (
         <div className="w-[88%] self-start overflow-hidden rounded-xl bg-[var(--chat-in)] text-[var(--chat-in-ink)] shadow-sm">
-          <div className="flex items-center justify-between bg-black/[0.055] px-3 py-2">
+          <div className="flex items-center justify-between bg-[var(--chat-muted-fill)] px-3 py-2">
             <span className="text-[0.62rem] font-bold tracking-[0.1em] uppercase opacity-70">
               Your book
             </span>
@@ -90,8 +90,8 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
        gets the most explicit artefact on the page. */
     case 'payment':
       return (
-        <div className="w-[88%] self-start overflow-hidden rounded-xl border border-black/10 bg-[var(--chat-in)] text-[var(--chat-in-ink)] shadow-sm">
-          <div className="flex items-center gap-2 border-b border-black/[0.08] px-3 py-2">
+        <div className="w-[88%] self-start overflow-hidden rounded-xl border border-[var(--chat-line)] bg-[var(--chat-in)] text-[var(--chat-in-ink)] shadow-sm">
+          <div className="flex items-center gap-2 border-b border-[var(--chat-line)] px-3 py-2">
             <Lock size={14} className="text-[var(--chat-accent)]" />
             <span className="text-[0.68rem] font-bold">Secure checkout link</span>
             <span className="ml-auto text-[0.6rem] opacity-55">expires in 30 min</span>
@@ -105,7 +105,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
               {msg.methods.map((method) => (
                 <span
                   key={method}
-                  className="rounded-md border border-black/10 bg-black/[0.03] px-2 py-1 text-[0.65rem] font-semibold"
+                  className="rounded-md border border-[var(--chat-line)] bg-[var(--chat-muted-fill)] px-2 py-1 text-[0.65rem] font-semibold"
                 >
                   {method}
                 </span>
@@ -155,15 +155,17 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                       'mt-1 size-2.5 shrink-0 rounded-full',
                       step.state === 'done' && 'bg-[var(--chat-accent)]',
                       step.state === 'active' &&
-                        'bg-[var(--gold-500)] ring-3 ring-[#e08a2e]/25 animate-pulse',
-                      step.state === 'todo' && 'bg-black/15',
+                        'bg-[var(--gold-500)] ring-3 ring-[var(--gold-500)]/25 animate-pulse',
+                      step.state === 'todo' && 'bg-[var(--chat-muted-fill)]',
                     )}
                   />
                   {i < msg.steps.length - 1 && (
                     <span
                       className={cx(
                         'w-px flex-1',
-                        step.state === 'done' ? 'bg-[var(--chat-accent)]/40' : 'bg-black/12',
+                        step.state === 'done'
+                          ? 'bg-[var(--chat-accent)]/40'
+                          : 'bg-[var(--chat-line)]',
                       )}
                     />
                   )}
@@ -190,7 +192,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
     case 'shipment':
       return (
         <div className="w-[88%] self-start overflow-hidden rounded-xl bg-[var(--chat-in)] text-[var(--chat-in-ink)] shadow-sm">
-          <div className="flex items-center gap-2.5 border-b border-black/[0.08] px-3 py-2">
+          <div className="flex items-center gap-2.5 border-b border-[var(--chat-line)] px-3 py-2">
             <Truck size={15} className="text-[var(--chat-accent)]" />
             <span className="text-[0.7rem] font-bold">{msg.courier}</span>
             <span className="ml-auto font-mono text-[0.62rem] opacity-60">{msg.code}</span>
@@ -202,7 +204,7 @@ export function ChatMessage({ msg, delivered = true }: { msg: Msg; delivered?: b
                   key={s}
                   className={cx(
                     'h-1.5 flex-1 rounded-full',
-                    i < 4 ? 'bg-[var(--chat-accent)]' : 'bg-black/12',
+                    i < 4 ? 'bg-[var(--chat-accent)]' : 'bg-[var(--chat-muted-fill)]',
                   )}
                 />
               ))}

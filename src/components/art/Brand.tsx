@@ -14,7 +14,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
     <span className="inline-flex items-center gap-2.5">
       <span
         aria-hidden="true"
-        className="relative grid size-9 shrink-0 place-items-center rounded-[0.7rem] bg-inverse text-ink-inverse ring-1 ring-gold-500/30"
+        className="relative grid size-9 shrink-0 place-items-center rounded-[0.7rem] bg-verdant-500 text-white ring-1 ring-verdant-600/25"
       >
         <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
           {/* Book gutter */}

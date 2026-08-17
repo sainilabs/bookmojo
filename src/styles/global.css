@@ -5,6 +5,12 @@
    avoids the flash-of-wrong-theme that a React-mounted toggle would cause. */
 @custom-variant night (&:where([data-theme='night'], [data-theme='night'] *));
 
+@property --hero-glow-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 /* =============================================================================
    BASE
 ============================================================================= */
@@ -202,6 +208,28 @@
    so a design change is one edit, not a find-and-replace across 40 files.
 ============================================================================= */
 @layer components {
+  .announcement-offer {
+    animation: announcement-offer-slide 28s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes announcement-offer-slide {
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+    to {
+      transform: translate3d(100vw, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-offer {
+      position: static;
+      justify-content: center;
+      animation: none;
+    }
+  }
+
   /* ---- Actions ------------------------------------------------------------ */
   .btn {
     display: inline-flex;
@@ -537,14 +565,31 @@
 
   /* ---- Type helpers ------------------------------------------------------ */
   .eyebrow {
+    --eyebrow-accent: var(--jade-500);
+    --eyebrow-ink: var(--jade-700);
+    --eyebrow-tint: var(--jade-50);
+
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    width: fit-content;
     font-size: var(--text-micro);
     font-weight: 700;
-    letter-spacing: 0.12em;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--c-ink-muted);
+    color: var(--eyebrow-ink);
+  }
+
+  .eyebrow-green {
+    --eyebrow-accent: var(--w-500);
+    --eyebrow-ink: var(--w-700);
+    --eyebrow-tint: var(--w-50);
+  }
+
+  .eyebrow-purple {
+    --eyebrow-accent: var(--gold-500);
+    --eyebrow-ink: var(--gold-700);
+    --eyebrow-tint: var(--gold-50);
   }
 
   /* Eyebrows are navigational labels, not illustration slots. Section-level
@@ -552,6 +597,44 @@
      remain visible. */
   .eyebrow > svg {
     display: none;
+  }
+
+  .hero-name-glow::after {
+    position: absolute;
+    inset: -1px;
+    z-index: 0;
+    border-radius: 0.65rem;
+    content: '';
+    pointer-events: none;
+  }
+
+  .hero-name-glow::after {
+    padding: 1px;
+    background: conic-gradient(
+      from var(--hero-glow-angle),
+      transparent 0deg 272deg,
+      color-mix(in srgb, var(--gold-500) 30%, transparent) 294deg,
+      var(--gold-500) 314deg,
+      var(--jade-500) 338deg,
+      transparent 360deg
+    );
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--gold-500) 45%, transparent))
+      drop-shadow(0 0 5px color-mix(in srgb, var(--jade-500) 25%, transparent));
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    animation: hero-name-border-spin 3.6s linear infinite;
+  }
+
+  @keyframes hero-name-border-spin {
+    to {
+      --hero-glow-angle: 1turn;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-name-glow::after {
+      animation: none;
+      background: linear-gradient(110deg, var(--gold-500), var(--jade-500));
+    }
   }
 
   /* ---- Section framing --------------------------------------------------- */

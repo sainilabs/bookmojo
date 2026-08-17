@@ -86,7 +86,7 @@ export const HAIR_STYLES: ReadonlyArray<{ id: HairId; label: string }> = [
  * ORDER IS COMMERCIAL, NOT CHRONOLOGICAL. The first three — police officer,
  * doctor, engineer — lead because those are the three answers an Indian parent
  * has already heard from their own child, and the hero rotates roles in this
- * order. A stargazer is a lovelier idea; a doctor is the one that makes a parent
+ * order. A scientist is a lovelier idea; a doctor is the one that makes a parent
  * stop scrolling. The literary six that follow are what makes the product worth
  * buying once they have stopped.
  *
@@ -160,7 +160,7 @@ export const THEMES: readonly StoryTheme[] = [
     id: 'chandni',
     name: 'The Night the Terrace Grew Stars',
     promise: 'For the child who does not want the day to end',
-    role: 'a stargazer.',
+    role: 'a scientist.',
     blurb:
       'A hot April night on the terrace, a charpai still warm from the afternoon, and a sky that turns out to have been keeping count of everyone who has ever been loved.',
     ages: ['2-3', '4-5'],

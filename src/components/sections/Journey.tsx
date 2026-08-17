@@ -143,7 +143,20 @@ export function Journey() {
   return (
     /* overflow-x-clip rather than overflow-hidden: `hidden` would make this
        section a scroll container and break the sticky phone column. */
-    <Section id="journey" tone="inverse" space="grand" className="overflow-x-clip">
+    <Section
+      id="journey"
+      tone="inverse"
+      space="grand"
+      className="overflow-x-clip before:hidden [--color-ink-inverse-muted:#5e5b73] [--color-ink-inverse-soft:#48465c] [--color-ink-inverse:#171426] [--color-inverse-hover:#665aa624] [--color-inverse-line:#51487938] [--color-inverse-raised:#ffffff94] [--color-inverse:#e2ddf4]"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-44 bg-gradient-to-b from-sunken via-sunken/55 to-transparent sm:h-56"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-28 bg-gradient-to-t from-paper to-transparent sm:h-36"
+      />
       {/* Inverse surface: this section is a night-time scene and the phone is
           the light source. It also creates the strongest possible break in the
           page rhythm at the exact point we need full attention. */}
@@ -160,7 +173,7 @@ export function Journey() {
         <div ref={sentinel} />
 
         <div className="max-w-[46rem]">
-          <Reveal y={12} className="eyebrow !text-ink-inverse-muted">
+          <Reveal y={12} className="eyebrow">
             <WhatsAppMark size={14} /> The ordering conversation
           </Reveal>
           <Reveal y={20} delay={70} as="h2" className="mt-4 text-display-2">
