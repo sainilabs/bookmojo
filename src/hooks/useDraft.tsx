@@ -31,9 +31,11 @@ const STORAGE_KEY = 'bookmojo:draft:v1';
 
 const DEFAULT_DRAFT: Draft = {
   childName: '',
+  gender: 'girl',
   age: '4-5',
   language: 'en',
   themeId: 'chandni',
+  bookFormat: 'hardcover',
   look: {
     skin: SKIN_TONES[2]!.hex,
     hair: HAIR_COLOURS[1]!.hex,

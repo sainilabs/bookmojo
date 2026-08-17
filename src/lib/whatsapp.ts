@@ -50,6 +50,7 @@ function draftLines(draft: Partial<Draft>): string[] {
   const lines: string[] = [];
   const name = draft.childName ? formatName(draft.childName) : '';
   if (name) lines.push(`• Child’s name: ${name}`);
+  if (draft.gender) lines.push(`• Gender: ${draft.gender === 'girl' ? 'Girl' : 'Boy'}`);
   if (draft.age) lines.push(`• Age: ${draft.age} years`);
   if (draft.language) {
     const lang = LANGUAGES.find((l) => l.code === draft.language);
@@ -58,6 +59,9 @@ function draftLines(draft: Partial<Draft>): string[] {
   if (draft.themeId) {
     const theme = THEMES.find((t) => t.id === draft.themeId);
     if (theme) lines.push(`• Story: ${theme.name}`);
+  }
+  if (draft.bookFormat) {
+    lines.push(`• Format: ${draft.bookFormat === 'hardcover' ? 'Hardcover' : 'Digital edition'}`);
   }
   if (draft.look) lines.push('• Character look: chosen in the preview');
   return lines;

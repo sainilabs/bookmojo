@@ -1,12 +1,9 @@
 import { Container, Reveal } from '@/components/ui/Layout';
-import { OrderButton } from '@/components/ui/Button';
+import { LinkButton, OrderButton } from '@/components/ui/Button';
 import { Typewriter } from '@/components/ui/Typewriter';
-import { BookBuild } from '@/components/art/BookBuild';
-import { ArrowDown, Camera, Clock, Lock } from '@/components/art/Icons';
+import { Clock, Lock } from '@/components/art/Icons';
 import { THEMES } from '@/data/catalogue';
-import { useDraft } from '@/hooks/useDraft';
 import { PROOF } from '@/lib/config';
-import { formatName, possessive } from '@/lib/utils';
 
 /** Derived, not hand-listed, so adding a seventh story to the catalogue puts its
  *  role in the hero automatically — and, more importantly, so the hero can never
@@ -40,14 +37,10 @@ const HERO_ROLES = THEMES.map((t) => t.role);
  *   The three shown are the three objections that block the first click: cost
  *   of committing, safety of paying in chat, and how long it takes.
  *
- * Performance: the LCP element is the headline text, not the illustration.
- * Everything visual here is inline SVG and CSS gradients — zero image requests
- * in the critical path, so LCP is bound by font swap alone.
+ * Performance: the hero product image is eagerly loaded because it appears in
+ * the first viewport and is a likely LCP candidate on wider screens.
  */
 export function Hero() {
-  const { draft, update, isPersonalised } = useDraft();
-  const name = formatName(draft.childName);
-
   return (
     // Top padding clears the fixed header AND the announcement strip above it
     // (h-9 bar + h-20 nav = 116px), so the badge is never tucked under either.
@@ -76,6 +69,12 @@ export function Hero() {
         <div className="grid items-center gap-14 mdlg:grid-cols-[1.05fr_0.95fr] mdlg:gap-8 3xl:gap-20">
           {/* ---------------------------------------------------------------- */}
           <div className="max-w-[38rem] mdlg:max-w-none">
+            <Reveal y={14} delay={40}>
+              <p className="mb-4 text-small font-bold tracking-[0.12em] text-verdant-600 uppercase night:text-verdant-500">
+                Personalised storybooks for children
+              </p>
+            </Reveal>
+
             {/* "The gift where…", not "Tonight,…". The old opener promised same-night
                 delivery of a physical hardcover that takes 5–7 days to print and
                 2–3 more to ship — the page contradicted itself in its own first
@@ -92,7 +91,7 @@ export function Hero() {
                   display-1 and nowhere near body size. The sub-line below uses 600
                   for exactly that reason. */}
               <span className="whitespace-nowrap text-verdant-500">
-                {isPersonalised ? name : 'your child'}
+                your child
               </span>{' '}
               is the hero.
             </Reveal>
@@ -152,7 +151,7 @@ export function Hero() {
                 narrow phone. Without a reserved box the paragraph would breathe in
                 and out and drag the name field and CTA with it on every rotation. */}
             <Reveal y={18} delay={160}>
-              <p className="mt-6 flex min-h-[3.3rem] max-w-[46ch] flex-wrap items-start gap-x-[0.4ch] text-lead font-medium text-ink sm:min-h-[1.95rem]">
+              <p className="mt-4 flex min-h-[3.3rem] max-w-[46ch] flex-wrap items-start gap-x-[0.4ch] text-lead font-medium text-ink sm:min-h-[1.95rem]">
                 <span>See your child become</span>
                 <Typewriter
                   phrases={HERO_ROLES}
@@ -161,49 +160,21 @@ export function Hero() {
               </p>
             </Reveal>
 
-            {/* One field. One result. */}
-            <Reveal y={18} delay={220} className="mt-8">
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="flex max-w-[30rem] flex-col gap-3 sm:flex-row"
-              >
-                <div className="hero-name-glow relative flex-1">
-                  <label htmlFor="hero-name" className="sr-only">
-                    Your child’s first name
-                  </label>
-                  <input
-                    id="hero-name"
-                    type="text"
-                    value={draft.childName}
-                    onChange={(e) => update({ childName: e.target.value })}
-                    placeholder="Type their name"
-                    maxLength={20}
-                    autoComplete="off"
-                    spellCheck={false}
-                    className="relative z-10 h-14 w-full rounded-md border border-strong bg-raised px-4 text-[1.05rem] font-medium shadow-e1 outline-none transition-colors placeholder:font-normal placeholder:text-ink-muted/60 hover:border-ink/40 focus:border-gold-500"
-                  />
-                </div>
-                <OrderButton
-                  intent="hero"
-                  label={isPersonalised ? `Make ${possessive(name)} book` : 'Start their book'}
-                  className="shrink-0"
-                />
-              </form>
-              <p className="mt-3 flex items-center gap-2 text-small text-ink-muted">
-                <span
-                  aria-hidden="true"
-                  className="inline-block size-1.5 animate-pulse rounded-full bg-verdant-500"
-                />
-                {isPersonalised
-                  ? 'Keep it, or design the whole book below.'
-                  : 'The cover updates as you type. Nothing is sent yet.'}
-              </p>
+            {/* Two explicit routes: self-serve on the site or assisted ordering
+                in WhatsApp. Personal details belong in the configurator below,
+                where their purpose and privacy terms can be explained. */}
+            <Reveal y={18} delay={220} className="mt-5">
+              <div className="flex max-w-[34rem] flex-col gap-3 sm:flex-row">
+                <LinkButton href="#create" variant="ink" size="lg" className="justify-center">
+                  Build your book
+                </LinkButton>
+                <OrderButton intent="hero" label="Order on WhatsApp" className="justify-center" />
+              </div>
             </Reveal>
 
             <Reveal y={16} delay={300}>
-              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-hairline pt-6">
+              <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
                 {[
-                  { icon: Camera, text: 'See it before you pay' },
                   { icon: Lock, text: 'UPI on a secure page' },
                   { icon: Clock, text: `Printed in ${PROOF.productionDays} days` },
                 ].map(({ icon: Icon, text }) => (
@@ -223,22 +194,16 @@ export function Hero() {
             scale={0.96}
             className="relative flex justify-center mdlg:justify-end"
           >
-            <BookBuild className="max-w-[26rem]" />
+            <img
+              src="/hero-book.png"
+              alt="A child holding a personalised Aman Scientist Dreams storybook"
+              width={1154}
+              height={1363}
+              fetchPriority="high"
+              className="h-auto w-full max-w-[31rem] object-contain"
+            />
           </Reveal>
         </div>
-
-        <Reveal y={12} delay={400} className="mt-10 flex justify-center mdlg:mt-12">
-          <a
-            href="#create"
-            className="btn btn-quiet group flex-col !gap-1 text-micro font-bold tracking-[0.14em] uppercase"
-          >
-            Design it yourself
-            <ArrowDown
-              size={18}
-              className="transition-transform duration-300 group-hover:translate-y-1"
-            />
-          </a>
-        </Reveal>
       </Container>
     </section>
   );

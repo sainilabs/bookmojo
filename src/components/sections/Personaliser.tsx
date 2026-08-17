@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container, Reveal, Section, SectionHeading } from '@/components/ui/Layout';
 import { ChoiceGroup, NameField, type Choice } from '@/components/ui/Controls';
 import { OrderButton } from '@/components/ui/Button';
 import { Pill } from '@/components/ui/Rating';
 import { Book3D } from '@/components/art/BookCover';
-import { Check, Sparkle } from '@/components/art/Icons';
+import { Camera, Check, Lock, Sparkle } from '@/components/art/Icons';
 import {
   AGE_BANDS,
   HAIR_COLOURS,
@@ -16,8 +16,9 @@ import {
   recommendedThemes,
 } from '@/data/catalogue';
 import { useDraft } from '@/hooks/useDraft';
-import { cx, formatName, possessive } from '@/lib/utils';
-import type { AgeBand, HairId, LanguageCode } from '@/types';
+import { PRICING, PROOF } from '@/lib/config';
+import { cx, formatINR, formatName, possessive } from '@/lib/utils';
+import type { AgeBand, BookFormat, ChildGender, HairId, LanguageCode } from '@/types';
 
 /**
  * INTERACTIVE PERSONALISATION PREVIEW
@@ -47,6 +48,8 @@ import type { AgeBand, HairId, LanguageCode } from '@/types';
  */
 export function Personaliser() {
   const { draft, update, updateLook, isPersonalised } = useDraft();
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const theme = THEME_BY_ID.get(draft.themeId) ?? THEMES[0]!;
   const name = formatName(draft.childName);
   const recommended = useMemo(() => recommendedThemes(draft.age), [draft.age]);
@@ -68,13 +71,45 @@ export function Personaliser() {
     label: style.label,
   }));
 
+  const genderOptions: Array<Choice<ChildGender>> = [
+    { value: 'girl', label: 'Girl' },
+    { value: 'boy', label: 'Boy' },
+  ];
+
+  const formatOptions: Array<Choice<BookFormat>> = [
+    {
+      value: 'hardcover',
+      label: `Hardcover · ${formatINR(PRICING.hardcover)}`,
+      hint: '210 × 250mm · gift box',
+    },
+    {
+      value: 'digital',
+      label: `Digital · ${formatINR(PRICING.digital)}`,
+      hint: 'Delivered to your phone',
+    },
+  ];
+
+  useEffect(
+    () => () => {
+      if (photoPreview) URL.revokeObjectURL(photoPreview);
+    },
+    [photoPreview],
+  );
+
+  const choosePhoto = (file: File | null) => {
+    setPhoto(file);
+    setPhotoPreview(file ? URL.createObjectURL(file) : null);
+  };
+
   /** Counts genuine choices, not steps walked past. */
   const done = [
     Boolean(name),
+    true, // gender always has a considered default
     true, // age always has a considered default
+    Boolean(photo),
     true, // language always has a considered default
     Boolean(draft.themeId),
-    true, // look always has a considered default
+    true, // format always has a considered default
   ].filter(Boolean).length;
 
   const opening = theme.opening.replaceAll('{name}', name || 'your child');
@@ -95,13 +130,31 @@ export function Personaliser() {
           }
           title={
             <>
-              Build the cover now.
+              Create their storybook here.
               <br />
-              Decide about buying later.
+              Order only when it feels right.
             </>
           }
-          deck="Five choices, no sign-up. One tap carries them into WhatsApp and we pick up from there."
+          deck="Add your child’s details in under two minutes, preview the book, then continue your completed order on WhatsApp."
         />
+
+        <Reveal y={16} className="mx-auto mt-8 max-w-[60rem]">
+          <div className="flex flex-col justify-between gap-4 border-y border-hairline py-5 sm:flex-row sm:items-center">
+            <div>
+              <p className="font-semibold text-ink">Personalised Storybook for Kids · Ages 2–12</p>
+              <p className="mt-1 text-small text-ink-muted">
+                Child’s name, appearance and chosen story woven through every page
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-small">
+              <strong className="text-lg text-ink">From {formatINR(PRICING.digital)}</strong>
+              <span className="font-semibold text-verdant-600">Free hardcover shipping</span>
+              <span className="text-ink-muted">
+                {PROOF.rating} ★ · {PROOF.reviewCount.toLocaleString('en-IN')} reviews
+              </span>
+            </div>
+          </div>
+        </Reveal>
 
         <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-16 3xl:gap-24">
           {/* ------------------------------ CONTROLS ------------------------ */}
@@ -110,19 +163,19 @@ export function Personaliser() {
               <p className="eyebrow eyebrow-green">Your choices</p>
               <div className="flex items-center gap-3">
                 <span className="text-small font-semibold tabular-nums text-ink-muted">
-                  {done} of 5
+                  {done} of 7
                 </span>
                 <div
                   className="h-1.5 w-24 overflow-hidden rounded-full bg-inset"
                   role="progressbar"
                   aria-valuenow={done}
                   aria-valuemin={0}
-                  aria-valuemax={5}
+                  aria-valuemax={7}
                   aria-label="Personalisation progress"
                 >
                   <div
                     className="h-full rounded-full bg-verdant-500 transition-[width] duration-500 ease-[var(--ease-spring)]"
-                    style={{ width: `${(done / 5) * 100}%` }}
+                    style={{ width: `${(done / 7) * 100}%` }}
                   />
                 </div>
               </div>
@@ -138,7 +191,15 @@ export function Personaliser() {
               />
 
               <ChoiceGroup
-                legend="2 · Age"
+                legend="2 · Gender"
+                options={genderOptions}
+                value={draft.gender}
+                onChange={(gender) => update({ gender })}
+                columns={2}
+              />
+
+              <ChoiceGroup
+                legend="3 · Current age"
                 options={ageOptions}
                 value={draft.age}
                 onChange={(age) => update({ age })}
@@ -146,8 +207,51 @@ export function Personaliser() {
                 note={AGE_BANDS.find((b) => b.id === draft.age)?.note}
               />
 
+              <div className="flex flex-col gap-2">
+                <p className="eyebrow">4 · Upload child photo</p>
+                <label className="group grid min-h-32 cursor-pointer place-items-center rounded-md border border-dashed border-strong bg-sunken px-5 py-5 text-center transition-colors hover:border-verdant-500 hover:bg-jade-50/50">
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    capture="user"
+                    className="sr-only"
+                    onChange={(event) => choosePhoto(event.target.files?.[0] ?? null)}
+                  />
+                  {photoPreview ? (
+                    <span className="flex items-center gap-4 text-left">
+                      <img
+                        src={photoPreview}
+                        alt="Selected child preview"
+                        className="size-20 rounded-md object-cover shadow-e1"
+                      />
+                      <span>
+                        <strong className="block text-small text-ink">{photo?.name}</strong>
+                        <span className="mt-1 block text-small text-ink-muted">
+                          Tap to choose a different photo
+                        </span>
+                      </span>
+                    </span>
+                  ) : (
+                    <span>
+                      <Camera size={26} className="mx-auto text-verdant-600" aria-hidden />
+                      <strong className="mt-2 block text-small text-ink">Choose a clear solo photo</strong>
+                      <span className="mt-1 block text-small text-ink-muted">
+                        Front-facing, smiling, no sunglasses or cap · JPG, PNG or WebP
+                      </span>
+                    </span>
+                  )}
+                </label>
+                <p className="flex items-start gap-2 rounded-md bg-jade-50 px-3 py-2.5 text-small text-jade-700 night:bg-jade-900/30 night:text-jade-200">
+                  <Lock size={15} className="mt-0.5 shrink-0" aria-hidden />
+                  <span>
+                    <strong>Privacy protected.</strong> This preview stays on your device. When ordered,
+                    photos are used only to create the book and deleted within 7 days of delivery.
+                  </span>
+                </p>
+              </div>
+
               <ChoiceGroup
-                legend="3 · Language"
+                legend="5 · Language"
                 options={languageOptions}
                 value={draft.language}
                 onChange={(language) => update({ language })}
@@ -159,7 +263,7 @@ export function Personaliser() {
                   is emotional and needs the promise line to be legible at the
                   moment of choosing, not hidden in a tooltip. */}
               <fieldset className="min-w-0 border-0 p-0">
-                <legend className="eyebrow mb-2.5">4 · Story world</legend>
+                <legend className="eyebrow mb-2.5">6 · Story world</legend>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {THEMES.map((option) => {
                     const selected = option.id === draft.themeId;
@@ -213,8 +317,21 @@ export function Personaliser() {
                 </div>
               </fieldset>
 
+              <ChoiceGroup
+                legend="7 · Book format"
+                options={formatOptions}
+                value={draft.bookFormat}
+                onChange={(bookFormat) => update({ bookFormat })}
+                columns={2}
+                note={
+                  draft.bookFormat === 'hardcover'
+                    ? 'Gift box, GST and tracked delivery are included.'
+                    : 'Upgrade to hardcover later and we deduct the digital edition price.'
+                }
+              />
+
               <div className="flex flex-col gap-5">
-                <p className="eyebrow eyebrow-purple">5 · What they look like</p>
+                <p className="eyebrow eyebrow-purple">Optional · Fine-tune their illustrated look</p>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <ChoiceGroup
                     legend="Skin tone"
@@ -296,14 +413,15 @@ export function Personaliser() {
                 <div className="mt-8 w-full max-w-[28rem]">
                   <OrderButton
                     intent="preview"
+                    note={photo ? 'I have selected a child photo and will attach it in this chat.' : undefined}
                     block
                     label={
-                      isPersonalised ? `Send ${possessive(name)} details` : 'Continue on WhatsApp'
+                      isPersonalised ? `Continue ${possessive(name)} order` : 'Continue order on WhatsApp'
                     }
                     sublabel={
                       isPersonalised
-                        ? 'Your five choices travel with you'
-                        : 'We will ask the five questions above'
+                        ? 'Your completed choices travel with you'
+                        : 'Fill the details above, then continue'
                     }
                   />
                 </div>
