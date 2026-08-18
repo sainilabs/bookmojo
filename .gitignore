@@ -4,3 +4,5 @@ dist-smoke/
 *.local
 .DS_Store
 .vite/
+.astro/
+*.tsbuildinfo

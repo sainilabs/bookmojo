@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import './tokens.css';
 
-/* Theme is driven by a data attribute set before paint (see index.html), which
+/* Theme is driven by a data attribute set before paint (see pages/index.astro), which
    avoids the flash-of-wrong-theme that a React-mounted toggle would cause. */
 @custom-variant night (&:where([data-theme='night'], [data-theme='night'] *));
 

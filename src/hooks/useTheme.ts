@@ -12,7 +12,7 @@ const STORAGE_KEY = 'bookmojo:theme';
  * bedtime, in a dark room, on a phone. A cream page at 400 nits in that context
  * is physically unpleasant and it is the moment the buying decision happens.
  *
- * The initial value is resolved before paint by an inline script in index.html;
+ * The initial value is resolved before paint by an inline script in the Astro page;
  * this hook only reads what is already there, so there is no flash and no
  * hydration mismatch.
  */
