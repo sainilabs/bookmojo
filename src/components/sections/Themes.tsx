@@ -43,13 +43,13 @@ export function Themes() {
         <SectionHeading
           eyebrow={
             <>
-              <BookGlyph size={14} /> Nine original worlds
+              <BookGlyph size={14} /> Eight original worlds
             </>
           }
           title={
             isPersonalised ? (
               <>
-                Nine stories. Same hero:
+                Eight stories. Same hero:
                 <br />
                 <span className="text-verdant-500">{name}</span>.
               </>

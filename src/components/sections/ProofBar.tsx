@@ -26,18 +26,10 @@ import { GUARANTEE, PROOF } from '@/lib/config';
  */
 export function ProofBar() {
   const stats = [
-    { value: PROOF.booksDeliveredLabel, label: 'books made', icon: Heart },
-    {
-      value: `${PROOF.rating}★`,
-      label: `${PROOF.reviewCount.toLocaleString()} parents`,
-      icon: CheckCircle,
-    },
-    { value: PROOF.pincodes, label: 'PIN codes served', icon: Globe },
-    {
-      value: `${Math.round(PROOF.repeatBuyerRate * 100)}%`,
-      label: 'buy a second book',
-      icon: Leaf,
-    },
+    { value: 'Preview first', label: 'See the book before ordering', icon: Heart },
+    { value: 'Secure UPI', label: 'Pay on a secure page', icon: CheckCircle },
+    { value: 'Free shipping', label: 'Included across India', icon: Globe },
+    { value: `${PROOF.productionDays} days`, label: 'Printed after approval', icon: Leaf },
   ];
 
   return (
@@ -51,7 +43,7 @@ export function ProofBar() {
               delay={i * 70}
               className="flex flex-col gap-1 lg:border-l lg:border-hairline lg:pl-6 lg:first:border-0 lg:first:pl-0"
             >
-              <span className="font-display text-[2rem] leading-none font-extrabold tracking-[-0.035em] tabular-nums sm:text-[2.4rem]">
+              <span className="font-display text-[1.45rem] leading-tight font-extrabold sm:text-[1.7rem]">
                 {stat.value}
               </span>
               <span className="max-w-[18ch] text-small text-ink-muted">{stat.label}</span>

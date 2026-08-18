@@ -27,16 +27,24 @@ export function Accordion({
   items,
   className,
   onOpen,
+  inverse = false,
 }: {
   items: readonly AccordionItem[];
   className?: string;
   onOpen?: (question: string) => void;
+  inverse?: boolean;
 }) {
   const [open, setOpen] = useState<number | null>(0);
   const base = useId().replace(/:/g, '');
 
   return (
-    <div className={cx('divide-y divide-hairline border-y border-hairline', className)}>
+    <div
+      className={cx(
+        'divide-y border-y',
+        inverse ? 'divide-inverse-line border-inverse-line' : 'divide-hairline border-hairline',
+        className,
+      )}
+    >
       {items.map((item, i) => {
         const isOpen = open === i;
         const panelId = `${base}-panel-${i}`;
@@ -55,7 +63,9 @@ export function Accordion({
                 }}
                 className={cx(
                   'group flex w-full items-start gap-4 py-5 text-left transition-colors',
-                  'hover:text-gold-700 night:hover:text-gold-500',
+                  inverse
+                    ? 'hover:text-gold-300'
+                    : 'hover:text-gold-700 night:hover:text-gold-500',
                 )}
               >
                 <span className="font-display flex-1 text-[1.0625rem] leading-snug font-semibold sm:text-title">
@@ -65,8 +75,12 @@ export function Accordion({
                   className={cx(
                     'mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border transition-all duration-300',
                     isOpen
-                      ? 'border-transparent bg-inverse text-ink-inverse rotate-45'
-                      : 'border-strong text-ink-muted group-hover:border-ink group-hover:text-ink',
+                      ? inverse
+                        ? 'rotate-45 border-transparent bg-paper text-ink'
+                        : 'rotate-45 border-transparent bg-inverse text-ink-inverse'
+                      : inverse
+                        ? 'border-inverse-line text-ink-inverse-muted group-hover:border-gold-300 group-hover:text-gold-300'
+                        : 'border-strong text-ink-muted group-hover:border-ink group-hover:text-ink',
                   )}
                   aria-hidden="true"
                 >
@@ -84,7 +98,8 @@ export function Accordion({
               <div className="overflow-hidden">
                 <p
                   className={cx(
-                    'max-w-[62ch] pb-6 pr-10 text-ink-soft transition-opacity duration-300',
+                    'max-w-[62ch] pb-6 pr-10 transition-opacity duration-300',
+                    inverse ? 'text-ink-inverse-soft' : 'text-ink-soft',
                     isOpen ? 'opacity-100' : 'opacity-0',
                   )}
                 >

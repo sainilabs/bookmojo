@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Container, Reveal, Section, SectionHeading } from '@/components/ui/Layout';
+import { useEffect, useState } from 'react';
+import { Container, Reveal, Section } from '@/components/ui/Layout';
 import { ChoiceGroup, NameField, type Choice } from '@/components/ui/Controls';
 import { OrderButton } from '@/components/ui/Button';
-import { Pill } from '@/components/ui/Rating';
 import { Book3D } from '@/components/art/BookCover';
-import { Camera, Check, Lock, Sparkle } from '@/components/art/Icons';
+import { Camera, Check, Lock } from '@/components/art/Icons';
 import {
   AGE_BANDS,
   HAIR_COLOURS,
@@ -13,10 +12,9 @@ import {
   SKIN_TONES,
   THEMES,
   THEME_BY_ID,
-  recommendedThemes,
 } from '@/data/catalogue';
 import { useDraft } from '@/hooks/useDraft';
-import { PRICING, PROOF } from '@/lib/config';
+import { PRICING } from '@/lib/config';
 import { cx, formatINR, formatName, possessive } from '@/lib/utils';
 import type { AgeBand, BookFormat, ChildGender, HairId, LanguageCode } from '@/types';
 
@@ -52,7 +50,6 @@ export function Personaliser() {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const theme = THEME_BY_ID.get(draft.themeId) ?? THEMES[0]!;
   const name = formatName(draft.childName);
-  const recommended = useMemo(() => recommendedThemes(draft.age), [draft.age]);
 
   const ageOptions: Array<Choice<AgeBand>> = AGE_BANDS.map((band) => ({
     value: band.id,
@@ -101,17 +98,6 @@ export function Personaliser() {
     setPhotoPreview(file ? URL.createObjectURL(file) : null);
   };
 
-  /** Counts genuine choices, not steps walked past. */
-  const done = [
-    Boolean(name),
-    true, // gender always has a considered default
-    true, // age always has a considered default
-    Boolean(photo),
-    true, // language always has a considered default
-    Boolean(draft.themeId),
-    true, // format always has a considered default
-  ].filter(Boolean).length;
-
   const opening = theme.opening.replaceAll('{name}', name || 'your child');
 
   return (
@@ -120,70 +106,70 @@ export function Personaliser() {
        the book un-sticks, scrolls away, and leaves the right half of the section
        empty. `clip` gives the same horizontal clipping without creating a scroll
        container, so sticky keeps working. */
-    <Section id="create" space="grand" className="overflow-x-clip">
+    <Section
+      id="create"
+      space="grand"
+      className="overflow-x-clip pt-10 sm:pt-12 lg:pt-14"
+    >
       <Container>
-        <SectionHeading
-          eyebrow={
-            <>
-              <Sparkle size={14} /> Step one, and it is the fun one
-            </>
-          }
-          title={
-            <>
-              Create their storybook here.
-              <br />
-              Order only when it feels right.
-            </>
-          }
-          deck="Add your child’s details in under two minutes, preview the book, then continue your completed order on WhatsApp."
-        />
+        <div className="grid items-start gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] 3xl:gap-x-20">
+          {/* ------------------------------ PREVIEW ------------------------- */}
+          <div className="order-2 lg:order-1 lg:row-span-2">
+            <div className="lg:sticky lg:top-28">
+              <Reveal y={24} scale={0.97} className="flex flex-col items-center">
+                <div className="w-full border-b border-hairline pb-4">
+                  <p className="eyebrow eyebrow-green">Book preview</p>
+                </div>
 
-        <Reveal y={16} className="mx-auto mt-8 max-w-[60rem]">
-          <div className="flex flex-col justify-between gap-4 border-y border-hairline py-5 sm:flex-row sm:items-center">
-            <div>
-              <p className="font-semibold text-ink">Personalised Storybook for Kids · Ages 2–12</p>
-              <p className="mt-1 text-small text-ink-muted">
-                Child’s name, appearance and chosen story woven through every page
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-small">
-              <strong className="text-lg text-ink">From {formatINR(PRICING.digital)}</strong>
-              <span className="font-semibold text-verdant-600">Free hardcover shipping</span>
-              <span className="text-ink-muted">
-                {PROOF.rating} ★ · {PROOF.reviewCount.toLocaleString('en-IN')} reviews
-              </span>
+                <div
+                  className="flex min-h-[31rem] w-full items-center justify-center bg-sunken px-6 py-10 sm:px-10"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <Book3D draft={draft} width={400} />
+                </div>
+
+                <div className="card mt-6 w-full overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-hairline bg-sunken px-5 py-2.5">
+                    <span className="eyebrow !text-[0.65rem]">Inside preview · Page one</span>
+                    <span className="text-[0.68rem] font-semibold text-ink-muted">
+                      {theme.name}
+                    </span>
+                  </div>
+                  <p className="font-book px-6 py-6 text-[1.05rem] leading-[1.7] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-book first-letter:text-[3.2rem] first-letter:leading-[0.8] first-letter:font-semibold first-letter:text-gold-600">
+                    {opening}
+                  </p>
+                  <p className="border-t border-hairline bg-sunken px-6 py-3 text-[0.72rem] text-ink-muted">
+                    Sample opening · rewritten for age {draft.age}
+                  </p>
+                </div>
+              </Reveal>
             </div>
           </div>
-        </Reveal>
 
-        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-16 3xl:gap-24">
+          {/* -------------------------- PRODUCT DETAILS -------------------- */}
+          <Reveal y={18} className="order-1 lg:order-2">
+            <p className="eyebrow eyebrow-green">Personalised storybook · Ages 2–12</p>
+            <h2 className="mt-3 text-[2rem] leading-tight font-extrabold sm:text-[2.25rem] lg:whitespace-nowrap xl:text-[2.5rem]">
+              A storybook made for your child
+            </h2>
+            <p className="mt-4 max-w-[48ch] text-lead text-ink-soft">
+              Add their name, photo and favourite story. Preview every choice before placing your order.
+            </p>
+
+            <p className="mt-4 text-base text-red-600">
+              Starting from{' '}
+              <strong className="font-semibold tracking-wide">
+                Rs. {PRICING.digital.toFixed(2)}
+              </strong>
+            </p>
+          </Reveal>
+
           {/* ------------------------------ CONTROLS ------------------------ */}
-          <Reveal y={24} className="order-2 lg:order-1">
-            <div className="flex items-center justify-between gap-4 border-b border-hairline pb-4">
-              <p className="eyebrow eyebrow-green">Your choices</p>
-              <div className="flex items-center gap-3">
-                <span className="text-small font-semibold tabular-nums text-ink-muted">
-                  {done} of 7
-                </span>
-                <div
-                  className="h-1.5 w-24 overflow-hidden rounded-full bg-inset"
-                  role="progressbar"
-                  aria-valuenow={done}
-                  aria-valuemin={0}
-                  aria-valuemax={7}
-                  aria-label="Personalisation progress"
-                >
-                  <div
-                    className="h-full rounded-full bg-verdant-500 transition-[width] duration-500 ease-[var(--ease-spring)]"
-                    style={{ width: `${(done / 7) * 100}%` }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-col gap-9">
+          <Reveal y={24} className="order-3 lg:order-3">
+            <div className="flex flex-col gap-7">
               <NameField
-                label="1 · Their first name"
+                label="Child’s First Name For Storybook"
                 value={draft.childName}
                 onChange={(childName) => update({ childName })}
                 placeholder="Aarav, Meera, Ishaan…"
@@ -191,7 +177,7 @@ export function Personaliser() {
               />
 
               <ChoiceGroup
-                legend="2 · Gender"
+                legend="Child Gender"
                 options={genderOptions}
                 value={draft.gender}
                 onChange={(gender) => update({ gender })}
@@ -199,7 +185,7 @@ export function Personaliser() {
               />
 
               <ChoiceGroup
-                legend="3 · Current age"
+                legend="Child’s Current Age"
                 options={ageOptions}
                 value={draft.age}
                 onChange={(age) => update({ age })}
@@ -208,7 +194,7 @@ export function Personaliser() {
               />
 
               <div className="flex flex-col gap-2">
-                <p className="eyebrow">4 · Upload child photo</p>
+                <p className="text-base font-normal leading-snug text-ink">Upload Child Photo</p>
                 <label className="group grid min-h-32 cursor-pointer place-items-center rounded-md border border-dashed border-strong bg-sunken px-5 py-5 text-center transition-colors hover:border-verdant-500 hover:bg-jade-50/50">
                   <input
                     type="file"
@@ -250,8 +236,12 @@ export function Personaliser() {
                 </p>
               </div>
 
+              <div className="border-b border-hairline pt-3 pb-4">
+                <p className="text-base font-normal leading-snug text-ink">Book Details</p>
+              </div>
+
               <ChoiceGroup
-                legend="5 · Language"
+                legend="Language"
                 options={languageOptions}
                 value={draft.language}
                 onChange={(language) => update({ language })}
@@ -263,16 +253,17 @@ export function Personaliser() {
                   is emotional and needs the promise line to be legible at the
                   moment of choosing, not hidden in a tooltip. */}
               <fieldset className="min-w-0 border-0 p-0">
-                <legend className="eyebrow mb-2.5">6 · Story world</legend>
+                <legend className="mb-2.5 text-base font-normal leading-snug text-ink">
+                  Story World (Optional)
+                </legend>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {THEMES.map((option) => {
                     const selected = option.id === draft.themeId;
-                    const fits = recommended.some((t) => t.id === option.id);
                     return (
                       <label
                         key={option.id}
                         className={cx(
-                          'group relative flex cursor-pointer gap-3 rounded-md border p-3 transition-all duration-200',
+                          'group relative flex min-h-12 cursor-pointer items-center justify-center rounded-md border px-4 py-3 text-center transition-all duration-200',
                           selected
                             ? 'border-ink bg-raised shadow-e2'
                             : 'border-hairline bg-raised/50 hover:border-strong',
@@ -286,29 +277,10 @@ export function Personaliser() {
                           onChange={() => update({ themeId: option.id })}
                           className="peer sr-only"
                         />
-                        <span
-                          aria-hidden="true"
-                          className="mt-0.5 size-9 shrink-0 rounded-md shadow-e1"
-                          style={{
-                            background: `linear-gradient(150deg, ${option.palette.deep}, ${option.palette.base} 60%, ${option.palette.accent})`,
-                          }}
-                        />
-                        <span className="min-w-0 flex-1">
-                          <span className="flex items-center gap-2">
-                            <span className="text-[0.95rem] leading-tight font-semibold">
-                              {option.name}
-                            </span>
-                            {selected && (
-                              <Check size={14} className="shrink-0 text-verdant-600" aria-hidden />
-                            )}
-                          </span>
-                          <span className="mt-0.5 block text-[0.78rem] leading-snug text-ink-muted">
-                            {option.promise}
-                          </span>
-                          {fits && (
-                            <span className="mt-1.5 inline-block text-[0.68rem] font-bold tracking-wide uppercase text-gold-700 night:text-gold-500">
-                              Written for {draft.age}s
-                            </span>
+                        <span className="flex items-center justify-center gap-2 text-[0.95rem] leading-tight">
+                          {option.name}
+                          {selected && (
+                            <Check size={14} className="shrink-0 text-verdant-600" aria-hidden />
                           )}
                         </span>
                       </label>
@@ -318,7 +290,7 @@ export function Personaliser() {
               </fieldset>
 
               <ChoiceGroup
-                legend="7 · Book format"
+                legend="Book Format"
                 options={formatOptions}
                 value={draft.bookFormat}
                 onChange={(bookFormat) => update({ bookFormat })}
@@ -331,10 +303,12 @@ export function Personaliser() {
               />
 
               <div className="flex flex-col gap-5">
-                <p className="eyebrow eyebrow-purple">Optional · Fine-tune their illustrated look</p>
+                <p className="text-base font-normal leading-snug text-ink">
+                  Optional · Fine-Tune Their Illustrated Look
+                </p>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <ChoiceGroup
-                    legend="Skin tone"
+                    legend="Skin Tone"
                     options={SKIN_TONES.map((tone) => ({
                       value: tone.hex,
                       label: tone.label,
@@ -345,7 +319,7 @@ export function Personaliser() {
                     variant="swatch"
                   />
                   <ChoiceGroup
-                    legend="Hair colour"
+                    legend="Hair Colour"
                     options={HAIR_COLOURS.map((c) => ({
                       value: c.hex,
                       label: c.label,
@@ -357,7 +331,7 @@ export function Personaliser() {
                   />
                 </div>
                 <ChoiceGroup
-                  legend="Hair style"
+                  legend="Hair Style"
                   options={hairStyleOptions}
                   value={draft.look.hairStyle}
                   onChange={(hairStyle) => updateLook({ hairStyle })}
@@ -365,69 +339,18 @@ export function Personaliser() {
                   note="Or send a photo in the chat — an illustrator matches it by hand."
                 />
               </div>
+
+              <OrderButton
+                intent="preview"
+                note={photo ? 'I have selected a child photo and will attach it in this chat.' : undefined}
+                block
+                label={
+                  isPersonalised ? `Continue ${possessive(name)} order` : 'Continue order on WhatsApp'
+                }
+                sublabel="Your selected details will be included"
+              />
             </div>
           </Reveal>
-
-          {/* ------------------------------ PREVIEW ------------------------- */}
-          <div className="order-1 lg:order-2">
-            <div className="lg:sticky lg:top-28">
-              <Reveal y={24} scale={0.97} className="flex flex-col items-center">
-                <div className="flex items-center gap-2 self-start">
-                  <Pill tone="verdant">
-                    <span
-                      aria-hidden="true"
-                      className="size-1.5 animate-pulse rounded-full bg-verdant-500"
-                    />
-                    Live preview
-                  </Pill>
-                  <Pill tone="outline">Not yet ordered</Pill>
-                </div>
-
-                <div
-                  className="mt-6 flex w-full justify-center"
-                  /* Announce cover changes once, politely — a screen reader user
-                     otherwise gets no feedback that their choice did anything. */
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  <Book3D draft={draft} width={330} />
-                </div>
-
-                {/* Live opening line: the proof that the story is written around
-                    them, delivered as an experience instead of a claim. */}
-                <div className="card mt-10 w-full max-w-[28rem] overflow-hidden">
-                  <div className="flex items-center justify-between border-b border-hairline bg-sunken px-5 py-2.5">
-                    <span className="eyebrow !text-[0.65rem]">Page one</span>
-                    <span className="text-[0.68rem] font-semibold text-ink-muted">
-                      {theme.name}
-                    </span>
-                  </div>
-                  <p className="font-book px-6 py-6 text-[1.05rem] leading-[1.7] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-book first-letter:text-[3.2rem] first-letter:leading-[0.8] first-letter:font-semibold first-letter:text-gold-600">
-                    {opening}
-                  </p>
-                  <p className="border-t border-hairline bg-sunken px-6 py-3 text-[0.72rem] text-ink-muted">
-                    Sample opening · rewritten for age {draft.age}
-                  </p>
-                </div>
-
-                <div className="mt-8 w-full max-w-[28rem]">
-                  <OrderButton
-                    intent="preview"
-                    note={photo ? 'I have selected a child photo and will attach it in this chat.' : undefined}
-                    block
-                    label={
-                      isPersonalised ? `Continue ${possessive(name)} order` : 'Continue order on WhatsApp'
-                    }
-                    sublabel={
-                      isPersonalised
-                        ? 'Your completed choices travel with you'
-                        : 'Fill the details above, then continue'
-                    }
-                  />
-                </div>
-              </Reveal>
-            </div>
-          </div>
         </div>
       </Container>
     </Section>

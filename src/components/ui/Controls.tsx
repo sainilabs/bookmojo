@@ -57,7 +57,7 @@ export function ChoiceGroup<T extends string>({
     <fieldset className={cx('min-w-0 border-0 p-0', className)}>
       <legend
         className={cx(
-          'eyebrow mb-2.5',
+          'mb-2.5 text-base font-normal leading-snug text-ink',
           hideLegend && 'sr-only',
         )}
       >
@@ -174,7 +174,7 @@ export function NameField({
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="eyebrow">
+      <label htmlFor={id} className="text-base font-normal leading-snug text-ink">
         {label}
       </label>
       <div className="relative">

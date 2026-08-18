@@ -78,9 +78,7 @@ export const GUARANTEE = {
 /** In-page navigation. Order mirrors the intended scroll narrative. */
 export const NAV_LINKS = [
   { id: 'create', label: 'Create yours' },
-  { id: 'how-it-works', label: 'How it works' },
+  { id: 'journey', label: 'How it works' },
   { id: 'themes', label: 'Stories' },
-  { id: 'craft', label: 'The craft' },
-  { id: 'reviews', label: 'Reviews' },
   { id: 'faq', label: 'FAQ' },
 ] as const;

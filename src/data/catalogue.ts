@@ -81,162 +81,118 @@ export const HAIR_STYLES: ReadonlyArray<{ id: HairId; label: string }> = [
  * evidence that the outcome is credible.
  */
 /**
- * NINE STORY WORLDS, SET WHERE THE CHILD ACTUALLY LIVES.
- *
- * ORDER IS COMMERCIAL, NOT CHRONOLOGICAL. The first three — police officer,
- * doctor, engineer — lead because those are the three answers an Indian parent
- * has already heard from their own child, and the hero rotates roles in this
- * order. A scientist is a lovelier idea; a doctor is the one that makes a parent
- * stop scrolling. The literary six that follow are what makes the product worth
- * buying once they have stopped.
- *
- * The aspiration three are still written as stories, not as career posters. There
- * is no child in a plastic stethoscope on a stage: there is a crow with a bad
- * wing, a missing blue cycle, and a footbridge eleven inches short. The role is
- * what the child DOES in the story, which is the only version of "become a
- * doctor" a four-year-old can actually feel.
- *
- * The earlier set — a wood called Whisperwood, a museum with a curator, a
- * skyline of pigeons — was competently written and completely foreign. An Indian
- * seven-year-old does not walk past that wood on the way to school. The single
- * most valuable thing a personalised book can do is put the child somewhere they
- * recognise, so the specifics here are deliberate and local: a summer terrace and
- * a charpai, backwaters the colour of strong tea, the banyan at the end of the
- * lane, a local train that has never been late, a launch pad on the Bay of
- * Bengal, a workshop down a gali behind the clock tower.
- *
- * These are original stories drawn from ordinary Indian life rather than
- * retellings of mythology. That is a choice: myth is already well served, it
- * carries religious specificity that would exclude some families, and a child
- * finds it far stranger to be written into the Mahabharata than onto their own
- * roof.
- *
- * Palettes moved with them — indigo, haldi, terracotta, brass, peacock — instead
- * of the cooler European storybook range they started in.
+ * Nine original Indian career adventures. Each profession is experienced
+ * through a real story problem in a recognisable place, rather than presented
+ * as a costume or career poster. Stable IDs preserve saved customer drafts.
  */
 export const THEMES: readonly StoryTheme[] = [
   {
     id: 'lane-four',
-    name: 'The Constable of Lane Number Four',
-    promise: 'For the child who notices who has been left out',
+    name: 'Little Police Officer',
+    promise: 'An Indian police adventure about courage, clues and helping others',
     blurb:
-      'Nobody hands out the job. But when something goes missing on Lane Number Four — a cycle, a tiffin, a very old dog — one person starts asking questions before the grown-ups have finished their tea.',
+      'At a busy Jaipur mela, a child becomes the youngest police officer on duty and follows a trail of tiny clues to reunite a lost visitor with their family.',
     ages: ['4-5', '6-8'],
     palette: { base: '#2B4468', accent: '#E8C170', deep: '#152438' },
     motif: 'city',
     opening:
-      'Nobody had appointed {name} to anything. But when the blue cycle vanished from outside number twelve, {name} was the only one who thought to look at the ground.',
+      'The Jaipur mela was full of music and colour, but {name} was the first to notice the small handprint beside the police tent.',
     role: 'a police officer.',
     popular: true,
   },
   {
     id: 'gulmohar',
-    name: 'The Clinic Behind the Gulmohar',
-    promise: 'For the child who looks after everyone before themselves',
+    name: 'Little Doctor',
+    promise: 'A caring doctor story set in a warm Indian neighbourhood',
     blurb:
-      'Behind the gulmohar at the end of the compound is a clinic with a waiting room, three patients and one doctor who is not yet tall enough for the top shelf. All three patients have feathers or fur.',
+      'When the neighbourhood clinic becomes busy after the first monsoon rain, one young doctor listens carefully, helps every patient and discovers what kindness can heal.',
     ages: ['2-3', '4-5'],
     palette: { base: '#1F6B63', accent: '#F4C9B0', deep: '#0D3A35' },
     motif: 'forest',
     opening:
-      'The crow with the bad wing had been waiting since Thursday, and out of everybody in the compound, it had decided to wait for {name}.',
+      'The first patient at Gulmohar Clinic arrived before breakfast, and Doctor {name} was already waiting with a bright red stethoscope.',
     role: 'a doctor.',
     popular: true,
   },
   {
     id: 'nala-bridge',
-    name: 'The Bridge That Was One Plank Short',
-    promise: 'For the child who takes things apart to see how they work',
+    name: 'Little Engineer',
+    promise: 'An Indian engineering adventure about building a safer way home',
     blurb:
-      'The footbridge over the nala has been one plank short for as long as anyone can remember, and the grown-ups have stopped seeing the gap. Somebody four feet tall has measured it. Twice.',
+      'Heavy monsoon rain has damaged the village footbridge. With careful measurements, a clever design and help from the community, a young engineer builds a stronger crossing.',
     ages: ['6-8', '9-12'],
     palette: { base: '#8A4A22', accent: '#F0D08A', deep: '#4A2410' },
     motif: 'dream',
     opening:
-      'The gap in the bridge was eleven inches across. {name} knew, because {name} had measured it once with a ruler and once with a shoe, to be sure.',
+      'The monsoon river was rising, and {name} had one notebook, three bamboo poles and the beginning of a very good engineering plan.',
     role: 'an engineer.',
   },
   {
     id: 'chandni',
-    name: 'The Night the Terrace Grew Stars',
-    promise: 'For the child who does not want the day to end',
+    name: 'Little Scientist',
+    promise: 'A joyful Indian science story filled with questions and experiments',
     role: 'a scientist.',
     blurb:
-      'A hot April night on the terrace, a charpai still warm from the afternoon, and a sky that turns out to have been keeping count of everyone who has ever been loved.',
+      'On a sunny terrace, a young scientist turns everyday Indian objects into a weather station and solves the mystery of why the evening rain keeps arriving early.',
     ages: ['2-3', '4-5'],
     palette: { base: '#2E3A70', accent: '#F0C060', deep: '#161E44' },
     motif: 'stars',
     opening:
-      'Everyone else had gone down for the night, but {name} stayed up on the terrace — because somebody had to count the stars, and tonight it was {name}’s turn.',
+      'By eight in the morning, Scientist {name} had made a rain gauge from a steel tumbler and asked seven questions nobody else had thought to ask.',
     popular: true,
   },
   {
     id: 'backwater',
-    name: 'The Temple Under the Backwaters',
-    promise: 'For the child who asks one more question about everything',
-    role: 'an explorer.',
+    name: 'Little Archaeologist',
+    promise: 'An Indian history adventure about discovering and protecting the past',
+    role: 'an archaeologist.',
     blurb:
-      'Past the fourth bend of the canal, under water the colour of strong tea, there is a temple that has been waiting four hundred years for somebody who is not afraid of the dark.',
+      'A forgotten map leads through Hampi’s stone pathways to a hidden stepwell. Its carvings hold a message that only a patient young archaeologist can understand.',
     ages: ['4-5', '6-8'],
     palette: { base: '#0E5A57', accent: '#E8A54A', deep: '#06322F' },
-    motif: 'ocean',
+    motif: 'dream',
     opening:
-      'The backwaters had kept one secret for four hundred years, and they chose a Tuesday — and {name} — to finally tell it.',
+      'The map in Hampi had one mark nobody could explain, until {name} turned it towards the morning sun and saw a staircase appear.',
   },
   {
     id: 'banyan',
-    name: 'The Banyan That Remembered Everything',
-    promise: 'For the child learning that brave is not the same as unafraid',
-    /* Not a job title, and that is deliberate — this manuscript is about nerve,
-       not an occupation. Forcing it into a noun would have meant inventing one. */
-    role: 'braver than they knew.',
+    name: 'Little Forest Officer',
+    promise: 'An Indian wildlife story about protecting animals and their home',
+    role: 'a forest officer.',
     blurb:
-      'The old banyan at the end of the lane has been listening for two hundred years. What it finally says out loud is small, and kind, and exactly what they needed to hear.',
+      'A frightened langur is stranded near an old banyan as a summer storm approaches. A young forest officer must read the tracks and guide it safely home.',
     ages: ['4-5', '6-8'],
     palette: { base: '#2F6146', accent: '#E5B33C', deep: '#163720' },
     motif: 'forest',
     opening:
-      '{name} was not the tallest thing standing under the banyan, or the fastest, or the loudest. {name} was simply the one who walked in.',
+      'Forest Officer {name} found the first pawprint beside the banyan just as the wind began to bend its highest branches.',
     popular: true,
   },
   {
-    id: 'local',
-    name: 'The Morning the 7:04 Was Late',
-    promise: 'For the child who fixes things nobody asked them to fix',
-    role: 'a detective.',
-    blurb:
-      'The local has not been late in ninety years. This morning it is eleven minutes behind, the crows have strong opinions about it, and the only person who has noticed is nine years old.',
-    ages: ['6-8', '9-12'],
-    palette: { base: '#A6402C', accent: '#F3D08A', deep: '#5E2118' },
-    motif: 'city',
-    opening:
-      'At 7:15 in the morning, eleven minutes later than it had been for ninety years, {name} was the only person on the platform who looked up.',
-  },
-  {
     id: 'sriharikota',
-    name: 'Nine Moons Past Sriharikota',
-    promise: 'For the child who wants to know what is past the last page',
+    name: 'Little Astronaut',
+    promise: 'An Indian space mission beyond the Moon and back again',
     role: 'an astronaut.',
     blurb:
-      'A one-seat expedition from a launch pad on the Bay of Bengal, a stowaway who eats star charts, and a decision that only a child would be brave enough to make.',
+      'From India’s spaceport at Sriharikota, a young astronaut launches on a daring mission to repair a research satellite and bring its discovery safely home.',
     ages: ['6-8', '9-12'],
     palette: { base: '#362A6B', accent: '#6FD3D9', deep: '#1B1244' },
     motif: 'space',
     opening:
-      'Mission control had exactly one instruction for {name}, and {name} had already decided not to follow it.',
+      'Mission control counted down in three languages, and Astronaut {name} smiled as the rocket rose above the Bay of Bengal.',
   },
   {
     id: 'karkhana',
-    name: 'The Workshop of Almost',
-    promise: 'For the child who is quietly making something',
+    name: 'Little Inventor',
+    promise: 'An Indian invention story about imagination, failure and trying again',
     role: 'an inventor.',
     blurb:
-      'Down a gali behind the clock tower is a workshop holding every idea the world nearly had. The last shelf is empty, and there is a small brass plate on it with their name already engraved.',
+      'Inside a tiny Chandni Chowk workshop, a young inventor builds a machine that can cool the whole lane without electricity and learns why the best ideas need many attempts.',
     ages: ['9-12'],
     palette: { base: '#6B2F4E', accent: '#F0AE8A', deep: '#3A1428' },
     motif: 'dream',
     opening:
-      'The old man in the workshop had been waiting for {name} for a very long time, which was strange, because {name} had never told anybody about the idea.',
+      'By lunchtime, Inventor {name} had collected two bicycle wheels, one broken fan and exactly enough courage to test the idea again.',
   },
 ];
 

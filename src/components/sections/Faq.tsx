@@ -35,7 +35,7 @@ export function Faq() {
   const tabs = ['All', ...FAQ_GROUPS] as const;
 
   return (
-    <Section id="faq" space="grand">
+    <Section id="faq" space="grand" tone="inverse">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 3xl:gap-24">
           {/* ---------------------------- ASIDE ---------------------------- */}
@@ -49,19 +49,19 @@ export function Faq() {
               ask us first.
             </Reveal>
             <Reveal y={18} delay={140}>
-              <p className="mt-5 max-w-[34ch] text-lead text-ink-soft">
+              <p className="mt-5 max-w-[34ch] text-lead text-ink-inverse-soft">
                 Honest answers, including the ones about paying inside a chat app.
               </p>
             </Reveal>
 
             <Reveal y={20} delay={200} className="mt-8 lg:sticky lg:top-28">
-              <div className="card flex flex-col gap-4 bg-sunken p-6">
+              <div className="card flex flex-col gap-4 border-inverse-line bg-inverse-raised p-6">
                 <span className="grid size-11 place-items-center rounded-[0.8rem] bg-verdant-50 text-verdant-700">
                   <WhatsAppMark size={20} />
                 </span>
                 <div>
                   <p className="font-display text-title">Ask a real person</p>
-                  <p className="mt-1.5 text-small text-ink-soft">
+                  <p className="mt-1.5 text-small text-ink-inverse-soft">
                     {BRAND.supportHours}. Asking does not start an order.
                   </p>
                 </div>
@@ -91,14 +91,16 @@ export function Faq() {
                       onClick={() => setGroup(tab)}
                       className={cx(
                         'btn btn-sm shrink-0 whitespace-nowrap',
-                        active ? 'btn-ink' : 'btn-tonal',
+                        active
+                          ? 'bg-paper text-ink hover:bg-sunken'
+                          : 'border border-inverse-line bg-inverse-raised text-ink-inverse-soft hover:bg-inverse-hover hover:text-ink-inverse',
                       )}
                     >
                       {tab}
                       <span
                         className={cx(
                           'text-[0.7rem] tabular-nums',
-                          active ? 'opacity-60' : 'text-ink-muted',
+                          active ? 'opacity-60' : 'text-ink-inverse-muted',
                         )}
                       >
                         {count}
@@ -116,6 +118,7 @@ export function Faq() {
               <Accordion
                 key={group}
                 items={items}
+                inverse
                 onOpen={(question) => track('faq_open', { question, group })}
               />
             </Reveal>

@@ -44,7 +44,7 @@ export function Hero() {
   return (
     // Top padding clears the fixed header AND the announcement strip above it
     // (h-9 bar + h-20 nav = 116px), so the badge is never tucked under either.
-    <section id="top" className="relative isolate overflow-hidden pt-32 pb-16 sm:pt-36 lg:pt-44 lg:pb-24">
+    <section id="top" className="relative isolate overflow-hidden border-b border-hairline pt-32 pb-16 sm:pt-36 lg:pt-44 lg:pb-24">
       {/* A single quiet grid gives the hero structure without competing with
           the product artwork. No nested grid, glow field, grain or illustration
           behind the interface. */}
@@ -195,7 +195,7 @@ export function Hero() {
             className="relative flex justify-center mdlg:justify-end"
           >
             <img
-              src="/hero-book.png"
+              src={`${import.meta.env.BASE_URL}hero-book.png`}
               alt="A child holding a personalised Aman Scientist Dreams storybook"
               width={1154}
               height={1363}
