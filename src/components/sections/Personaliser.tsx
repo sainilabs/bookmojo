@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Container, Reveal, Section } from '@/components/ui/Layout';
 import { ChoiceGroup, NameField, type Choice } from '@/components/ui/Controls';
 import { OrderButton } from '@/components/ui/Button';
-import { Book3D } from '@/components/art/BookCover';
+import { PersonalisedFlipBook } from '@/components/book/PersonalisedFlipBook';
 import { Camera, Check, Lock } from '@/components/art/Icons';
 import {
   AGE_BANDS,
@@ -11,7 +11,6 @@ import {
   LANGUAGES,
   SKIN_TONES,
   THEMES,
-  THEME_BY_ID,
 } from '@/data/catalogue';
 import { useDraft } from '@/hooks/useDraft';
 import { PRICING } from '@/lib/config';
@@ -48,7 +47,6 @@ export function Personaliser() {
   const { draft, update, updateLook, isPersonalised } = useDraft();
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
-  const theme = THEME_BY_ID.get(draft.themeId) ?? THEMES[0]!;
   const name = formatName(draft.childName);
 
   const ageOptions: Array<Choice<AgeBand>> = AGE_BANDS.map((band) => ({
@@ -98,8 +96,6 @@ export function Personaliser() {
     setPhotoPreview(file ? URL.createObjectURL(file) : null);
   };
 
-  const opening = theme.opening.replaceAll('{name}', name || 'your child');
-
   return (
     /* overflow-x-clip, NOT overflow-hidden. `hidden` turns this section into a
        scroll container, which silently breaks the sticky preview column below —
@@ -121,28 +117,7 @@ export function Personaliser() {
                   <p className="eyebrow eyebrow-green">Book preview</p>
                 </div>
 
-                <div
-                  className="flex min-h-[31rem] w-full items-center justify-center bg-sunken px-6 py-10 sm:px-10"
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  <Book3D draft={draft} width={400} />
-                </div>
-
-                <div className="card mt-6 w-full overflow-hidden">
-                  <div className="flex items-center justify-between border-b border-hairline bg-sunken px-5 py-2.5">
-                    <span className="eyebrow !text-[0.65rem]">Inside preview · Page one</span>
-                    <span className="text-[0.68rem] font-semibold text-ink-muted">
-                      {theme.name}
-                    </span>
-                  </div>
-                  <p className="font-book px-6 py-6 text-[1.05rem] leading-[1.7] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-book first-letter:text-[3.2rem] first-letter:leading-[0.8] first-letter:font-semibold first-letter:text-gold-600">
-                    {opening}
-                  </p>
-                  <p className="border-t border-hairline bg-sunken px-6 py-3 text-[0.72rem] text-ink-muted">
-                    Sample opening · rewritten for age {draft.age}
-                  </p>
-                </div>
+                <PersonalisedFlipBook draft={draft} />
               </Reveal>
             </div>
           </div>

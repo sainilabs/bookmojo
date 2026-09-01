@@ -66,7 +66,7 @@ export function Hero() {
             lands just under Tailwind's lg breakpoint, so the hero stayed single
             column and the book — the one thing worth looking at — fell below the
             fold while the right half of the screen sat empty. */}
-        <div className="grid items-center gap-14 mdlg:grid-cols-[1.05fr_0.95fr] mdlg:gap-8 3xl:gap-20">
+        <div className="grid items-center gap-y-6 min-[42rem]:grid-cols-[1.05fr_0.95fr] min-[42rem]:gap-x-8 min-[42rem]:gap-y-5 3xl:gap-x-20">
           {/* ---------------------------------------------------------------- */}
           <div className="max-w-[38rem] mdlg:max-w-none">
             <Reveal y={14} delay={40}>
@@ -163,8 +163,28 @@ export function Hero() {
             {/* Two explicit routes: self-serve on the site or assisted ordering
                 in WhatsApp. Personal details belong in the configurator below,
                 where their purpose and privacy terms can be explained. */}
-            <Reveal y={18} delay={220} className="mt-5">
-              <div className="flex max-w-[34rem] flex-col gap-3 sm:flex-row">
+          </div>
+
+          {/* ---------------------------------------------------------------- */}
+          <Reveal
+            y={30}
+            delay={140}
+            scale={0.96}
+            className="relative flex justify-center min-[42rem]:col-start-2 min-[42rem]:row-span-2 min-[42rem]:row-start-1 min-[42rem]:justify-end"
+          >
+            <img
+              src={`${import.meta.env.BASE_URL}hero-book.png`}
+              alt="A child holding a personalised Aman Scientist Dreams storybook"
+              width={1154}
+              height={1363}
+              fetchPriority="high"
+              className="h-auto w-full max-w-[17rem] object-contain sm:max-w-[23rem] min-[42rem]:max-w-[31rem]"
+            />
+          </Reveal>
+
+          <div className="min-[42rem]:col-start-1 min-[42rem]:row-start-2">
+            <Reveal y={18} delay={220}>
+              <div className="flex max-w-[34rem] flex-col gap-3 sm:flex-row min-[42rem]:flex-col min-[56rem]:flex-row">
                 <LinkButton href="#create" variant="ink" size="lg" className="justify-center">
                   Build your book
                 </LinkButton>
@@ -186,23 +206,6 @@ export function Hero() {
               </ul>
             </Reveal>
           </div>
-
-          {/* ---------------------------------------------------------------- */}
-          <Reveal
-            y={30}
-            delay={140}
-            scale={0.96}
-            className="relative flex justify-center mdlg:justify-end"
-          >
-            <img
-              src={`${import.meta.env.BASE_URL}hero-book.png`}
-              alt="A child holding a personalised Aman Scientist Dreams storybook"
-              width={1154}
-              height={1363}
-              fetchPriority="high"
-              className="h-auto w-full max-w-[31rem] object-contain"
-            />
-          </Reveal>
         </div>
       </Container>
     </section>
