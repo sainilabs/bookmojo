@@ -1,12 +1,22 @@
 import { Container, Reveal, Section, SectionHeading } from '@/components/ui/Layout';
 import { OrderButton } from '@/components/ui/Button';
 import { Pill } from '@/components/ui/Rating';
-import { BookCover } from '@/components/art/BookCover';
 import { ArrowRight, BookGlyph, Check } from '@/components/art/Icons';
 import { AGE_BANDS, THEMES } from '@/data/catalogue';
 import { useDraft } from '@/hooks/useDraft';
 import { track } from '@/lib/analytics';
 import { cx, formatName } from '@/lib/utils';
+
+const THEME_ARTWORK: Record<string, string> = {
+  'lane-four': 'theme-lane-four.jpg',
+  gulmohar: 'theme-gulmohar.jpg',
+  'nala-bridge': 'theme-nala-bridge.jpg',
+  chandni: 'aman-scientist-cover.png',
+  backwater: 'theme-backwater.jpg',
+  banyan: 'theme-banyan.jpg',
+  sriharikota: 'theme-sriharikota.jpg',
+  karkhana: 'theme-karkhana.jpg',
+};
 
 /**
  * STORY WORLDS
@@ -30,6 +40,7 @@ import { cx, formatName } from '@/lib/utils';
 export function Themes() {
   const { draft, update, isPersonalised } = useDraft();
   const name = formatName(draft.childName);
+  const asset = (file: string) => `${import.meta.env.BASE_URL}images/storybook/${file}`;
 
   const choose = (themeId: string) => {
     update({ themeId });
@@ -86,14 +97,27 @@ export function Themes() {
                     selected && '!border-ink shadow-e3',
                   )}
                 >
-                  {/* Cover, rendered with the visitor's own character. */}
                   <div className="relative overflow-hidden border-b border-hairline bg-sunken">
                     <div className="mx-auto w-[62%] pt-8">
-                      <div className="overflow-hidden rounded-[3px] shadow-book">
-                        <BookCover
-                          draft={{ ...draft, themeId: theme.id }}
-                          className="block w-full"
+                      <div className="relative aspect-[2/3] overflow-hidden rounded-[3px] bg-ink shadow-book">
+                        <img
+                          src={asset(THEME_ARTWORK[theme.id]!)}
+                          alt={`Illustration for ${theme.name}, featuring a young Indian child as ${theme.role}`}
+                          width="1024"
+                          height="1536"
+                          loading="lazy"
+                          className="h-full w-full object-cover"
                         />
+                        <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/70 via-black/25 to-transparent px-3 pb-10 pt-3 text-center text-white">
+                          <p className="font-book text-[0.9rem] leading-tight font-semibold text-balance">
+                            {theme.name}
+                          </p>
+                          {name && (
+                            <p className="mt-1 text-[0.55rem] font-bold tracking-[0.12em] uppercase text-white/80">
+                              Starring {name}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="h-8" />

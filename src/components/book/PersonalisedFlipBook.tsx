@@ -152,22 +152,33 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           </StoryPage>
 
           <StoryPage>
-            <div
-              className="flex h-full flex-col items-center justify-center px-8 py-10 text-center"
-              style={{
-                background: `radial-gradient(circle at 50% 45%, #fff 0 40%, transparent 72%), linear-gradient(145deg, #eef8fb, #fff8dc)`,
-              }}
-            >
-              <p className="text-[0.55rem] font-bold tracking-[0.18em] uppercase" style={{ color: theme.palette.deep }}>A curious morning</p>
-              <div className="my-5 h-px w-16" style={{ backgroundColor: theme.palette.accent }} />
-              <p className="font-book text-[1.02rem] leading-[1.72] font-semibold text-[#343024]">
-                {opening}
-              </p>
-              <p className="font-book mt-4 text-[0.88rem] leading-[1.65] text-[#5e5749]">
-                Drop by drop, {name} measured the water and wrote down every clue. The clouds were telling a story, and a good scientist always listened.
-              </p>
-              <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">2</span>
-            </div>
+            {usesScientistArtwork ? (
+              <div className="relative h-full overflow-hidden bg-[#aac8dc]">
+                <img
+                  src={asset('aman-scientist-curious-morning.jpg')}
+                  alt={`${name} records clues from the changing monsoon clouds at a rooftop weather station`}
+                  className="h-full w-full object-cover"
+                />
+                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">2</span>
+              </div>
+            ) : (
+              <div
+                className="flex h-full flex-col items-center justify-center px-8 py-10 text-center"
+                style={{
+                  background: `radial-gradient(circle at 50% 45%, #fff 0 40%, transparent 72%), linear-gradient(145deg, #eef8fb, #fff8dc)`,
+                }}
+              >
+                <p className="text-[0.55rem] font-bold tracking-[0.18em] uppercase" style={{ color: theme.palette.deep }}>A curious morning</p>
+                <div className="my-5 h-px w-16" style={{ backgroundColor: theme.palette.accent }} />
+                <p className="font-book text-[1.02rem] leading-[1.72] font-semibold text-[#343024]">
+                  {opening}
+                </p>
+                <p className="font-book mt-4 text-[0.88rem] leading-[1.65] text-[#5e5749]">
+                  Drop by drop, {name} measured the water and wrote down every clue. The clouds were telling a story, and a good scientist always listened.
+                </p>
+                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">2</span>
+              </div>
+            )}
           </StoryPage>
 
           <StoryPage>
@@ -194,20 +205,31 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           </StoryPage>
 
           <StoryPage>
-            <div
-              className="flex h-full flex-col items-center justify-center px-8 text-center"
-              style={{ background: 'linear-gradient(160deg, #fff9df 0%, #ffffff 52%, #e8f5f4 100%)' }}
-            >
-              <p className="text-[0.55rem] font-bold tracking-[0.18em] uppercase" style={{ color: theme.palette.deep }}>The discovery</p>
-              <div className="my-6 h-px w-20" style={{ backgroundColor: theme.palette.accent }} />
-              <p className="font-book text-[1rem] leading-[1.72] font-semibold text-[#343024]">
-                The pinwheel spun. The gauge began to fill. “Rain before sunset!” {name} called, just as the first silver drops danced across the terrace.
-              </p>
-              <p className="font-book mt-4 text-[0.88rem] leading-[1.65] text-[#5e5749]">
-                The mystery was solved with careful questions, patient measuring and one wonderfully curious mind.
-              </p>
-              <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">4</span>
-            </div>
+            {usesScientistArtwork ? (
+              <div className="relative h-full overflow-hidden bg-[#64859d]">
+                <img
+                  src={asset('aman-scientist-discovery.jpg')}
+                  alt={`${name} celebrates as rain begins to fill the rooftop gauge`}
+                  className="h-full w-full object-cover"
+                />
+                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">4</span>
+              </div>
+            ) : (
+              <div
+                className="flex h-full flex-col items-center justify-center px-8 text-center"
+                style={{ background: 'linear-gradient(160deg, #fff9df 0%, #ffffff 52%, #e8f5f4 100%)' }}
+              >
+                <p className="text-[0.55rem] font-bold tracking-[0.18em] uppercase" style={{ color: theme.palette.deep }}>The discovery</p>
+                <div className="my-6 h-px w-20" style={{ backgroundColor: theme.palette.accent }} />
+                <p className="font-book text-[1rem] leading-[1.72] font-semibold text-[#343024]">
+                  The pinwheel spun. The gauge began to fill. “Rain before sunset!” {name} called, just as the first silver drops danced across the terrace.
+                </p>
+                <p className="font-book mt-4 text-[0.88rem] leading-[1.65] text-[#5e5749]">
+                  The mystery was solved with careful questions, patient measuring and one wonderfully curious mind.
+                </p>
+                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">4</span>
+              </div>
+            )}
           </StoryPage>
 
           <StoryPage hard>
