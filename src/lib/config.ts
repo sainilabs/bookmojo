@@ -39,8 +39,6 @@ export const ANNOUNCEMENT =
 export const PROOF = {
   booksDelivered: 41_820,
   booksDeliveredLabel: '41,800+',
-  rating: 4.9,
-  reviewCount: 2148,
   /** Reach stated the way an Indian buyer checks it: does it come to my PIN? */
   pincodes: '19,000+',
   /** Kept small and secondary — the NRI gifting corridor is real revenue but

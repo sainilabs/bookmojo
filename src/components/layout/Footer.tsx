@@ -1,7 +1,6 @@
 import { Container } from '@/components/ui/Layout';
 import { Logo } from '@/components/art/Brand';
 import { WhatsAppMark } from '@/components/art/Icons';
-import { Rating } from '@/components/ui/Rating';
 import { whatsappHref } from '@/lib/whatsapp';
 import { BRAND, NAV_LINKS, PROOF } from '@/lib/config';
 // BRAND carries the studio and press locations used in the blurb below.
@@ -33,7 +32,6 @@ export function Footer() {
               Written in {BRAND.studio}, printed in {BRAND.press}, delivered to {PROOF.pincodes} PIN
               codes.
             </p>
-            <Rating value={PROOF.rating} count={PROOF.reviewCount} className="mt-5" />
           </div>
 
           <nav aria-label="Sections">

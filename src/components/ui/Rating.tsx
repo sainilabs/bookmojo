@@ -1,18 +1,17 @@
 import { Star } from '@/components/art/Icons';
 import { cx } from '@/lib/utils';
-import { PROOF } from '@/lib/config';
 
 /**
  * Star rating.
  *
  * Two accessibility decisions worth naming: the stars are `aria-hidden` and the
- * rating is announced as text, because a screen reader user needs "4.9 out of 5
- * from 2,148 reviews", not "star star star star star". And the count is always
+ * rating is announced as text rather than as repeated star labels. The count is
+ * always
  * shown next to the score — a rating without a sample size is a weaker trust
  * signal than no rating at all, and savvy buyers know it.
  */
 export function Rating({
-  value = PROOF.rating,
+  value = 5,
   count,
   size = 15,
   className,

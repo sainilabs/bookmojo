@@ -62,7 +62,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
   const usesScientistArtwork = draft.themeId === 'chandni';
   const usesSampleCover = usesScientistArtwork && !enteredName;
   const asset = (file: string) => `${import.meta.env.BASE_URL}images/storybook/${file}`;
-  const pageCount = 6;
+  const pageCount = usesScientistArtwork ? 10 : 6;
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -88,17 +88,17 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           ref={book}
           className="relative z-10 drop-shadow-[0_24px_28px_rgb(37_33_63_/_0.22)]"
           style={{}}
-          width={290}
-          height={348}
+          width={260}
+          height={330}
           size="stretch"
-          minWidth={240}
-          maxWidth={320}
-          minHeight={288}
-          maxHeight={384}
+          minWidth={145}
+          maxWidth={290}
+          minHeight={184}
+          maxHeight={368}
           startPage={0}
           drawShadow
           flippingTime={760}
-          usePortrait
+          usePortrait={!usesScientistArtwork}
           startZIndex={10}
           autoSize
           maxShadowOpacity={0.38}
@@ -127,7 +127,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#b9d5e8]">
                 <img
-                  src={asset('aman-scientist-rain-gauge.png')}
+                  src={asset('aman-scientist-spread-rain-gauge.jpg')}
                   alt={`${name}, wearing a white scientist coat, tests a homemade rain gauge on a terrace`}
                   className="h-full w-full object-cover"
                 />
@@ -151,15 +151,29 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             )}
           </StoryPage>
 
+          {usesScientistArtwork && (
+            <StoryPage>
+              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
+                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">A curious morning</p>
+                <div className="my-5 h-px w-16 bg-[#d49645]" />
+                <p className="font-book text-[1rem] leading-[1.72] font-semibold text-[#343024]">{opening}</p>
+                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">
+                  Drop by drop, {name} measured the water and wrote down every clue. The clouds were telling a story, and a good scientist always listened.
+                </p>
+                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">2</span>
+              </div>
+            </StoryPage>
+          )}
+
           <StoryPage>
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#aac8dc]">
                 <img
-                  src={asset('aman-scientist-curious-morning.jpg')}
-                  alt={`${name} records clues from the changing monsoon clouds at a rooftop weather station`}
+                  src={asset('aman-scientist-spread-cloud-clues.jpg')}
+                  alt={`${name} studies the changing monsoon clouds at a rooftop weather station`}
                   className="h-full w-full object-cover"
                 />
-                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">2</span>
+                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">3</span>
               </div>
             ) : (
               <div
@@ -181,15 +195,29 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             )}
           </StoryPage>
 
+          {usesScientistArtwork && (
+            <StoryPage>
+              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
+                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">Cloud clues</p>
+                <div className="my-5 h-px w-16 bg-[#d49645]" />
+                <p className="font-book text-[0.96rem] leading-[1.72] font-semibold text-[#343024]">
+                  Dark clouds gathered above the old rooftops. {name} checked the wind, drew every cloud and spotted a bright patch racing in from the west.
+                </p>
+                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">“The rain is close,” he whispered, comparing today’s notes with yesterday’s careful measurements.</p>
+                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">4</span>
+              </div>
+            </StoryPage>
+          )}
+
           <StoryPage>
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#d8934f]">
                 <img
-                  src={asset('aman-scientist-weather-station.png')}
+                  src={asset('aman-scientist-spread-experiment.jpg')}
                   alt={`${name} discovers the first monsoon rain with a homemade weather station`}
                   className="h-full w-full object-cover"
                 />
-                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">3</span>
+                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">5</span>
               </div>
             ) : (
               <div className="relative flex h-full flex-col justify-end overflow-hidden p-7 text-white" style={{ backgroundColor: theme.palette.base }}>
@@ -204,15 +232,29 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             )}
           </StoryPage>
 
+          {usesScientistArtwork && (
+            <StoryPage>
+              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
+                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">The experiment</p>
+                <div className="my-5 h-px w-16 bg-[#d49645]" />
+                <p className="font-book text-[0.96rem] leading-[1.72] font-semibold text-[#343024]">
+                  {name} set the rain gauge beside his spinning pinwheel and watched the sky. One turn meant a breeze. Three quick turns meant the monsoon was almost here.
+                </p>
+                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">He waited patiently, pencil ready, while the first cool wind swept across the terrace.</p>
+                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">6</span>
+              </div>
+            </StoryPage>
+          )}
+
           <StoryPage>
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#64859d]">
                 <img
-                  src={asset('aman-scientist-discovery.jpg')}
+                  src={asset('aman-scientist-spread-discovery.jpg')}
                   alt={`${name} celebrates as rain begins to fill the rooftop gauge`}
                   className="h-full w-full object-cover"
                 />
-                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">4</span>
+                <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">7</span>
               </div>
             ) : (
               <div
@@ -232,6 +274,20 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             )}
           </StoryPage>
 
+          {usesScientistArtwork && (
+            <StoryPage>
+              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
+                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">The discovery</p>
+                <div className="my-5 h-px w-16 bg-[#d49645]" />
+                <p className="font-book text-[0.96rem] leading-[1.72] font-semibold text-[#343024]">
+                  The pinwheel spun. The gauge began to fill. “Rain before sunset!” {name} called, just as silver drops danced across the terrace.
+                </p>
+                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">The mystery was solved with careful questions, patient measuring and one wonderfully curious mind.</p>
+                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">8</span>
+              </div>
+            </StoryPage>
+          )}
+
           <StoryPage hard>
             <div className="flex h-full flex-col items-center justify-center px-8 text-center text-white" style={{ backgroundColor: theme.palette.deep }}>
               <div className="grid size-14 place-items-center rounded-md border border-white/25 bg-white/10 font-book text-2xl">B</div>
@@ -242,7 +298,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           </StoryPage>
         </HTMLFlipBook>
 
-        <div className="relative z-20 grid w-full max-w-[22rem] grid-cols-2 gap-2" aria-label="Book preview controls">
+        <div className="relative z-20 grid w-full max-w-[38rem] grid-cols-2 gap-2" aria-label="Book preview controls">
           <button
             type="button"
             onClick={() => book.current?.pageFlip().flipPrev('bottom')}
