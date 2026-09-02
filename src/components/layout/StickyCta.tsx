@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { OrderButton } from '@/components/ui/Button';
-import { BookCover } from '@/components/art/BookCover';
 import { Close } from '@/components/art/Icons';
 import { PRICING } from '@/lib/config';
 import { useDraft } from '@/hooks/useDraft';
@@ -88,9 +87,15 @@ export function StickyCta() {
           'rounded-t-[1.35rem] sm:w-[24rem] sm:rounded-[1.35rem] sm:p-4',
         )}
       >
-        {/* Their cover, small. The single most persuasive pixel we have. */}
-        <div className="w-12 shrink-0 overflow-hidden rounded-[3px] shadow-e2 sm:w-14">
-          <BookCover draft={draft} className="block w-full" />
+        {/* Repeat the hero product shot so the floating offer stays tangible. */}
+        <div className="h-[4.25rem] w-14 shrink-0 overflow-hidden rounded-[3px] sm:h-[4.75rem] sm:w-16">
+          <img
+            src={`${import.meta.env.BASE_URL}hero-book.png`}
+            alt="Personalised Aman Scientist Dreams storybook"
+            width="1154"
+            height="1363"
+            className="h-full w-full object-contain"
+          />
         </div>
 
         <div className="min-w-0 flex-1">
