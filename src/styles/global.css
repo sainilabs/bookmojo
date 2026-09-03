@@ -1,3 +1,10 @@
+@import '@fontsource-variable/figtree/wght.css';
+@import '@fontsource-variable/literata/standard.css';
+@import '@fontsource-variable/literata/standard-italic.css';
+@import '@fontsource/mukta/400.css';
+@import '@fontsource/mukta/500.css';
+@import '@fontsource/mukta/600.css';
+@import '@fontsource/mukta/700.css';
 @import 'tailwindcss';
 @import './tokens.css';
 
@@ -36,7 +43,7 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.65;
+    line-height: var(--text-body--line-height);
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -66,6 +73,10 @@
   p {
     margin: 0;
     text-wrap: pretty;
+  }
+
+  .font-book {
+    font-optical-sizing: auto;
   }
 
   /* Never remove focus rings — replace them with a better one. Two-tone ring

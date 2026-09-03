@@ -387,29 +387,28 @@
      Mukta covers Devanagari in both roles. Neither Figtree nor Literata ships
      the script, and leaving Hindi to a platform fallback is how bilingual
      products end up looking unfinished in one of their two languages. */
-  --font-display: 'Figtree', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+  --font-display: 'Figtree Variable', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
     sans-serif;
-  --font-sans: 'Figtree', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+  --font-sans: 'Figtree Variable', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
     sans-serif;
   /* Exposed as a utility (`font-book`) so only genuine book surfaces opt in. */
-  --font-book: 'Literata', 'Mukta', 'Iowan Old Style', Georgia, serif;
+  --font-book: 'Literata Variable', 'Mukta', 'Iowan Old Style', Georgia, serif;
   --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
 
-  /* Display tops out at 68px. Tracking is tighter than the previous serif scale
-     because a geometric sans at heavy weights opens up at large sizes and reads
-     loose if it is left at default spacing. */
+    /* Display tops out at 68px. Tracking stays neutral so long names remain
+      resilient in compact layouts and bilingual text keeps its natural rhythm. */
   --text-display-1: clamp(2.7rem, 2rem + 3.2vw, 4.25rem);
   --text-display-1--line-height: 1;
-  --text-display-1--letter-spacing: -0.035em;
+    --text-display-1--letter-spacing: 0;
   --text-display-2: clamp(2.15rem, 1.65rem + 2.4vw, 3.5rem);
   --text-display-2--line-height: 1.04;
-  --text-display-2--letter-spacing: -0.03em;
+    --text-display-2--letter-spacing: 0;
   --text-display-3: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
   --text-display-3--line-height: 1.1;
-  --text-display-3--letter-spacing: -0.024em;
+    --text-display-3--letter-spacing: 0;
   --text-title: clamp(1.25rem, 1.1rem + 0.65vw, 1.6rem);
   --text-title--line-height: 1.24;
-  --text-title--letter-spacing: -0.018em;
+    --text-title--letter-spacing: 0;
   --text-lead: clamp(1.05rem, 1rem + 0.35vw, 1.22rem);
   --text-lead--line-height: 1.55;
   --text-body: 1rem;
