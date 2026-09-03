@@ -1,9 +1,6 @@
 import { Container } from '@/components/ui/Layout';
 import { Logo } from '@/components/art/Brand';
-import { WhatsAppMark } from '@/components/art/Icons';
-import { whatsappHref } from '@/lib/whatsapp';
 import { BRAND, NAV_LINKS, PROOF } from '@/lib/config';
-// BRAND carries the studio and press locations used in the blurb below.
 import { LANGUAGES } from '@/data/catalogue';
 
 /**
@@ -21,16 +18,25 @@ import { LANGUAGES } from '@/data/catalogue';
  */
 export function Footer() {
   const year = new Date().getFullYear();
+  const base = import.meta.env.BASE_URL;
+  const policyLinks = [
+    { label: 'About us', href: `${base}about-us/` },
+    { label: 'Contact us', href: `${base}contact-us/` },
+    { label: 'Privacy', href: `${base}privacy-policy/` },
+    { label: 'Terms', href: `${base}terms-and-conditions/` },
+    { label: 'Shipping', href: `${base}shipping-policy/` },
+    { label: 'Returns & refunds', href: `${base}return-refund-policy/` },
+    { label: 'Disclaimer', href: `${base}disclaimer/` },
+  ];
 
   return (
-    <footer className="border-t border-hairline bg-paper">
+    <footer id="site-footer" className="border-t border-hairline bg-paper">
       <Container>
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-8">
           <div className="max-w-[30ch]">
             <Logo />
             <p className="mt-4 text-small text-ink-soft">
-              Written in {BRAND.studio}, printed in {BRAND.press}, delivered to {PROOF.pincodes} PIN
-              codes.
+              Based in {BRAND.studio}. Pan-India delivery across {PROOF.pincodes} PIN codes.
             </p>
           </div>
 
@@ -60,42 +66,33 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-small text-ink-muted">GST and delivery included.</p>
+            <p className="mt-4 text-small text-ink-muted">Tracked delivery included.</p>
           </div>
 
           <div>
             <h2 className="eyebrow mb-4">Talk to us</h2>
             <a
-              href={whatsappHref({ intent: 'help' })}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-small font-semibold text-verdant-600 transition-colors hover:text-verdant-700 night:text-verdant-500"
-            >
-              <WhatsAppMark size={16} />
-              {BRAND.whatsappDisplay}
-            </a>
-            <p className="mt-2 text-small text-ink-muted">{BRAND.supportHours}</p>
-            <a
               href={`mailto:${BRAND.email}`}
-              className="mt-4 inline-block text-small text-ink-soft transition-colors hover:text-ink"
+              className="text-small font-semibold text-verdant-600 transition-colors hover:text-verdant-700 night:text-verdant-500"
             >
               {BRAND.email}
             </a>
+            <p className="mt-2 text-small text-ink-muted">{BRAND.supportHours}</p>
           </div>
         </div>
 
         <div className="flex flex-col gap-4 border-t border-hairline py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-small text-ink-muted">
-            © {year} BookMojo Studio Ltd. Illustrations and manuscripts are original works.
+            © {year} BookMojo Studio. Illustrations and manuscripts are original works.
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            {['Privacy', 'Terms', 'Refunds & guarantee', 'Accessibility'].map((item) => (
-              <li key={item}>
+            {policyLinks.map((item) => (
+              <li key={item.href}>
                 <a
-                  href="#top"
+                  href={item.href}
                   className="text-small text-ink-muted underline decoration-hairline underline-offset-4 transition-colors hover:text-ink"
                 >
-                  {item}
+                  {item.label}
                 </a>
               </li>
             ))}

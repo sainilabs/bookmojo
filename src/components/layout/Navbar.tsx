@@ -3,7 +3,7 @@ import { Container } from '@/components/ui/Layout';
 import { OrderButton } from '@/components/ui/Button';
 import { Logo } from '@/components/art/Brand';
 import { Close, Gift, Menu, Moon, Sun } from '@/components/art/Icons';
-import { ANNOUNCEMENT, NAV_LINKS, PROOF } from '@/lib/config';
+import { ANNOUNCEMENT, NAV_LINKS } from '@/lib/config';
 import { useTheme } from '@/hooks/useTheme';
 import { useEscape, useScrollLock, useScrolledPast, useScrollSpy } from '@/hooks/useUi';
 import { cx } from '@/lib/utils';
@@ -128,10 +128,6 @@ export function Navbar() {
 
             <div className="ml-auto flex items-center gap-2">
               <ThemeToggle theme={theme} onToggle={toggle} />
-
-              <span className="hidden text-small text-ink-muted xl:inline">
-                {PROOF.booksDeliveredLabel} books delivered
-              </span>
 
               <OrderButton
                 intent="nav"

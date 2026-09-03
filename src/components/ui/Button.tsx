@@ -3,7 +3,6 @@ import { cx } from '@/lib/utils';
 import { track } from '@/lib/analytics';
 import { whatsappHref, type HandoffOptions, type Intent } from '@/lib/whatsapp';
 import { useDraft } from '@/hooks/useDraft';
-import { WhatsAppMark } from '@/components/art/Icons';
 import { BRAND } from '@/lib/config';
 
 /**
@@ -84,7 +83,7 @@ export function OrderButton({
   intent,
   note,
   size = 'lg',
-  label = 'Start on WhatsApp',
+  label = 'Email BookMojo',
   sublabel,
   block = false,
   className,
@@ -105,8 +104,6 @@ export function OrderButton({
   return (
     <a
       href={whatsappHref(options)}
-      target="_blank"
-      rel="noopener noreferrer"
       onClick={() =>
         track('whatsapp_open', {
           intent,
@@ -122,21 +119,17 @@ export function OrderButton({
         sublabel ? 'flex-col !gap-0 py-2.5' : null,
         className,
       )}
-      aria-label={`${typeof label === 'string' ? label : 'Start your book on WhatsApp'} — opens WhatsApp at ${BRAND.whatsappDisplay}`}
+      aria-label={`${typeof label === 'string' ? label : 'Email BookMojo'} at ${BRAND.email}`}
     >
       {sublabel ? (
         <>
           <span className="flex items-center gap-2 font-semibold">
-            <WhatsAppMark size={19} className="shrink-0" />
             {label}
           </span>
           <span className="text-[0.7rem] font-medium tracking-wide opacity-80">{sublabel}</span>
         </>
       ) : (
-        <>
-          <WhatsAppMark size={size === 'sm' ? 16 : 19} className="shrink-0" />
-          {label}
-        </>
+        label
       )}
     </a>
   );

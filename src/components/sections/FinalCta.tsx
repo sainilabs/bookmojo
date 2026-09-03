@@ -38,7 +38,7 @@ export function FinalCta() {
     'Written and illustrated for your child',
     'English or Hindi',
     'Rigid gift box',
-    'Tracked delivery + GST',
+    'Tracked delivery included',
     'Unlimited changes before printing',
   ];
 
@@ -92,7 +92,7 @@ export function FinalCta() {
                     {formatINR(PRICING.hardcover)}
                   </p>
                   <p className="text-small text-ink-inverse-muted">
-                    <s className="opacity-70">{formatINR(PRICING.hardcoverCompare)}</s> · GST and
+                    <s className="opacity-70">{formatINR(PRICING.hardcoverCompare)}</s> · tracked
                     delivery included · no per-page or per-name extras
                   </p>
                 </div>

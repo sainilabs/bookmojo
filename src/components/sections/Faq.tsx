@@ -50,7 +50,7 @@ export function Faq() {
             </Reveal>
             <Reveal y={18} delay={140}>
               <p className="mt-5 max-w-[34ch] text-lead text-ink-inverse-soft">
-                Honest answers, including the ones about paying inside a chat app.
+                Honest answers, including the ones about ordering and payment.
               </p>
             </Reveal>
 
@@ -65,7 +65,7 @@ export function Faq() {
                     {BRAND.supportHours}. Asking does not start an order.
                   </p>
                 </div>
-                <OrderButton intent="faq" size="md" label="Ask on WhatsApp" block />
+                <OrderButton intent="faq" size="md" label="Email us" block />
               </div>
             </Reveal>
           </div>

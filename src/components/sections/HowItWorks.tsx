@@ -140,7 +140,7 @@ export function HowItWorks() {
           <OrderButton
             intent="hero"
             label="Start step one"
-            sublabel="Opens WhatsApp · nothing to pay yet"
+            sublabel="Opens email · nothing to pay yet"
           />
           <p className="text-small text-ink-muted">
             Or{' '}

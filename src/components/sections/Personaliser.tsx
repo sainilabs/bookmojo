@@ -272,7 +272,7 @@ export function Personaliser() {
                 columns={2}
                 note={
                   draft.bookFormat === 'hardcover'
-                    ? 'Gift box, GST and tracked delivery are included.'
+                    ? 'Gift box and tracked delivery are included.'
                     : 'Upgrade to hardcover later and we deduct the digital edition price.'
                 }
               />
@@ -320,7 +320,7 @@ export function Personaliser() {
                 note={photo ? 'I have selected a child photo and will attach it in this chat.' : undefined}
                 block
                 label={
-                  isPersonalised ? `Continue ${possessive(name)} order` : 'Continue order on WhatsApp'
+                  isPersonalised ? `Continue ${possessive(name)} order` : 'Continue order by email'
                 }
                 sublabel="Your selected details will be included"
               />

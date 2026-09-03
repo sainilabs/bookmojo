@@ -124,7 +124,7 @@ export function Delivery() {
                   {PROOF.pincodes}
                 </p>
                 <p className="mt-2 text-small text-ink-soft">
-                  PIN codes across India, courier and GST already in the price. Plus{' '}
+                  PIN codes across India, with tracked delivery included. Plus{' '}
                   {PROOF.countries} countries for gifts sent home.
                 </p>
               </div>

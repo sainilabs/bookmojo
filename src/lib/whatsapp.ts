@@ -89,11 +89,8 @@ export function buildMessage({ intent, draft, note }: HandoffOptions): string {
   return parts.join('\n\n');
 }
 
-/**
- * wa.me is used over api.whatsapp.com because it resolves natively to the
- * installed app on mobile and to WhatsApp Web on desktop without an interstitial.
- */
 export function whatsappHref(options: HandoffOptions): string {
-  const text = encodeURIComponent(buildMessage(options));
-  return `https://wa.me/${BRAND.whatsappNumber}?text=${text}`;
+  const subject = encodeURIComponent('BookMojo enquiry');
+  const body = encodeURIComponent(buildMessage(options));
+  return `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
 }

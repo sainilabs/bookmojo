@@ -188,7 +188,7 @@ export function Hero() {
                 <LinkButton href="#create" variant="ink" size="lg" className="justify-center">
                   Build your book
                 </LinkButton>
-                <OrderButton intent="hero" label="Order on WhatsApp" className="justify-center" />
+                <OrderButton intent="hero" label="Start your order" className="justify-center" />
               </div>
             </Reveal>
 

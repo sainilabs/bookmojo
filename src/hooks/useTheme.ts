@@ -12,24 +12,37 @@ const STORAGE_KEY = 'bookmojo:theme';
  * bedtime, in a dark room, on a phone. A cream page at 400 nits in that context
  * is physically unpleasant and it is the moment the buying decision happens.
  *
- * The initial value is resolved before paint by an inline script in the Astro page;
- * this hook only reads what is already there, so there is no flash and no
- * hydration mismatch.
+ * The document theme is resolved before paint by an inline script in the Astro
+ * page. React resolves the same preference after hydration so its first client
+ * render still matches the server without introducing a flash.
  */
 export function useTheme() {
-  const [theme, setTheme] = useState<ThemeName>(() => {
-    if (typeof document === 'undefined') return 'day';
-    return (document.documentElement.dataset.theme as ThemeName) ?? 'day';
-  });
+  const [theme, setTheme] = useState<ThemeName>('day');
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'night'
+      : 'day';
+    setTheme(stored === 'day' || stored === 'night' ? stored : preferredTheme);
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
     document.documentElement.dataset.theme = theme;
     try {
       localStorage.setItem(STORAGE_KEY, theme);
     } catch {
       /* private mode — theme simply will not persist */
     }
-  }, [theme]);
+  }, [hydrated, theme]);
 
   /**
    * Flags the document while the theme flips so CSS can suppress every

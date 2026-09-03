@@ -64,7 +64,7 @@ const SPECS = [
   ['Binding', 'Thread-sewn sections, linen-wrapped spine'],
   ['Languages', 'English or Hindi, set in Devanagari where needed'],
   ['Ages 2–3', 'Board pages, 3mm, rounded corners'],
-  ['Printed in', `${BRAND.press} — India's children's-book press town`],
+  ['Produced in', BRAND.press],
   ['Packaging', 'Rigid gift box, unbranded outer, no pricing inside'],
   ['Proofing', 'Read by a human editor before it goes to plate'],
 ] as const;
@@ -156,7 +156,7 @@ export function Craft() {
                 </>
               }
               title="Printed like a bookshop book, because it is one."
-              deck={`Litho on uncoated stock, signatures sewn in ${BRAND.press} — the same presses behind the children's hardcovers you already own.`}
+              deck={`Litho on uncoated stock and sewn in ${BRAND.press} — made to open flat and last through repeated reading.`}
             />
 
             <Reveal y={20} delay={120} className="mt-9">

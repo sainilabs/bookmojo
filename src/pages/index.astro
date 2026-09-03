@@ -1,11 +1,12 @@
 ---
 import App from '@/App';
+import ThemeHead from '@/components/ui/ThemeHead.astro';
 import '@/styles/global.css';
 import { FAQS } from '@/data/faq';
 
 const title = 'BookMojo — Personalised Storybooks Where Your Child Is the Hero';
 const description =
-  "The gift where your child is the hero: personalised storybooks built around their name, age and dream career, in English or Hindi. Order through WhatsApp.";
+  "The gift where your child is the hero: personalised storybooks built around their name, age and dream career, in English or Hindi. Order by email.";
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -47,8 +48,7 @@ const faqSchema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="theme-color" content="#fbfdfc" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0c1a17" media="(prefers-color-scheme: dark)" />
+    <ThemeHead />
     <link rel="canonical" href={canonical} />
 
     <meta property="og:type" content="website" />
@@ -77,15 +77,6 @@ const faqSchema = {
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-    <script is:inline>
-      try {
-        const stored = localStorage.getItem('bookmojo:theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.dataset.theme = stored || (prefersDark ? 'night' : 'day');
-      } catch {
-        document.documentElement.dataset.theme = 'day';
-      }
-    </script>
   </head>
   <body>
     <App client:load />
@@ -93,8 +84,8 @@ const faqSchema = {
       <div style="padding: 2rem; font-family: sans-serif">
         <h1>BookMojo</h1>
         <p>
-          Personalised storybooks starring your child, in English or Hindi. To order, message
-          BookMojo on <a href="https://wa.me/919876543210">WhatsApp</a>.
+          Personalised storybooks starring your child, in English or Hindi. To order, email
+          BookMojo at <a href="mailto:hello@bookmojo.in">hello@bookmojo.in</a>.
         </p>
       </div>
     </noscript>

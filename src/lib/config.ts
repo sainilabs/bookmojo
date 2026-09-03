@@ -17,16 +17,10 @@ export const BRAND = {
    *  ₹2,000 (NSS 2025); their gifting budget is not. Sold as a book this is
    *  priced at a year's worth of books. Sold as a gift it is priced normally. */
   tagline: 'The gift where your child is the hero.',
-  /** E.164, digits only — required format for wa.me deep links. */
-  whatsappNumber: '919876543210',
-  whatsappDisplay: '+91 98765 43210',
   email: 'hello@bookmojo.in',
-  supportHours: 'Replies in ~2 min, 9am–11pm IST',
-  /** Sivakasi is India's offset children's-book printing centre; naming the town
-   *  is a credibility signal to anyone in publishing and harmless to everyone
-   *  else. Vague "made with love" copy earns nothing. */
-  studio: 'Bengaluru',
-  press: 'Sivakasi, Tamil Nadu',
+  supportHours: 'Replies within one business day',
+  studio: 'Narnaul, Haryana 123001',
+  press: 'India',
 } as const;
 
 /** The strip above the nav. One line, one fact, no dismiss button.
@@ -37,8 +31,6 @@ export const ANNOUNCEMENT =
   '70% OFF on personalised storybooks';
 
 export const PROOF = {
-  booksDelivered: 41_820,
-  booksDeliveredLabel: '41,800+',
   /** Reach stated the way an Indian buyer checks it: does it come to my PIN? */
   pincodes: '19,000+',
   /** Kept small and secondary — the NRI gifting corridor is real revenue but
@@ -61,10 +53,9 @@ export const PRICING = {
    *  against 2–3% for a ₹1,499 gift. Lead with ₹199 and we sell a PDF. */
   digital: 199,
   giftBoxIncluded: true,
-  /** Shipping and GST are inside the price. In a market trained on surprise
-   *  delivery charges at the last step, saying so early is a conversion feature. */
+  /** Shipping is inside the price. In a market trained on surprise delivery
+   *  charges at the last step, saying so early is a conversion feature. */
   shippingIncluded: true,
-  gstIncluded: true,
 } as const;
 
 export const GUARANTEE = {

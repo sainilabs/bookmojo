@@ -155,7 +155,7 @@ export function buildJourney(draft: Draft): Stage[] {
           kind: 'in',
           text: 'Where should we deliver it? Address, city, PIN code — one message is fine.',
         },
-        { kind: 'out', text: 'B-402, Ashoka Residency, Koramangala 5th Block, Bengaluru 560095' },
+        { kind: 'out', text: 'Narnaul, Haryana 123001' },
         {
           /* UPI first, and not as a token gesture: it is how most of this market
              actually pays. Leading with Apple Pay would signal that the page was
@@ -166,7 +166,7 @@ export function buildJourney(draft: Draft): Stage[] {
         },
         {
           kind: 'in',
-          text: 'Secure one-time payment link. Nothing is stored in this chat. GST and tracked delivery are already in the price.',
+          text: 'Secure one-time payment link. Payment details are never stored in the conversation, and tracked delivery is included.',
         },
       ],
     },

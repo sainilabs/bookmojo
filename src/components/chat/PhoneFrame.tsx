@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { BRAND } from '@/lib/config';
 import { Check } from '@/components/art/Icons';
 
 /**
@@ -147,7 +146,7 @@ export function PhoneFrame({
       </div>
 
       <p className="mt-4 text-center text-[0.7rem] text-ink-muted">
-        A depiction of the real conversation · {BRAND.whatsappDisplay}
+        A depiction of the ordering conversation
       </p>
     </div>
   );

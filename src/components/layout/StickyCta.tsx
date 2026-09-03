@@ -44,17 +44,31 @@ export function StickyCta() {
     }
   }, []);
 
-  /* Stand down while the closing section — which has a bigger, better version of
-     this same offer — is in view. */
+  /* Stand down before the footer so the floating bar never covers contact or
+     policy links at the end of the page. */
   useEffect(() => {
-    const target = document.getElementById('final-cta');
-    if (!target || typeof IntersectionObserver === 'undefined') return;
-    const io = new IntersectionObserver(
-      (entries) => setAtClose(entries.some((e) => e.isIntersecting)),
-      { rootMargin: '-10% 0px -10% 0px' },
-    );
-    io.observe(target);
-    return () => io.disconnect();
+    const target = document.getElementById('site-footer');
+    if (!target) return;
+
+    const updateAtClose = () => {
+      const bounds = target.getBoundingClientRect();
+      setAtClose(bounds.top < window.innerHeight && bounds.bottom > 0);
+    };
+
+    const io = typeof IntersectionObserver === 'undefined'
+      ? null
+      : new IntersectionObserver(updateAtClose, { rootMargin: '0px 0px 5% 0px' });
+
+    updateAtClose();
+    io?.observe(target);
+    window.addEventListener('scroll', updateAtClose, { passive: true });
+    window.addEventListener('resize', updateAtClose);
+
+    return () => {
+      io?.disconnect();
+      window.removeEventListener('scroll', updateAtClose);
+      window.removeEventListener('resize', updateAtClose);
+    };
   }, []);
 
   const dismiss = () => {

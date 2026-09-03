@@ -79,6 +79,6 @@ export const ENDORSEMENTS: ReadonlyArray<{ label: string; note: string }> = [
   { label: 'FSC® Certified', note: 'Responsibly sourced paper' },
   { label: 'Soy-based inks', note: 'Child-safe, low VOC' },
   { label: 'Indie bookshops', note: 'Stocked in 40+ stores' },
-  { label: 'GST invoice', note: 'Included with every order' },
+  { label: 'Order confirmation', note: 'Included with every order' },
   { label: 'Reading Together', note: 'Literacy programme partner' },
 ];

@@ -1,0 +1,102 @@
+---
+import { Logo } from '@/components/art/Brand';
+import ThemeHead from '@/components/ui/ThemeHead.astro';
+import ThemeToggle from '@/components/ui/ThemeToggle.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+}
+
+const { title, description, eyebrow } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const links = [
+  ['About us', 'about-us/'],
+  ['Contact us', 'contact-us/'],
+  ['Privacy policy', 'privacy-policy/'],
+  ['Terms', 'terms-and-conditions/'],
+  ['Shipping policy', 'shipping-policy/'],
+  ['Returns & refunds', 'return-refund-policy/'],
+  ['Disclaimer', 'disclaimer/'],
+] as const;
+---
+
+<!doctype html>
+<html lang="en-IN" data-theme="day">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title} | BookMojo</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <ThemeHead />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&display=swap"
+    />
+  </head>
+  <body class="bg-paper text-ink">
+    <header class="border-b border-hairline bg-paper">
+      <div class="mx-auto flex min-h-20 w-[min(100%-2rem,72rem)] items-center justify-between gap-5">
+        <a href={base} aria-label="BookMojo home"><Logo /></a>
+        <div class="flex items-center gap-2">
+          <ThemeToggle />
+          <a href={base} class="text-small font-semibold text-ink-soft transition-colors hover:text-ink">
+            Back to home
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="border-b border-hairline bg-sunken py-14 sm:py-20">
+        <div class="mx-auto w-[min(100%-2rem,52rem)]">
+          <p class="eyebrow">{eyebrow}</p>
+          <h1 class="mt-4 text-display-2">{title}</h1>
+          <p class="mt-5 max-w-[58ch] text-lead text-ink-soft">{description}</p>
+          <p class="mt-5 text-small text-ink-muted">Effective 3 September 2026</p>
+        </div>
+      </section>
+
+      <article class="legal-copy mx-auto w-[min(100%-2rem,52rem)] py-12 sm:py-16">
+        <slot />
+      </article>
+    </main>
+
+    <footer class="border-t border-hairline bg-paper">
+      <div class="mx-auto flex w-[min(100%-2rem,72rem)] flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-small text-ink-muted">© 2026 BookMojo Studio · Narnaul, Haryana 123001</p>
+        <nav aria-label="Policy pages">
+          <ul class="flex flex-wrap gap-x-5 gap-y-2">
+            {links.map(([label, path]) => (
+              <li><a href={`${base}${path}`} class="text-small text-ink-muted underline decoration-hairline underline-offset-4 hover:text-ink">{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .legal-copy :global(h2) {
+    margin-top: 2.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    font-weight: 750;
+    line-height: 1.2;
+  }
+
+  .legal-copy :global(h2:first-child) { margin-top: 0; }
+  .legal-copy :global(p), .legal-copy :global(li) { color: var(--color-ink-soft); line-height: 1.75; }
+  .legal-copy :global(p) { margin-top: 0.85rem; }
+  .legal-copy :global(ul) { margin-top: 0.85rem; list-style: disc; padding-left: 1.35rem; }
+  .legal-copy :global(a) { color: var(--color-verdant-700); text-decoration: underline; text-underline-offset: 3px; }
+</style>

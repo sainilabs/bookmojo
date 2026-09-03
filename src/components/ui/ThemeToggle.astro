@@ -1,0 +1,57 @@
+---
+import { Moon, Sun } from '@/components/art/Icons';
+---
+
+<button
+  type="button"
+  role="switch"
+  aria-checked="false"
+  class="btn btn-tonal btn-icon"
+  data-theme-toggle
+>
+  <Sun size={18} className="night:hidden" />
+  <Moon size={18} className="hidden night:block" />
+  <span class="sr-only" data-theme-label>Bedtime theme, off</span>
+</button>
+
+<script>
+  const STORAGE_KEY = 'bookmojo:theme';
+
+  function setupThemeToggles() {
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
+      if (button.dataset.themeBound === 'true') return;
+      button.dataset.themeBound = 'true';
+
+      const updateState = () => {
+        const isNight = document.documentElement.dataset.theme === 'night';
+        button.setAttribute('aria-checked', String(isNight));
+        button.title = isNight ? 'Switch to daylight' : 'Switch to bedtime';
+        const label = button.querySelector('[data-theme-label]');
+        if (label) label.textContent = isNight ? 'Bedtime theme, on' : 'Bedtime theme, off';
+      };
+
+      button.addEventListener('click', () => {
+        const root = document.documentElement;
+        const next = root.dataset.theme === 'night' ? 'day' : 'night';
+        root.setAttribute('data-theme-switching', '');
+        root.dataset.theme = next;
+
+        try {
+          localStorage.setItem(STORAGE_KEY, next);
+        } catch {
+          // The theme still applies for the current page when storage is unavailable.
+        }
+
+        updateState();
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => root.removeAttribute('data-theme-switching'));
+        });
+      });
+
+      updateState();
+    });
+  }
+
+  setupThemeToggles();
+  document.addEventListener('astro:page-load', setupThemeToggles);
+</script>

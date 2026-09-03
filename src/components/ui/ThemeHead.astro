@@ -1,0 +1,28 @@
+<meta name="theme-color" content="#ffffff" data-theme-color />
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const themeColor = document.querySelector('meta[data-theme-color]');
+    let stored = null;
+
+    try {
+      stored = localStorage.getItem('bookmojo:theme');
+    } catch {
+      // Storage can be unavailable in private browsing contexts.
+    }
+
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day';
+    root.dataset.theme = stored === 'day' || stored === 'night' ? stored : systemTheme;
+
+    const updateThemeColor = () => {
+      themeColor?.setAttribute('content', root.dataset.theme === 'night' ? '#14121f' : '#ffffff');
+    };
+
+    updateThemeColor();
+    new MutationObserver(updateThemeColor).observe(root, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+  })();
+</script>

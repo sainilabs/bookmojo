@@ -15,8 +15,8 @@ import type { FaqItem } from '@/types';
 export const FAQS: readonly FaqItem[] = [
   {
     group: 'Ordering',
-    q: 'Why WhatsApp instead of a normal checkout?',
-    a: `Because a personalised book needs a conversation. A form cannot ask a follow-up when a name has an unusual spelling or the gift is for Saturday. No account, no cart — about ${PROOF.avgOrderMinutes} minutes, and the receipt stays in a thread you already check.`,
+    q: 'How do I place an order?',
+    a: `Email us your choices and we will guide you through the personalised details. No account or cart is needed, and you can review the cover before paying.`,
   },
   {
     group: 'Ordering',
@@ -81,7 +81,7 @@ export const FAQS: readonly FaqItem[] = [
   {
     group: 'Payment',
     q: 'What does it cost, and what if we do not love it?',
-    a: `${formatINR(PRICING.hardcover)} for the hardcover, including the gift box, GST and tracked delivery. Nothing is added at the last step. There is also a ${formatINR(PRICING.digital)} digital edition — the same story, sent to your phone — and what you pay for it comes off the printed book if you upgrade. ${GUARANTEE.headline}, for ${GUARANTEE.window} after delivery.`,
+    a: `${formatINR(PRICING.hardcover)} for the hardcover, including the gift box and tracked delivery. Nothing is added at the last step. There is also a ${formatINR(PRICING.digital)} digital edition — the same story, sent to your email — and what you pay for it comes off the printed book if you upgrade. ${GUARANTEE.headline}, for ${GUARANTEE.window} after delivery.`,
   },
 ];
 
