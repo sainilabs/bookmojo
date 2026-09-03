@@ -65,7 +65,7 @@ export function Faq() {
                     {BRAND.supportHours}. Asking does not start an order.
                   </p>
                 </div>
-                <OrderButton intent="faq" size="md" label="Email us" block />
+                <OrderButton intent="faq" size="md" label="Ask on WhatsApp" block />
               </div>
             </Reveal>
           </div>

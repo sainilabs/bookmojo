@@ -6,7 +6,7 @@ import { FAQS } from '@/data/faq';
 
 const title = 'BookMojo — Personalised Storybooks Where Your Child Is the Hero';
 const description =
-  "The gift where your child is the hero: personalised storybooks built around their name, age and dream career, in English or Hindi. Order by email.";
+  "The gift where your child is the hero: personalised storybooks built around their name, age and dream career, in English or Hindi. Order on WhatsApp.";
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -84,8 +84,9 @@ const faqSchema = {
       <div style="padding: 2rem; font-family: sans-serif">
         <h1>BookMojo</h1>
         <p>
-          Personalised storybooks starring your child, in English or Hindi. To order, email
-          BookMojo at <a href="mailto:hello@bookmojo.in">hello@bookmojo.in</a>.
+          Personalised storybooks starring your child, in English or Hindi. Enable JavaScript
+          to personalise your book and continue on WhatsApp. For support, email
+          <a href="mailto:hello@bookmojo.in">hello@bookmojo.in</a>.
         </p>
       </div>
     </noscript>

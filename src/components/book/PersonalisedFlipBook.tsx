@@ -18,6 +18,17 @@ interface FlipEvent {
   data: number;
 }
 
+const THEME_ARTWORK: Record<string, string> = {
+  'lane-four': 'theme-lane-four.jpg',
+  gulmohar: 'theme-gulmohar.jpg',
+  'nala-bridge': 'theme-nala-bridge.jpg',
+  chandni: 'aman-scientist-cover.png',
+  backwater: 'theme-backwater.jpg',
+  banyan: 'theme-banyan.jpg',
+  sriharikota: 'theme-sriharikota.jpg',
+  karkhana: 'theme-karkhana.jpg',
+};
+
 const StoryPage = forwardRef<
   HTMLDivElement,
   { children: React.ReactNode; className?: string; hard?: boolean }
@@ -26,7 +37,7 @@ const StoryPage = forwardRef<
     ref={ref}
     data-density={hard ? 'hard' : 'soft'}
     className={cx(
-      'relative h-full overflow-hidden border border-[#d9cfbd] bg-[#fffaf0] text-[#27231d]',
+      'relative h-full overflow-hidden border border-[#d9cfbd] bg-[#fffaf0] text-[#27231d] [container-type:inline-size]',
       className,
     )}
     style={{ boxShadow: 'inset 0 0 28px rgb(93 75 45 / 0.08)' }}
@@ -52,6 +63,47 @@ function ChildPortrait({ draft, className }: { draft: Draft; className?: string 
   );
 }
 
+function IllustratedTextPage({
+  image,
+  eyebrow,
+  body,
+  pageNumber,
+  accent,
+  deep,
+}: {
+  image: string;
+  eyebrow: string;
+  body: string;
+  pageNumber: number;
+  accent: string;
+  deep: string;
+}) {
+  return (
+    <div className="relative flex h-full items-center justify-center overflow-hidden bg-[#fffaf0]">
+      <img src={image} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-[#fffaf0]/82 backdrop-blur-[1px]" />
+      <div className="relative mx-[5cqw] flex max-h-[90%] w-full flex-col items-center border border-white/70 bg-[#fffaf0]/88 px-[5cqw] py-[5cqw] text-center shadow-sm">
+        <p
+          className="font-bold tracking-[0.14em] uppercase"
+          style={{ color: deep, fontSize: 'clamp(0.4rem, 3.4cqw, 0.58rem)' }}
+        >
+          {eyebrow}
+        </p>
+        <div className="my-[3cqw] h-px w-[28cqw]" style={{ backgroundColor: accent }} />
+        <p
+          className="font-book font-semibold text-[#343024]"
+          style={{ fontSize: 'clamp(0.52rem, 5cqw, 0.92rem)', lineHeight: 1.36 }}
+        >
+          {body}
+        </p>
+      </div>
+      <span className="absolute right-[5cqw] bottom-[4cqw] text-[clamp(0.45rem,3cqw,0.58rem)] text-[#75684f]">
+        {pageNumber}
+      </span>
+    </div>
+  );
+}
+
 export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
   const book = useRef<FlipBookApi | null>(null);
   const [page, setPage] = useState(0);
@@ -62,6 +114,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
   const usesScientistArtwork = draft.themeId === 'chandni';
   const usesSampleCover = usesScientistArtwork && !enteredName;
   const asset = (file: string) => `${import.meta.env.BASE_URL}images/storybook/${file}`;
+  const themeArtwork = asset(THEME_ARTWORK[draft.themeId] ?? THEME_ARTWORK.chandni!);
   const pageCount = usesScientistArtwork ? 10 : 6;
 
   return (
@@ -91,9 +144,9 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           width={260}
           height={330}
           size="stretch"
-          minWidth={145}
+          minWidth={118}
           maxWidth={290}
-          minHeight={184}
+          minHeight={150}
           maxHeight={368}
           startPage={0}
           drawShadow
@@ -134,34 +187,33 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">1</span>
               </div>
             ) : (
-              <div className="flex h-full flex-col items-center justify-between px-7 py-8 text-center">
-                <p className="text-[0.55rem] font-bold tracking-[0.2em] text-[#75684f] uppercase">
+              <div className="flex h-full flex-col items-center justify-between px-[8cqw] py-[9cqw] text-center">
+                <p className="text-[clamp(0.44rem,3.6cqw,0.55rem)] font-bold tracking-[0.14em] text-[#75684f] uppercase">
                   This story belongs to
                 </p>
                 <div>
-                  <p className="font-book text-[2.15rem] leading-none font-semibold" style={{ color: theme.palette.deep }}>
+                  <p className="font-book text-[clamp(1.2rem,12cqw,2.15rem)] leading-none font-semibold" style={{ color: theme.palette.deep }}>
                     {name}
                   </p>
-                  <div className="mx-auto mt-3 h-px w-20" style={{ backgroundColor: theme.palette.accent }} />
+                  <div className="mx-auto mt-[4cqw] h-px w-[28cqw]" style={{ backgroundColor: theme.palette.accent }} />
                 </div>
-                <ChildPortrait draft={draft} className="w-[45%]" />
-                <p className="font-book text-[0.8rem] italic text-[#75684f]">Made especially by BookMojo</p>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">1</span>
+                <ChildPortrait draft={draft} className="max-h-[42%] w-[45%]" />
+                <p className="font-book text-[clamp(0.54rem,4.5cqw,0.8rem)] italic text-[#75684f]">Made especially by BookMojo</p>
+                <span className="absolute right-[5cqw] bottom-[4cqw] text-[clamp(0.45rem,3cqw,0.55rem)] text-[#9b907d]">1</span>
               </div>
             )}
           </StoryPage>
 
           {usesScientistArtwork && (
             <StoryPage>
-              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
-                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">A curious morning</p>
-                <div className="my-5 h-px w-16 bg-[#d49645]" />
-                <p className="font-book text-[1rem] leading-[1.72] font-semibold text-[#343024]">{opening}</p>
-                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">
-                  Drop by drop, {name} measured the water and wrote down every clue. The clouds were telling a story, and a good scientist always listened.
-                </p>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">2</span>
-              </div>
+              <IllustratedTextPage
+                image={asset('aman-scientist-curious-morning.jpg')}
+                eyebrow="A curious morning"
+                body={`By eight, Scientist ${name} had built a rain gauge and filled a notebook with questions. Every drop was a clue.`}
+                pageNumber={2}
+                accent={theme.palette.accent}
+                deep={theme.palette.deep}
+              />
             </StoryPage>
           )}
 
@@ -176,36 +228,27 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">3</span>
               </div>
             ) : (
-              <div
-                className="flex h-full flex-col items-center justify-center px-8 py-10 text-center"
-                style={{
-                  background: `radial-gradient(circle at 50% 45%, #fff 0 40%, transparent 72%), linear-gradient(145deg, #eef8fb, #fff8dc)`,
-                }}
-              >
-                <p className="text-[0.55rem] font-bold tracking-[0.18em] uppercase" style={{ color: theme.palette.deep }}>A curious morning</p>
-                <div className="my-5 h-px w-16" style={{ backgroundColor: theme.palette.accent }} />
-                <p className="font-book text-[1.02rem] leading-[1.72] font-semibold text-[#343024]">
-                  {opening}
-                </p>
-                <p className="font-book mt-4 text-[0.88rem] leading-[1.65] text-[#5e5749]">
-                  Drop by drop, {name} measured the water and wrote down every clue. The clouds were telling a story, and a good scientist always listened.
-                </p>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">2</span>
-              </div>
+              <IllustratedTextPage
+                image={themeArtwork}
+                eyebrow="The adventure begins"
+                body={opening}
+                pageNumber={2}
+                accent={theme.palette.accent}
+                deep={theme.palette.deep}
+              />
             )}
           </StoryPage>
 
           {usesScientistArtwork && (
             <StoryPage>
-              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
-                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">Cloud clues</p>
-                <div className="my-5 h-px w-16 bg-[#d49645]" />
-                <p className="font-book text-[0.96rem] leading-[1.72] font-semibold text-[#343024]">
-                  Dark clouds gathered above the old rooftops. {name} checked the wind, drew every cloud and spotted a bright patch racing in from the west.
-                </p>
-                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">“The rain is close,” he whispered, comparing today’s notes with yesterday’s careful measurements.</p>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">4</span>
-              </div>
+              <IllustratedTextPage
+                image={asset('aman-scientist-weather-station.png')}
+                eyebrow="Cloud clues"
+                body={`Dark clouds gathered. ${name} checked the wind, sketched their shapes and spotted a bright patch racing in from the west.`}
+                pageNumber={4}
+                accent={theme.palette.accent}
+                deep={theme.palette.deep}
+              />
             </StoryPage>
           )}
 
@@ -220,29 +263,28 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">5</span>
               </div>
             ) : (
-              <div className="relative flex h-full flex-col justify-end overflow-hidden p-7 text-white" style={{ backgroundColor: theme.palette.base }}>
+              <div className="relative flex h-full flex-col justify-end overflow-hidden p-[7cqw] text-white" style={{ backgroundColor: theme.palette.base }}>
                 <div className="absolute inset-x-0 top-0 h-[58%] opacity-90" style={{ background: `radial-gradient(circle at 50% 68%, ${theme.palette.accent}, transparent 52%)` }} />
-                <ChildPortrait draft={draft} className="absolute top-7 left-1/2 w-[48%] -translate-x-1/2" />
-                <div className="relative rounded-sm bg-black/25 p-5 backdrop-blur-[2px]">
-                  <p className="text-[0.55rem] font-bold tracking-[0.18em] text-white/70 uppercase">Inside the adventure</p>
-                  <p className="font-book mt-2 text-[0.92rem] leading-[1.55]">{theme.blurb}</p>
+                <ChildPortrait draft={draft} className="absolute top-[7cqw] left-1/2 max-h-[45%] w-[48%] -translate-x-1/2" />
+                <div className="relative rounded-sm bg-black/30 p-[5cqw] backdrop-blur-[2px]">
+                  <p className="text-[clamp(0.44rem,3.5cqw,0.55rem)] font-bold tracking-[0.14em] text-white/75 uppercase">Inside the adventure</p>
+                  <p className="font-book mt-[2cqw] text-[clamp(0.58rem,4.8cqw,0.92rem)] leading-[1.45]">{theme.blurb}</p>
                 </div>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-white/55">3</span>
+                <span className="absolute right-[4cqw] bottom-[3cqw] text-[clamp(0.45rem,3cqw,0.55rem)] text-white/55">3</span>
               </div>
             )}
           </StoryPage>
 
           {usesScientistArtwork && (
             <StoryPage>
-              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
-                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">The experiment</p>
-                <div className="my-5 h-px w-16 bg-[#d49645]" />
-                <p className="font-book text-[0.96rem] leading-[1.72] font-semibold text-[#343024]">
-                  {name} set the rain gauge beside his spinning pinwheel and watched the sky. One turn meant a breeze. Three quick turns meant the monsoon was almost here.
-                </p>
-                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">He waited patiently, pencil ready, while the first cool wind swept across the terrace.</p>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">6</span>
-              </div>
+              <IllustratedTextPage
+                image={asset('aman-scientist-rain-gauge.png')}
+                eyebrow="The experiment"
+                body={`${name}'s pinwheel spun once for a breeze, then three quick turns. The monsoon was almost here.`}
+                pageNumber={6}
+                accent={theme.palette.accent}
+                deep={theme.palette.deep}
+              />
             </StoryPage>
           )}
 
@@ -257,43 +299,36 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">7</span>
               </div>
             ) : (
-              <div
-                className="flex h-full flex-col items-center justify-center px-8 text-center"
-                style={{ background: 'linear-gradient(160deg, #fff9df 0%, #ffffff 52%, #e8f5f4 100%)' }}
-              >
-                <p className="text-[0.55rem] font-bold tracking-[0.18em] uppercase" style={{ color: theme.palette.deep }}>The discovery</p>
-                <div className="my-6 h-px w-20" style={{ backgroundColor: theme.palette.accent }} />
-                <p className="font-book text-[1rem] leading-[1.72] font-semibold text-[#343024]">
-                  The pinwheel spun. The gauge began to fill. “Rain before sunset!” {name} called, just as the first silver drops danced across the terrace.
-                </p>
-                <p className="font-book mt-4 text-[0.88rem] leading-[1.65] text-[#5e5749]">
-                  The mystery was solved with careful questions, patient measuring and one wonderfully curious mind.
-                </p>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">4</span>
-              </div>
+              <IllustratedTextPage
+                image={themeArtwork}
+                eyebrow="The discovery"
+                body={`${name} solved the mystery with courage, careful questions and one wonderfully curious mind.`}
+                pageNumber={4}
+                accent={theme.palette.accent}
+                deep={theme.palette.deep}
+              />
             )}
           </StoryPage>
 
           {usesScientistArtwork && (
             <StoryPage>
-              <div className="flex h-full flex-col items-center justify-center px-8 py-10 text-center">
-                <p className="text-[0.55rem] font-bold tracking-[0.18em] text-[#31566e] uppercase">The discovery</p>
-                <div className="my-5 h-px w-16 bg-[#d49645]" />
-                <p className="font-book text-[0.96rem] leading-[1.72] font-semibold text-[#343024]">
-                  The pinwheel spun. The gauge began to fill. “Rain before sunset!” {name} called, just as silver drops danced across the terrace.
-                </p>
-                <p className="font-book mt-4 text-[0.86rem] leading-[1.65] text-[#5e5749]">The mystery was solved with careful questions, patient measuring and one wonderfully curious mind.</p>
-                <span className="absolute right-4 bottom-3 text-[0.55rem] text-[#9b907d]">8</span>
-              </div>
+              <IllustratedTextPage
+                image={asset('aman-scientist-discovery.jpg')}
+                eyebrow="The discovery"
+                body={`“Rain before sunset!” ${name} cheered as silver drops filled the gauge. Careful questions had solved the mystery.`}
+                pageNumber={8}
+                accent={theme.palette.accent}
+                deep={theme.palette.deep}
+              />
             </StoryPage>
           )}
 
           <StoryPage hard>
-            <div className="flex h-full flex-col items-center justify-center px-8 text-center text-white" style={{ backgroundColor: theme.palette.deep }}>
-              <div className="grid size-14 place-items-center rounded-md border border-white/25 bg-white/10 font-book text-2xl">B</div>
-              <p className="font-book mt-5 text-[1.35rem] font-semibold">{name}&apos;s story is only beginning.</p>
-              <p className="mt-3 text-[0.65rem] leading-relaxed text-white/65">Written, illustrated and printed especially for one child.</p>
-              <p className="absolute bottom-7 text-[0.55rem] font-bold tracking-[0.22em] text-white/50 uppercase">BookMojo original</p>
+            <div className="flex h-full flex-col items-center justify-center px-[8cqw] py-[9cqw] text-center text-white" style={{ backgroundColor: theme.palette.deep }}>
+              <div className="grid size-[clamp(2rem,18cqw,3.5rem)] shrink-0 place-items-center rounded-md border border-white/25 bg-white/10 font-book text-[clamp(1rem,8cqw,1.5rem)]">B</div>
+              <p className="font-book mt-[6cqw] text-[clamp(0.82rem,7.4cqw,1.35rem)] leading-[1.25] font-semibold">{name}&apos;s story is only beginning.</p>
+              <p className="mt-[4cqw] text-[clamp(0.48rem,3.8cqw,0.65rem)] leading-[1.45] text-white/70">Written, illustrated and printed especially for one child.</p>
+              <p className="mt-[7cqw] text-[clamp(0.42rem,3.2cqw,0.55rem)] font-bold tracking-[0.14em] text-white/55 uppercase">BookMojo original</p>
             </div>
           </StoryPage>
         </HTMLFlipBook>

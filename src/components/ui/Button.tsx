@@ -3,7 +3,7 @@ import { cx } from '@/lib/utils';
 import { track } from '@/lib/analytics';
 import { whatsappHref, type HandoffOptions, type Intent } from '@/lib/whatsapp';
 import { useDraft } from '@/hooks/useDraft';
-import { BRAND } from '@/lib/config';
+import { WhatsAppMark } from '@/components/art/Icons';
 
 /**
  * The emphasis ladder, exposed as a closed union so a fifth "just this once"
@@ -83,7 +83,7 @@ export function OrderButton({
   intent,
   note,
   size = 'lg',
-  label = 'Email BookMojo',
+  label = 'WhatsApp BookMojo',
   sublabel,
   block = false,
   className,
@@ -119,17 +119,23 @@ export function OrderButton({
         sublabel ? 'flex-col !gap-0 py-2.5' : null,
         className,
       )}
-      aria-label={`${typeof label === 'string' ? label : 'Email BookMojo'} at ${BRAND.email}`}
+      aria-label={typeof label === 'string' ? label : 'Open WhatsApp to order'}
+      target="_blank"
+      rel="noopener"
     >
       {sublabel ? (
         <>
           <span className="flex items-center gap-2 font-semibold">
+            <WhatsAppMark size={18} aria-hidden />
             {label}
           </span>
           <span className="text-[0.7rem] font-medium tracking-wide opacity-80">{sublabel}</span>
         </>
       ) : (
-        label
+        <>
+          <WhatsAppMark size={18} aria-hidden />
+          {label}
+        </>
       )}
     </a>
   );

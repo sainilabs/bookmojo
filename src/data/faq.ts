@@ -16,7 +16,7 @@ export const FAQS: readonly FaqItem[] = [
   {
     group: 'Ordering',
     q: 'How do I place an order?',
-    a: `Email us your choices and we will guide you through the personalised details. No account or cart is needed, and you can review the cover before paying.`,
+    a: `Send your choices on WhatsApp and we will guide you through the personalised details. No account or cart is needed, and you can review the cover before paying.`,
   },
   {
     group: 'Ordering',

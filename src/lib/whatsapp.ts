@@ -90,7 +90,6 @@ export function buildMessage({ intent, draft, note }: HandoffOptions): string {
 }
 
 export function whatsappHref(options: HandoffOptions): string {
-  const subject = encodeURIComponent('BookMojo enquiry');
-  const body = encodeURIComponent(buildMessage(options));
-  return `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
+  const text = encodeURIComponent(buildMessage(options));
+  return `https://wa.me/${BRAND.whatsappNumber}?text=${text}`;
 }

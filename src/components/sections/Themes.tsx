@@ -5,6 +5,7 @@ import { ArrowRight, BookGlyph, Check } from '@/components/art/Icons';
 import { AGE_BANDS, THEMES } from '@/data/catalogue';
 import { useDraft } from '@/hooks/useDraft';
 import { track } from '@/lib/analytics';
+import { whatsappHref } from '@/lib/whatsapp';
 import { cx, formatName } from '@/lib/utils';
 
 const THEME_ARTWORK: Record<string, string> = {
@@ -33,9 +34,8 @@ const THEME_ARTWORK: Record<string, string> = {
  * because parents self-identify with a description of their kid far faster than
  * with a synopsis. The synopsis sits one line down, for the ones who read on.
  *
- * Selecting a world writes to the shared draft and returns the visitor to the
- * preview rather than opening a product page — there are no product pages here,
- * and every path has to funnel back to the one conversion surface.
+ * Selecting a world writes to the shared draft and opens a prefilled WhatsApp
+ * hand-off, keeping every catalogue path inside the primary ordering flow.
  */
 export function Themes() {
   const { draft, update, isPersonalised } = useDraft();
@@ -45,7 +45,6 @@ export function Themes() {
   const choose = (themeId: string) => {
     update({ themeId });
     track('theme_open', { theme: themeId });
-    document.getElementById('create')?.scrollIntoView({ block: 'start' });
   };
 
   return (
@@ -91,7 +90,16 @@ export function Themes() {
                 scale={0.98}
                 className="h-full"
               >
-                <article
+                <a
+                  href={whatsappHref({
+                    intent: 'theme',
+                    draft: { ...draft, themeId: theme.id },
+                    note: `I chose ${theme.name}.`,
+                  })}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => choose(theme.id)}
+                  aria-label={`Choose ${theme.name} and continue on WhatsApp`}
                   className={cx(
                     'card card-lift flex h-full flex-col overflow-hidden',
                     selected && '!border-ink shadow-e3',
@@ -143,21 +151,18 @@ export function Themes() {
 
                     <div className="mt-5 flex items-center justify-between gap-3 border-t border-hairline pt-4">
                       <span className="text-small font-semibold text-ink-muted">Ages {ages}</span>
-                      <button
-                        type="button"
-                        onClick={() => choose(theme.id)}
+                      <span
                         className="btn btn-tonal btn-sm group"
-                        aria-label={`Put ${name || 'your child'} in ${theme.name}`}
                       >
-                        {selected ? 'Selected' : 'Try this world'}
+                        {selected ? 'Continue on WhatsApp' : 'Choose on WhatsApp'}
                         <ArrowRight
                           size={15}
                           className="transition-transform duration-300 group-hover:translate-x-0.5"
                         />
-                      </button>
+                      </span>
                     </div>
                   </div>
-                </article>
+                </a>
               </Reveal>
             );
           })}

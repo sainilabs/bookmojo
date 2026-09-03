@@ -108,9 +108,9 @@ export function Personaliser() {
       className="overflow-x-clip pt-10 sm:pt-12 lg:pt-14"
     >
       <Container>
-        <div className="grid items-start gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] 3xl:gap-x-20">
+        <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] 3xl:gap-x-20">
           {/* ------------------------------ PREVIEW ------------------------- */}
-          <div className="order-2 lg:order-1 lg:row-span-2">
+          <div className="min-w-0 order-2 lg:order-1 lg:row-span-2">
             <div className="lg:sticky lg:top-28">
               <Reveal y={24} scale={0.97} className="flex flex-col items-center">
                 <div className="w-full border-b border-hairline pb-4">
@@ -320,7 +320,7 @@ export function Personaliser() {
                 note={photo ? 'I have selected a child photo and will attach it in this chat.' : undefined}
                 block
                 label={
-                  isPersonalised ? `Continue ${possessive(name)} order` : 'Continue order by email'
+                  isPersonalised ? `Continue ${possessive(name)} order on WhatsApp` : 'Continue with WhatsApp'
                 }
                 sublabel="Your selected details will be included"
               />

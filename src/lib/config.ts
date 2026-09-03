@@ -17,6 +17,8 @@ export const BRAND = {
    *  ₹2,000 (NSS 2025); their gifting budget is not. Sold as a book this is
    *  priced at a year's worth of books. Sold as a gift it is priced normally. */
   tagline: 'The gift where your child is the hero.',
+  /** E.164 digits only for direct WhatsApp hand-off; never displayed as contact copy. */
+  whatsappNumber: '919876543210',
   email: 'hello@bookmojo.in',
   supportHours: 'Replies within one business day',
   studio: 'Narnaul, Haryana 123001',

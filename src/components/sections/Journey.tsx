@@ -307,7 +307,7 @@ export function Journey() {
               <OrderButton
                 intent="final"
                 label="Do this for real"
-                sublabel="Opens email · about 4 minutes"
+                sublabel="Opens WhatsApp · about 4 minutes"
               />
               <p className="max-w-[22ch] text-small text-ink-inverse-muted">
                 Nothing is charged before you approve the cover.
