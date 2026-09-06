@@ -134,7 +134,18 @@ export const THEMES: readonly StoryTheme[] = [
     role: 'a scientist.',
     blurb:
       'On a sunny terrace, a young scientist turns everyday Indian objects into a weather station and solves the mystery of why the evening rain keeps arriving early.',
-    ages: ['2-3', '4-5'],
+    /**
+     * Offered across every age band, unlike the others, because this is the one
+     * story with finished artwork — ten illustrated spreads rather than a single
+     * reused illustration.
+     *
+     * It is also the default draft. When it was limited to the two youngest
+     * bands, picking 6-8 or 9-12 made useDraft quietly move the visitor to the
+     * first story covering that age, and they landed on a placeholder book with a
+     * generated cover. Losing the only finished artwork on the site is a worse
+     * outcome than offering one science story a little wide.
+     */
+    ages: ['2-3', '4-5', '6-8', '9-12'],
     palette: { base: '#2E3A70', accent: '#F0C060', deep: '#161E44' },
     motif: 'stars',
     opening:
