@@ -130,16 +130,16 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
   const opening = theme.opening.replaceAll('{name}', name);
   const usesScientistArtwork = draft.themeId === 'chandni';
   /**
-   * The illustrated cover keeps the printed artwork on screen at all times.
+   * The Little Scientist story has real photographed artwork, and it stays on the
+   * cover whether or not a name has been typed — the photograph is the strongest
+   * thing this preview has to show, and swapping it for the generated cover the
+   * moment someone starts typing traded that away at exactly the wrong moment.
    *
-   * It used to swap to the generated cover the moment a name was typed, so that
-   * the cover could show the child's actual name. That trade was the wrong way
-   * round: the finished artwork is what sells the book, and losing it the instant
-   * someone starts filling the form made the preview look cheaper exactly when
-   * the visitor was closest to ordering. The name still appears throughout the
-   * pages inside, so nothing about the personalisation promise is hidden.
+   * The trade-off this accepts: the title is baked into the photograph, so the
+   * cover reads "Aman" regardless of the name entered. The child's own name still
+   * carries through every inside page.
    */
-  const usesSampleCover = usesScientistArtwork;
+  const usesPhotographicCover = usesScientistArtwork;
   const asset = (file: string) => `${import.meta.env.BASE_URL}images/storybook/${file}`;
   const themeArtwork = asset(THEME_ARTWORK[draft.themeId] ?? THEME_ARTWORK.chandni!);
 
@@ -165,7 +165,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
    */
   const pages = [
     <StoryPage key="cover" hard className="bg-[#161e44]">
-      {usesSampleCover ? (
+      {usesPhotographicCover ? (
         /* Page one is always on screen, so this one stays eager. */
         <img
           src={asset('aman-scientist-cover.webp')}
