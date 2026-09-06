@@ -129,7 +129,17 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
   const name = enteredName || 'Aman';
   const opening = theme.opening.replaceAll('{name}', name);
   const usesScientistArtwork = draft.themeId === 'chandni';
-  const usesSampleCover = usesScientistArtwork && !enteredName;
+  /**
+   * The illustrated cover keeps the printed artwork on screen at all times.
+   *
+   * It used to swap to the generated cover the moment a name was typed, so that
+   * the cover could show the child's actual name. That trade was the wrong way
+   * round: the finished artwork is what sells the book, and losing it the instant
+   * someone starts filling the form made the preview look cheaper exactly when
+   * the visitor was closest to ordering. The name still appears throughout the
+   * pages inside, so nothing about the personalisation promise is hidden.
+   */
+  const usesSampleCover = usesScientistArtwork;
   const asset = (file: string) => `${import.meta.env.BASE_URL}images/storybook/${file}`;
   const themeArtwork = asset(THEME_ARTWORK[draft.themeId] ?? THEME_ARTWORK.chandni!);
 
