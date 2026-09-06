@@ -9,14 +9,14 @@ import { whatsappHref } from '@/lib/whatsapp';
 import { cx, formatName } from '@/lib/utils';
 
 const THEME_ARTWORK: Record<string, string> = {
-  'lane-four': 'theme-lane-four.jpg',
-  gulmohar: 'theme-gulmohar.jpg',
-  'nala-bridge': 'theme-nala-bridge.jpg',
-  chandni: 'aman-scientist-cover.png',
-  backwater: 'theme-backwater.jpg',
-  banyan: 'theme-banyan.jpg',
-  sriharikota: 'theme-sriharikota.jpg',
-  karkhana: 'theme-karkhana.jpg',
+  'lane-four': 'theme-lane-four.webp',
+  gulmohar: 'theme-gulmohar.webp',
+  'nala-bridge': 'theme-nala-bridge.webp',
+  chandni: 'aman-scientist-cover.webp',
+  backwater: 'theme-backwater.webp',
+  banyan: 'theme-banyan.webp',
+  sriharikota: 'theme-sriharikota.webp',
+  karkhana: 'theme-karkhana.webp',
 };
 
 /**
@@ -111,8 +111,8 @@ export function Themes() {
                         <img
                           src={asset(THEME_ARTWORK[theme.id]!)}
                           alt={`Illustration for ${theme.name}, featuring a young Indian child as ${theme.role}`}
-                          width="1024"
-                          height="1536"
+                          width="600"
+                          height="900"
                           loading="lazy"
                           className="h-full w-full object-cover"
                         />

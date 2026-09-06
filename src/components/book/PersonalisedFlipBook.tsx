@@ -19,14 +19,14 @@ interface FlipEvent {
 }
 
 const THEME_ARTWORK: Record<string, string> = {
-  'lane-four': 'theme-lane-four.jpg',
-  gulmohar: 'theme-gulmohar.jpg',
-  'nala-bridge': 'theme-nala-bridge.jpg',
-  chandni: 'aman-scientist-cover.png',
-  backwater: 'theme-backwater.jpg',
-  banyan: 'theme-banyan.jpg',
-  sriharikota: 'theme-sriharikota.jpg',
-  karkhana: 'theme-karkhana.jpg',
+  'lane-four': 'theme-lane-four.webp',
+  gulmohar: 'theme-gulmohar.webp',
+  'nala-bridge': 'theme-nala-bridge.webp',
+  chandni: 'aman-scientist-cover.webp',
+  backwater: 'theme-backwater.webp',
+  banyan: 'theme-banyan.webp',
+  sriharikota: 'theme-sriharikota.webp',
+  karkhana: 'theme-karkhana.webp',
 };
 
 const StoryPage = forwardRef<
@@ -80,7 +80,24 @@ function IllustratedTextPage({
 }) {
   return (
     <div className="relative flex h-full items-center justify-center overflow-hidden bg-[#fffaf0]">
-      <img src={image} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+      {/**
+       * react-pageflip mounts every page at once, so without these hints the
+       * browser decodes the whole book into RGBA the moment this section
+       * renders. Intrinsic dimensions let it reserve the box without a decode,
+       * and lazy/async keep off-screen pages off the critical path - the
+       * difference between a smooth preview and a renderer killed for memory on
+       * a mid-range phone.
+       */}
+      <img
+        src={image}
+        alt=""
+        aria-hidden
+        width={600}
+        height={900}
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
       <div className="absolute inset-0 bg-[#fffaf0]/82 backdrop-blur-[1px]" />
       <div className="relative mx-[5cqw] flex max-h-[90%] w-full flex-col items-center border border-white/70 bg-[#fffaf0]/88 px-[5cqw] py-[5cqw] text-center shadow-sm">
         <p
@@ -166,9 +183,13 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
         >
           <StoryPage hard className="bg-[#161e44]">
             {usesSampleCover ? (
+              /* Page one is always on screen, so this one stays eager. */
               <img
-                src={asset('aman-scientist-cover.png')}
+                src={asset('aman-scientist-cover.webp')}
                 alt="Aman Scientist Dreams personalised storybook cover"
+                width={590}
+                height={740}
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             ) : (
@@ -180,8 +201,12 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#b9d5e8]">
                 <img
-                  src={asset('aman-scientist-spread-rain-gauge.jpg')}
+                  src={asset('aman-scientist-spread-rain-gauge.webp')}
                   alt={`${name}, wearing a white scientist coat, tests a homemade rain gauge on a terrace`}
+                  width={600}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">1</span>
@@ -207,7 +232,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           {usesScientistArtwork && (
             <StoryPage>
               <IllustratedTextPage
-                image={asset('aman-scientist-curious-morning.jpg')}
+                image={asset('aman-scientist-curious-morning.webp')}
                 eyebrow="A curious morning"
                 body={`By eight, Scientist ${name} had built a rain gauge and filled a notebook with questions. Every drop was a clue.`}
                 pageNumber={2}
@@ -221,8 +246,12 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#aac8dc]">
                 <img
-                  src={asset('aman-scientist-spread-cloud-clues.jpg')}
+                  src={asset('aman-scientist-spread-cloud-clues.webp')}
                   alt={`${name} studies the changing monsoon clouds at a rooftop weather station`}
+                  width={600}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">3</span>
@@ -242,7 +271,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           {usesScientistArtwork && (
             <StoryPage>
               <IllustratedTextPage
-                image={asset('aman-scientist-weather-station.png')}
+                image={asset('aman-scientist-weather-station.webp')}
                 eyebrow="Cloud clues"
                 body={`Dark clouds gathered. ${name} checked the wind, sketched their shapes and spotted a bright patch racing in from the west.`}
                 pageNumber={4}
@@ -256,8 +285,12 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#d8934f]">
                 <img
-                  src={asset('aman-scientist-spread-experiment.jpg')}
+                  src={asset('aman-scientist-spread-experiment.webp')}
                   alt={`${name} discovers the first monsoon rain with a homemade weather station`}
+                  width={600}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">5</span>
@@ -278,7 +311,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           {usesScientistArtwork && (
             <StoryPage>
               <IllustratedTextPage
-                image={asset('aman-scientist-rain-gauge.png')}
+                image={asset('aman-scientist-rain-gauge.webp')}
                 eyebrow="The experiment"
                 body={`${name}'s pinwheel spun once for a breeze, then three quick turns. The monsoon was almost here.`}
                 pageNumber={6}
@@ -292,8 +325,12 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             {usesScientistArtwork ? (
               <div className="relative h-full overflow-hidden bg-[#64859d]">
                 <img
-                  src={asset('aman-scientist-spread-discovery.jpg')}
+                  src={asset('aman-scientist-spread-discovery.webp')}
                   alt={`${name} celebrates as rain begins to fill the rooftop gauge`}
+                  width={600}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <span className="absolute right-3 bottom-3 grid size-5 place-items-center rounded-full bg-white/90 text-[0.55rem] font-bold text-[#28354a] shadow-sm">7</span>
@@ -313,7 +350,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
           {usesScientistArtwork && (
             <StoryPage>
               <IllustratedTextPage
-                image={asset('aman-scientist-discovery.jpg')}
+                image={asset('aman-scientist-discovery.webp')}
                 eyebrow="The discovery"
                 body={`“Rain before sunset!” ${name} cheered as silver drops filled the gauge. Careful questions had solved the mystery.`}
                 pageNumber={8}

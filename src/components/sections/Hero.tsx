@@ -173,10 +173,10 @@ export function Hero() {
             className="relative flex justify-center min-[42rem]:col-start-2 min-[42rem]:row-span-2 min-[42rem]:row-start-1 min-[42rem]:justify-end"
           >
             <img
-              src={`${import.meta.env.BASE_URL}hero-book.png`}
+              src={`${import.meta.env.BASE_URL}hero-book.webp`}
               alt="A child holding a personalised Aman Scientist Dreams storybook"
-              width={1154}
-              height={1363}
+              width={1000}
+              height={1181}
               fetchPriority="high"
               className="h-auto w-full max-w-[17rem] object-contain sm:max-w-[23rem] min-[42rem]:max-w-[31rem]"
             />
