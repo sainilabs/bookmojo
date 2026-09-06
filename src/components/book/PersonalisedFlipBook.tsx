@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { BookCover } from '@/components/art/BookCover';
 import { HeroChild } from '@/components/art/HeroChild';
@@ -109,18 +109,35 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
   const [page, setPage] = useState(0);
 
   /**
-   * Changing the story remounts the book, which reopens it at the cover. The
-   * counter lives out here and would otherwise keep the page number from the
-   * previous story — showing "Page 9 / 6" and disabling Next on a book that is
-   * actually sitting on page one.
+   * THE PREVIEW IS PINNED TO THE LITTLE SCIENTIST BOOK, WHATEVER IS SELECTED.
+   *
+   * Little Scientist is the only story with finished artwork — a photographed
+   * cover and ten illustrated spreads. The other seven have a single reused
+   * illustration each, so they fell back to a generated cover and a six-page
+   * book, and picking one replaced the real product with something that looked
+   * like a placeholder.
+   *
+   * Rather than let the selection decide, the preview always shows the finished
+   * book. The visitor's name, age, language and appearance still flow through it,
+   * and the WhatsApp hand-off still carries whatever story they chose.
+   *
+   * Two consequences worth knowing:
+   *  - The story picker no longer changes the preview, so the pages a visitor
+   *    sees will not match a non-scientist story they selected.
+   *  - Because the book no longer depends on the selection, the key below is
+   *    constant: switching story does not rebuild it, and the page counter
+   *    therefore never needs resetting.
+   *
+   * When the other stories get real artwork, this goes back to
+   * `draft.themeId === 'chandni'` and the key back to `draft.themeId`.
    */
-  useEffect(() => setPage(0), [draft.themeId]);
+  const PREVIEW_STORY_ID = 'chandni';
+  const usesScientistArtwork = true;
 
-  const theme = THEME_BY_ID.get(draft.themeId) ?? THEMES[0]!;
+  const theme = THEME_BY_ID.get(PREVIEW_STORY_ID) ?? THEMES[0]!;
   const enteredName = formatName(draft.childName);
   const name = enteredName || 'Aman';
   const opening = theme.opening.replaceAll('{name}', name);
-  const usesScientistArtwork = draft.themeId === 'chandni';
   /**
    * The printed cover stays on screen at all times.
    *
@@ -371,7 +388,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
          * PageFlip is constructed.
          */}
         <HTMLFlipBook
-          key={draft.themeId}
+          key={PREVIEW_STORY_ID}
           ref={book}
           className="relative z-10 drop-shadow-[0_24px_28px_rgb(37_33_63_/_0.22)]"
           style={{}}
