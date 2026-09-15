@@ -89,7 +89,7 @@ export function Delivery() {
                 {/* The actual notification, as it appears on their phone. */}
                 <div className="mt-auto rounded-[0.85rem] rounded-tl-sm bg-[var(--chat-out)] px-3 py-2.5 text-[0.78rem] leading-snug text-[var(--chat-out-ink)] shadow-e1">
                   <span className="mb-1 flex items-center gap-1.5 text-[0.6rem] font-bold tracking-[0.08em] uppercase opacity-60">
-                    <WhatsAppMark size={10} /> BookMojo
+                    <WhatsAppMark size={10} /> KidMojo
                   </span>
                   {beat.message}
                 </div>

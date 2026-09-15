@@ -27,7 +27,7 @@ import type { Draft } from '@/types';
  * chooses to send the message themselves.
  */
 
-const STORAGE_KEY = 'bookmojo:draft:v1';
+const STORAGE_KEY = 'kidmojo:draft:v1';
 
 const DEFAULT_DRAFT: Draft = {
   childName: '',

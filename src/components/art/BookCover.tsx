@@ -110,7 +110,7 @@ export function BookCover({ draft, placeholderName = 'Aarav', className }: BookC
         fontFamily="var(--font-sans)"
         fontWeight="700"
       >
-        A BOOKMOJO ORIGINAL
+        A KIDMOJO ORIGINAL
       </text>
       <path d="M116 38h68" stroke="#fff" strokeOpacity="0.28" strokeWidth="0.8" />
 

@@ -1,9 +1,9 @@
 {
-  "name": "bookmojo",
+  "name": "kidmojo",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "BookMojo — premium personalized children's storybooks, ordered over WhatsApp.",
+  "description": "KidMojo — premium personalized children's storybooks, ordered over WhatsApp.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

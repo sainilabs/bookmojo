@@ -34,16 +34,16 @@ export type Intent =
   | 'help';
 
 const OPENERS: Record<Intent, string> = {
-  hero: 'Hi BookMojo! I’d like to create a personalised book.',
-  nav: 'Hi BookMojo! I’d like to start a book.',
-  sticky: 'Hi BookMojo! I’m ready to create my book.',
-  preview: 'Hi BookMojo! I designed a preview on your site — here are the details:',
-  theme: 'Hi BookMojo! I’d like a book in this story world:',
-  gift: 'Hi BookMojo! I’m buying this as a gift and would love some help choosing.',
-  faq: 'Hi BookMojo! I have a question before I order.',
-  final: 'Hi BookMojo! Let’s make my child’s book.',
-  sample: 'Hi BookMojo! Could you send me sample pages before I order?',
-  help: 'Hi BookMojo! I need a hand with an order.',
+  hero: 'Hi KidMojo! I’d like to create a personalised book.',
+  nav: 'Hi KidMojo! I’d like to start a book.',
+  sticky: 'Hi KidMojo! I’m ready to create my book.',
+  preview: 'Hi KidMojo! I designed a preview on your site — here are the details:',
+  theme: 'Hi KidMojo! I’d like a book in this story world:',
+  gift: 'Hi KidMojo! I’m buying this as a gift and would love some help choosing.',
+  faq: 'Hi KidMojo! I have a question before I order.',
+  final: 'Hi KidMojo! Let’s make my child’s book.',
+  sample: 'Hi KidMojo! Could you send me sample pages before I order?',
+  help: 'Hi KidMojo! I need a hand with an order.',
 };
 
 function draftLines(draft: Partial<Draft>): string[] {

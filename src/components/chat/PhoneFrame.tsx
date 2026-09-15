@@ -96,7 +96,7 @@ export function PhoneFrame({
               </span>
               <span className="min-w-0 flex-1 leading-tight">
                 <span className="flex items-center gap-1.5 text-[0.82rem] font-semibold text-white">
-                  BookMojo
+                  KidMojo
                   <span
                     aria-hidden="true"
                     className="grid size-3.5 place-items-center rounded-full bg-[#25d366] text-[#075e54]"

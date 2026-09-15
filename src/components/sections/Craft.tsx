@@ -81,7 +81,7 @@ export function Craft() {
 
               <svg viewBox="0 0 420 330" className="w-full" role="img" aria-labelledby="craft-title">
                 <title id="craft-title">
-                  An exploded diagram of a BookMojo hardcover, showing five layers: foil-stamped
+                  An exploded diagram of a KidMojo hardcover, showing five layers: foil-stamped
                   title, 2.5mm hardcover board, 170gsm uncoated FSC paper, soy-based litho inks, and
                   thread-sewn signatures with a linen spine.
                 </title>

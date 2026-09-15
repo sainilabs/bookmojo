@@ -97,7 +97,7 @@ export function Navbar() {
             <a
               href="#top"
               className="shrink-0 rounded-lg transition-opacity hover:opacity-80"
-              aria-label="BookMojo, home"
+              aria-label="KidMojo, home"
             >
               <Logo />
             </a>

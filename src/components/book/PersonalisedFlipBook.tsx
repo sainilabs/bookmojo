@@ -207,7 +207,7 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
             <div className="mx-auto mt-[4cqw] h-px w-[28cqw]" style={{ backgroundColor: theme.palette.accent }} />
           </div>
           <ChildPortrait draft={draft} className="max-h-[42%] w-[45%]" />
-          <p className="font-book text-[clamp(0.54rem,4.5cqw,0.8rem)] italic text-[#75684f]">Made especially by BookMojo</p>
+          <p className="font-book text-[clamp(0.54rem,4.5cqw,0.8rem)] italic text-[#75684f]">Made especially by KidMojo</p>
           <span className="absolute right-[5cqw] bottom-[4cqw] text-[clamp(0.45rem,3cqw,0.55rem)] text-[#9b907d]">1</span>
         </div>
       )}
@@ -342,10 +342,10 @@ export function PersonalisedFlipBook({ draft }: { draft: Draft }) {
 
     <StoryPage key="back-cover" hard>
       <div className="flex h-full flex-col items-center justify-center px-[8cqw] py-[9cqw] text-center text-white" style={{ backgroundColor: theme.palette.deep }}>
-        <div className="grid size-[clamp(2rem,18cqw,3.5rem)] shrink-0 place-items-center rounded-md border border-white/25 bg-white/10 font-book text-[clamp(1rem,8cqw,1.5rem)]">B</div>
+        <div className="grid size-[clamp(2rem,18cqw,3.5rem)] shrink-0 place-items-center rounded-md border border-white/25 bg-white/10 font-book text-[clamp(1rem,8cqw,1.5rem)]">K</div>
         <p className="font-book mt-[6cqw] text-[clamp(0.82rem,7.4cqw,1.35rem)] leading-[1.25] font-semibold">{name}&apos;s story is only beginning.</p>
         <p className="mt-[4cqw] text-[clamp(0.48rem,3.8cqw,0.65rem)] leading-[1.45] text-white/70">Written, illustrated and printed especially for one child.</p>
-        <p className="mt-[7cqw] text-[clamp(0.42rem,3.2cqw,0.55rem)] font-bold tracking-[0.14em] text-white/55 uppercase">BookMojo original</p>
+        <p className="mt-[7cqw] text-[clamp(0.42rem,3.2cqw,0.55rem)] font-bold tracking-[0.14em] text-white/55 uppercase">KidMojo original</p>
       </div>
     </StoryPage>,
   ];

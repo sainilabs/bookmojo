@@ -42,7 +42,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       </span>
       {!compact && (
         <span className="font-display text-[1.3rem] leading-none font-extrabold tracking-[-0.035em]">
-          BookMojo
+          KidMojo
         </span>
       )}
     </span>

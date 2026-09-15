@@ -4,7 +4,7 @@ import ThemeHead from '@/components/ui/ThemeHead.astro';
 import '@/styles/global.css';
 import { FAQS } from '@/data/faq';
 
-const title = 'BookMojo — Personalised Storybooks Where Your Child Is the Hero';
+const title = 'KidMojo — Personalised Storybooks Where Your Child Is the Hero';
 const description =
   "The gift where your child is the hero: personalised storybooks built around their name, age and dream career, in English or Hindi. Order on WhatsApp.";
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -13,10 +13,10 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'BookMojo Personalised Storybook',
+  name: 'KidMojo Personalised Storybook',
   description,
   image: new URL(asset('hero-book.png'), Astro.site).href,
-  brand: { '@type': 'Brand', name: 'BookMojo' },
+  brand: { '@type': 'Brand', name: 'KidMojo' },
   inLanguage: ['en-IN', 'hi-IN'],
   offers: {
     '@type': 'AggregateOffer',
@@ -52,13 +52,13 @@ const faqSchema = {
     <link rel="canonical" href={canonical} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="BookMojo" />
+    <meta property="og:site_name" content="KidMojo" />
     <meta property="og:title" content="The gift where your child is the hero" />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(asset('og.svg'), Astro.site)} />
-    <meta property="og:image:alt" content="BookMojo personalised storybooks" />
+    <meta property="og:image:alt" content="KidMojo personalised storybooks" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
@@ -71,11 +71,11 @@ const faqSchema = {
     <App client:load />
     <noscript>
       <div style="padding: 2rem; font-family: sans-serif">
-        <h1>BookMojo</h1>
+        <h1>KidMojo</h1>
         <p>
           Personalised storybooks starring your child, in English or Hindi. Enable JavaScript
           to personalise your book and continue on WhatsApp. For support, email
-          <a href="mailto:hello@bookmojo.in">hello@bookmojo.in</a>.
+          <a href="mailto:hello@kidmojo.in">hello@kidmojo.in</a>.
         </p>
       </div>
     </noscript>

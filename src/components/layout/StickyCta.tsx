@@ -6,7 +6,7 @@ import { useDraft } from '@/hooks/useDraft';
 import { useScrolledPast } from '@/hooks/useUi';
 import { cx, formatINR, formatName, possessive } from '@/lib/utils';
 
-const DISMISS_KEY = 'bookmojo:sticky-dismissed';
+const DISMISS_KEY = 'kidmojo:sticky-dismissed';
 
 /**
  * FLOATING CONVERSION BAR

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { track } from '@/lib/analytics';
 
 export type ThemeName = 'day' | 'night';
-const STORAGE_KEY = 'bookmojo:theme';
+const STORAGE_KEY = 'kidmojo:theme';
 
 /**
  * "Daylight" / "Bedtime" theming.

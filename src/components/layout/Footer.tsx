@@ -83,7 +83,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-4 border-t border-hairline py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-small text-ink-muted">
-            © {year} BookMojo Studio. Illustrations and manuscripts are original works.
+            © {year} KidMojo Studio. Illustrations and manuscripts are original works.
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {policyLinks.map((item) => (

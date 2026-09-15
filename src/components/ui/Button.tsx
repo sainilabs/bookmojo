@@ -83,7 +83,7 @@ export function OrderButton({
   intent,
   note,
   size = 'lg',
-  label = 'WhatsApp BookMojo',
+  label = 'WhatsApp KidMojo',
   sublabel,
   block = false,
   className,

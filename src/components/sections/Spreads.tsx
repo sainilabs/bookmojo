@@ -88,7 +88,7 @@ export function Spreads() {
             </>
           }
           title="Turn the pages before you buy them."
-          deck="Four spreads from a real BookMojo, with your child's name already in the text."
+          deck="Four spreads from a real KidMojo, with your child's name already in the text."
         />
 
         <div
@@ -131,7 +131,7 @@ export function Spreads() {
                     className="absolute inset-y-0 right-0 w-16 bg-gradient-to-r from-transparent to-black/35"
                   />
                   <span className="absolute bottom-3 left-4 text-[0.6rem] font-semibold tracking-[0.2em] text-white/45">
-                    BOOKMOJO
+                    KIDMOJO
                   </span>
                 </div>
 

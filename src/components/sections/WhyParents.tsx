@@ -5,7 +5,7 @@ import { useDraft } from '@/hooks/useDraft';
 import { cx, formatName, possessive } from '@/lib/utils';
 
 /**
- * WHY PARENTS LOVE BOOKMOJO
+ * WHY PARENTS LOVE KIDMOJO
  * -----------------------------------------------------------------------------
  * The emotional value proposition, argued rather than asserted.
  *

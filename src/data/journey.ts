@@ -37,7 +37,7 @@ export interface Stage {
   reassurance: string;
   /** Honest time cost. Naming it removes the "this will take forever" fear. */
   eta: string;
-  /** 'you' = visitor is answering, 'us' = BookMojo is working. */
+  /** 'you' = visitor is answering, 'us' = KidMojo is working. */
   actor: 'you' | 'us';
   messages: Msg[];
 }

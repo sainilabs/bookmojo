@@ -29,7 +29,7 @@ const links = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{title} | BookMojo</title>
+    <title>{title} | KidMojo</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <ThemeHead />
@@ -39,7 +39,7 @@ const links = [
   <body class="bg-paper text-ink">
     <header class="border-b border-hairline bg-paper">
       <div class="mx-auto flex min-h-20 w-[min(100%-2rem,72rem)] items-center justify-between gap-5">
-        <a href={base} aria-label="BookMojo home"><Logo /></a>
+        <a href={base} aria-label="KidMojo home"><Logo /></a>
         <div class="flex items-center gap-2">
           <ThemeToggle />
           <a href={base} class="text-small font-semibold text-ink-soft transition-colors hover:text-ink">
@@ -66,7 +66,7 @@ const links = [
 
     <footer class="border-t border-hairline bg-paper">
       <div class="mx-auto flex w-[min(100%-2rem,72rem)] flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-small text-ink-muted">© 2026 BookMojo Studio · Narnaul, Haryana 123001</p>
+        <p class="text-small text-ink-muted">© 2026 KidMojo Studio · Narnaul, Haryana 123001</p>
         <nav aria-label="Policy pages">
           <ul class="flex flex-wrap gap-x-5 gap-y-2">
             {links.map(([label, path]) => (
